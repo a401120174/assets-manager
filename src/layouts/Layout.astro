@@ -1,5 +1,15 @@
 ---
 import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { 
+	title = "資產計算機 - 您的個人財富儀表板 | Asset Manager",
+	description = "全方位的個人資產管理工具。即時追蹤現金、股票、加密貨幣、房地產與負債，自動整合實時匯率，精準掌握您的淨資產狀況。"
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -9,7 +19,31 @@ import '../styles/global.css';
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>資產計算機</title>
+		
+		<!-- Primary Meta Tags -->
+		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+		<meta name="keywords" content="資產管理, 記帳, 淨資產計算, 股票追蹤, 匯率換算, 投資理財, 財務儀表板, Asset Calculator, Net Worth Tracker" />
+		<meta name="robots" content="index, follow" />
+		<meta name="theme-color" content="#0B0F19" />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://asset-manager.vercel.app/" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content="https://images.unsplash.com/photo-1611974765270-ca1258547bbb?q=80&w=1200&auto=format&fit=crop" />
+		<meta property="og:locale" content="zh_TW" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://asset-manager.vercel.app/" />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content="https://images.unsplash.com/photo-1611974765270-ca1258547bbb?q=80&w=1200&auto=format&fit=crop" />
+
+		<!-- Fonts -->
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 	</head>
 	<body class="bg-[#0B0F19] text-white min-h-screen font-sans selection:bg-indigo-500/30">
