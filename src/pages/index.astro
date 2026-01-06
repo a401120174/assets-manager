@@ -4,82 +4,108 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout>
 <Layout>
-  <main class="container mx-auto px-4 py-12 max-w-6xl relative min-h-screen flex flex-col">
+  <main class="container mx-auto px-4 py-8 max-w-7xl relative min-h-screen">
     <!-- Header -->
-    <header class="mb-10 text-center relative z-10 animate-fade-in-down">
-        <h1 class="text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 mb-4 filter drop-shadow-lg tracking-tight">
-            資產計算機
-        </h1>
-        <p class="text-gray-400 text-lg font-light tracking-wide">您的個人財富儀表板</p>
+    <header class="mb-8 md:mb-12 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-4 animate-fade-in-down">
+        <div>
+            <h1 class="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 mb-2 filter drop-shadow-lg tracking-tight">
+                資產計算機
+            </h1>
+            <p class="text-gray-400 text-sm font-light tracking-wide">您的個人財富儀表板</p>
+        </div>
+        
+        <div class="flex items-center gap-2 text-xs font-mono text-gray-500 bg-black/30 px-3 py-1.5 rounded-full border border-white/5 cursor-pointer hover:bg-black/50 transition-colors" id="exchange-rate-badge">
+            <span class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" id="status-dot"></span>
+            <span id="rate-info">正在獲取實時匯率...</span>
+        </div>
     </header>
 
-    <!-- Total Display -->
-    <div class="mb-12 p-8 rounded-[2rem] bg-gray-900/80 backdrop-blur-2xl border border-white/5 shadow-2xl relative overflow-hidden group hover:border-white/10 transition-colors duration-500">
-        <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/20 via-blue-600/10 to-transparent opacity-40 group-hover:opacity-60 transition-opacity duration-700"></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 px-4">
-            <div class="text-center md:text-left">
-                <h2 class="text-gray-400 text-xs tracking-[0.2em] uppercase mb-2 font-semibold">淨資產總額 (TWD)</h2>
-                <span class="text-6xl md:text-7xl font-bold text-white tracking-tighter drop-shadow-xl tabular-nums" id="total-amount">0</span>
-            </div>
-            
-            <div class="flex flex-col items-end gap-3">
-                 <div class="flex items-center gap-2 text-xs font-mono text-gray-500 bg-black/30 px-3 py-1.5 rounded-full border border-white/5" id="exchange-rate-status">
-                    <span class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" id="status-dot"></span>
-                    <span id="rate-info">正在獲取實時匯率...</span>
-                 </div>
-                 <div class="text-right">
-                    <p class="text-xs text-gray-500">資產分佈概況</p>
-                    <div id="assets-summary" class="flex gap-2 mt-2">
-                        <!-- Tiny pills for summary could go here -->
-                    </div>
-                 </div>
+        <!-- Left Column: Asset Lists (lg:col-span-8) -->
+        <div class="lg:col-span-8 space-y-8 order-2 lg:order-1">
+             <!-- Assets Container -->
+             <div id="asset-sections" class="space-y-8 pb-20">
+                <!-- Sections injected by JS -->
             </div>
         </div>
+
+        <!-- Right Column: Sidebar (lg:col-span-4) -->
+        <aside class="lg:col-span-4 space-y-6 lg:sticky lg:top-8 order-1 lg:order-2">
+            
+            <!-- Total Net Worth Card -->
+            <div class="p-6 md:p-8 rounded-[2rem] bg-gray-900/80 backdrop-blur-2xl border border-white/5 shadow-2xl relative overflow-hidden group hover:border-white/10 transition-colors duration-500">
+                <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/20 via-blue-600/10 to-transparent opacity-40 group-hover:opacity-60 transition-opacity duration-700"></div>
+                <div class="relative z-10">
+                    <h2 class="text-gray-400 text-xs tracking-[0.2em] uppercase mb-2 font-semibold flex items-center gap-2">
+                        <span class="w-1 h-4 bg-cyan-400 rounded-full"></span>
+                        淨資產總額 (TWD)
+                    </h2>
+                    <div class="text-5xl lg:text-6xl font-bold text-white tracking-tighter drop-shadow-xl tabular-nums break-all" id="total-amount">0</div>
+                </div>
+            </div>
+
+            <!-- Chart Card -->
+            <div class="p-6 rounded-[2rem] bg-gray-900/40 backdrop-blur-xl border border-white/5 shadow-lg relative overflow-hidden">
+                <h3 class="text-gray-400 text-xs tracking-[0.2em] uppercase mb-4 font-semibold flex items-center gap-2">
+                    <span class="w-1 h-4 bg-purple-400 rounded-full"></span>
+                    資產分佈
+                </h3>
+                <div class="relative h-64 w-full flex items-center justify-center">
+                    <canvas id="assetChart"></canvas>
+                </div>
+                <!-- Legend Container / Details if needed -->
+                <div id="chart-legend" class="mt-4 grid grid-cols-2 gap-2 text-xs text-gray-400">
+                    <!-- Dynamic details -->
+                </div>
+            </div>
+
+            <!-- Add Panel (Quick Access) -->
+            <!-- Maybe keep Add buttons in sections, but having a quick nav here could be cool. For now, let's keep it clean. -->
+
+        </aside>
+
     </div>
 
-    <!-- Assets Container -->
-    <div id="asset-sections" class="space-y-12 pb-20">
-        <!-- Sections injected by JS -->
-    </div>
     
-    <footer class="mt-auto text-center text-gray-600 text-sm py-8">
+    <footer class="text-center text-gray-600 text-sm py-12 border-t border-white/5 mt-12">
         <p>© 2026 Asset Manager. Data stored locally.</p>
     </footer>
 
     <!-- Template for Section -->
     <template id="section-template">
-        <section class="asset-section relative animate-fade-in">
-             <div class="flex items-end justify-between mb-6 border-b border-white/5 pb-2">
+        <section class="asset-section relative animate-fade-in bg-black/20 rounded-[1.5rem] border border-white/5 p-1">
+             <div class="flex items-center justify-between p-4 md:p-6 pb-2">
                 <div class="flex items-center gap-3">
-                    <div class="section-icon w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center text-2xl shadow-inner"></div>
+                    <div class="section-icon w-10 h-10 rounded-xl bg-gray-800/80 flex items-center justify-center text-2xl shadow-inner border border-white/5"></div>
                     <div>
-                        <h3 class="section-title text-xl font-bold text-white tracking-wide"></h3>
-                        <p class="section-subtitle text-xs text-gray-500"></p>
+                        <h3 class="section-title text-lg font-bold text-white tracking-wide"></h3>
+                        <p class="section-subtitle text-[10px] text-gray-500 uppercase tracking-widest"></p>
                     </div>
                 </div>
                 <div class="text-right">
-                    <div class="text-xs text-gray-500 uppercase tracking-wider mb-0.5">類別總計</div>
-                    <div class="section-total text-2xl font-bold font-mono text-cyan-400 tabular-nums">$0</div>
+                    <div class="section-total text-xl md:text-2xl font-bold font-mono text-cyan-400 tabular-nums">$0</div>
                 </div>
              </div>
 
-             <div class="section-list space-y-4 mb-4 min-h-[50px]">
+             <div class="section-list space-y-2 p-2 min-h-[50px]">
                 <!-- Rows go here -->
              </div>
 
-            <button class="add-btn w-full py-3 rounded-xl border border-dashed border-gray-700/50 text-gray-500 hover:border-cyan-500/30 hover:text-cyan-400 hover:bg-cyan-500/5 transition-all duration-200 flex items-center justify-center gap-2 text-sm font-medium group">
-                <span class="bg-gray-800/80 p-1 rounded-md group-hover:bg-cyan-900/50 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                </span>
-                新增項目
-            </button>
+             <div class="p-2 pt-0">
+                <button class="add-btn w-full py-3 rounded-xl border border-dashed border-gray-700/50 text-gray-500 hover:border-cyan-500/30 hover:text-cyan-400 hover:bg-cyan-500/5 transition-all duration-200 flex items-center justify-center gap-2 text-sm font-medium group bg-black/20">
+                    <span class="bg-gray-800/80 p-0.5 rounded group-hover:bg-cyan-900/50 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </span>
+                    新增項目
+                </button>
+            </div>
         </section>
     </template>
 
     <!-- Template for Asset Row -->
     <template id="asset-row-template">
-        <div class="asset-row group flex flex-col lg:flex-row gap-4 p-4 rounded-xl bg-gray-900/40 border border-white/5 hover:border-white/10 hover:bg-gray-800/50 transition-all duration-300 relative">
+        <div class="asset-row group flex flex-col md:flex-row gap-4 p-4 rounded-xl bg-gray-900/80 border border-white/5 hover:border-white/10 hover:bg-gray-800 transition-all duration-300 relative shadow-sm">
              <!-- Delete Button -->
              <button class="delete-btn absolute top-2 right-2 p-1.5 text-gray-600 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100 z-10" title="刪除">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
@@ -87,12 +113,12 @@ import Layout from '../layouts/Layout.astro';
 
             <!-- Name & Currency (Type is hidden/fixed per section) -->
             <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center flex-grow">
-                <div class="w-full sm:w-auto flex-grow min-w-[200px]">
+                <div class="w-full sm:w-auto flex-grow min-w-[150px]">
                     <label class="text-[10px] text-gray-600 font-bold mb-1 block uppercase tracking-wider pl-1">項目名稱</label>
                     <input type="text" class="asset-name w-full bg-black/20 border border-white/5 text-white text-sm rounded-lg px-3 py-2 outline-none focus:border-cyan-500/40 focus:bg-black/40 transition-all placeholder-gray-700 hover:bg-black/30" placeholder="輸入名稱...">
                 </div>
 
-                <div class="w-32 flex-shrink-0">
+                <div class="w-full sm:w-28 flex-shrink-0">
                      <label class="text-[10px] text-gray-600 font-bold mb-1 block uppercase tracking-wider pl-1">幣別</label>
                     <div class="relative">
                          <select class="asset-currency w-full bg-black/20 border border-white/5 text-white text-sm rounded-lg px-3 py-2 outline-none focus:border-cyan-500/40 focus:bg-black/40 transition-all appearance-none cursor-pointer hover:bg-black/30 font-mono">
@@ -111,14 +137,14 @@ import Layout from '../layouts/Layout.astro';
             </div>
 
             <!-- Dynamic Inputs -->
-            <div class="dynamic-inputs grid grid-cols-2 gap-3 w-full lg:w-[40%] items-end">
+            <div class="dynamic-inputs grid grid-cols-2 gap-3 w-full lg:w-[45%] items-end">
                 <!-- Inputs injected by JS -->
             </div>
 
             <!-- Row Total -->
-            <div class="flex-shrink-0 flex flex-col justify-end items-end min-w-[120px] pb-1 border-t sm:border-t-0 sm:border-l border-white/5 pl-4 pt-2 sm:pt-0 mt-2 sm:mt-0">
+            <div class="flex-shrink-0 flex flex-col justify-end items-end min-w-[100px] border-l border-white/5 pl-4 hidden md:flex">
                  <span class="text-[10px] text-gray-600 uppercase tracking-wider mb-0.5">估算 (TWD)</span>
-                 <span class="asset-row-total text-lg font-bold font-mono text-cyan-400/90">$0</span>
+                 <span class="asset-row-total text-base font-bold font-mono text-cyan-400/90">$0</span>
             </div>
         </div>
     </template>
@@ -127,6 +153,8 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
+    import Chart from 'chart.js/auto';
+
     interface Details {
         amount?: number;
         shares?: number;
@@ -149,19 +177,20 @@ import Layout from '../layouts/Layout.astro';
 
     // Config for Sections
     const ASSET_TYPES = [
-        { id: 'cash', icon: '💰', title: '現金 & 存款', sub: '銀行帳戶 / 錢包 / 定存' },
-        { id: 'stock', icon: '📈', title: '股票 & 證券', sub: '台股 / 美股 / ETF' },
-        { id: 'real_estate', icon: '🏠', title: '房地產', sub: '自住 / 投資 / 土地' },
-        { id: 'crypto', icon: '₿', title: '加密貨幣', sub: 'BTC / ETH / 鏈上資產' },
-        { id: 'car', icon: '🚗', title: '汽機車', sub: '現有車輛估值' },
-        { id: 'insurance', icon: '🛡️', title: '保險', sub: '儲蓄險 / 投資型保單現值' },
-        { id: 'other', icon: '💎', title: '其他資產', sub: '手錶 / 珠寶 / 借出款項' },
-        { id: 'liability', icon: '💳', title: '負債', sub: '房貸 / 車貸 / 信用卡' },
+        { id: 'cash', icon: '💰', title: '現金 & 存款', sub: '銀行帳戶 / 錢包', color: '#10B981' }, // Emerald-500
+        { id: 'stock', icon: '📈', title: '股票 & 證券', sub: '台股 / 美股 / ETF', color: '#3B82F6' }, // Blue-500
+        { id: 'real_estate', icon: '🏠', title: '房地產', sub: '自住 / 投資', color: '#8B5CF6' }, // Violet-500
+        { id: 'crypto', icon: '₿', title: '加密貨幣', sub: '鏈上資產', color: '#F59E0B' }, // Amber-500
+        { id: 'car', icon: '🚗', title: '汽機車', sub: '交通工具估值', color: '#EC4899' }, // Pink-500
+        { id: 'insurance', icon: '🛡️', title: '保險', sub: '保單現值', color: '#EF4444' }, // Red-500
+        { id: 'other', icon: '💎', title: '其他資產', sub: '其他有價物', color: '#6366F1' }, // Indigo-500
+        { id: 'liability', icon: '💳', title: '負債', sub: '貸款 / 信用卡', color: '#6B7280' }, // Gray-500
     ];
 
     let assets: Asset[] = [];
     let rates: Record<string, number> = { TWD: 1, USD: 32.5, JPY: 0.21, EUR: 35.2, CNY: 4.5, HKD: 4.2 }; 
     const API_URL = 'https://open.er-api.com/v6/latest/USD';
+    let chartInstance: Chart | null = null;
 
     // Elements
     const sectionsContainer = document.getElementById('asset-sections');
@@ -174,10 +203,79 @@ import Layout from '../layouts/Layout.astro';
     // --- Init ---
     document.addEventListener('DOMContentLoaded', () => {
         initSections();
-        loadAssets(); // Triggers render
+        initChart();
+        loadAssets(); // Triggers render & chart update
         fetchRates();
         setInterval(fetchRates, 300000);
     });
+
+    function initChart() {
+        const ctx = document.getElementById('assetChart') as HTMLCanvasElement;
+        if (!ctx) return;
+
+        Chart.defaults.color = '#9CA3AF';
+        Chart.defaults.font.family = "'Inter', sans-serif";
+
+        chartInstance = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ASSET_TYPES.map(t => t.title),
+                datasets: [{
+                    data: ASSET_TYPES.map(() => 0),
+                    backgroundColor: ASSET_TYPES.map(t => t.color),
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        display: false // We will likely make a custom legend or tooltip is enough
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: 12,
+                        cornerRadius: 8,
+                        titleFont: { size: 14, weight: 'bold' },
+                        bodyFont: { size: 13 },
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', maximumFractionDigits: 0 }).format(context.parsed);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function updateChart(typeTotals: Record<string, number>) {
+        if (!chartInstance) return;
+        
+        // Filter out liabilities for the "Asset" chart? 
+        // Or show them? Doughnut chart with negative values is weird.
+        // Let's treat Liability as negative, so maybe exclude from "Distribution" chart or show as separate?
+        // Standard approach: Show Assets Distribution. Net Worth calculates everything.
+        // Let's zero out liability in this chart for cleaner ASSET view.
+        
+        const assetOnlyData = ASSET_TYPES.map(t => {
+            if (t.id === 'liability') return 0;
+            return Math.max(0, typeTotals[t.id] || 0);
+        });
+
+        chartInstance.data.datasets[0].data = assetOnlyData;
+        chartInstance.update();
+    }
 
     function initSections() {
         if (!sectionsContainer || !sectionTemplate) return;
@@ -191,12 +289,15 @@ import Layout from '../layouts/Layout.astro';
             section.id = `section-${type.id}`;
             section.querySelector('.section-icon')!.textContent = type.icon;
             section.querySelector('.section-title')!.textContent = type.title;
-            // section.querySelector('.section-subtitle')!.textContent = type.sub;
+            section.querySelector('.section-subtitle')!.textContent = type.sub;
             
+            // Tint the icon or title with section color?
+            // (section.querySelector('.section-icon') as HTMLElement).style.color = type.color;
+
             // Add Button Logic
             const btn = section.querySelector('.add-btn') as HTMLButtonElement;
             btn.onclick = () => addAsset(type.id);
-            btn.innerHTML = `<span class="bg-gray-800/80 p-1 rounded-md group-hover:bg-cyan-900/50 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span> 新增${type.title}`;
+            btn.innerHTML = `<span class="bg-gray-800/80 p-0.5 rounded group-hover:bg-cyan-900/50 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span> 新增${type.title}`;
 
             sectionsContainer.appendChild(section);
         });
@@ -262,6 +363,9 @@ import Layout from '../layouts/Layout.astro';
              const fmt = new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 }).format(grandTotal);
              totalAmountEl.textContent = fmt.replace('TWD', '$');
         }
+
+        // Update Chart
+        updateChart(typeTotals);
     }
 
     function renderDynamicInputs(asset: Asset, container: HTMLElement) {
@@ -277,6 +381,7 @@ import Layout from '../layouts/Layout.astro';
             const input = document.createElement('input');
             input.type = 'number'; 
             input.inputMode = 'decimal';
+            // Compact input styles
             input.className = 'w-full bg-black/20 border border-white/5 text-white text-sm rounded-lg px-3 py-2 outline-none focus:border-cyan-500/40 focus:bg-black/40 transition-all font-mono hover:bg-black/30';
             input.placeholder = placeholder;
             input.step = step;
@@ -298,20 +403,14 @@ import Layout from '../layouts/Layout.astro';
 
         switch (asset.type) {
             case 'stock':
-                container.appendChild(createInput('股數 (Shares)', 'shares'));
-                container.appendChild(createInput('現價 (Price)', 'pricePerShare'));
+                container.appendChild(createInput('股數', 'shares'));
+                container.appendChild(createInput('現價', 'pricePerShare'));
                 break;
             case 'crypto':
-                container.appendChild(createInput('數量 (Amount)', 'coins', '0.0000', '0.00000001'));
-                container.appendChild(createInput('現價 (Price)', 'pricePerCoin'));
+                container.appendChild(createInput('數量', 'coins', '0.0000', '0.00000001'));
+                container.appendChild(createInput('現價', 'pricePerCoin'));
                 break;
             case 'real_estate':
-                 // Let's default to Total Value for simplicity unless user wants advanced?
-                 // Plan said: Area + Price. But simpler to have "Estimated Value" as primary for most?
-                 // Let's enable both in a smart way? No, let's just stick to "Estimated Value" for simple UI 
-                 // UNLESS we want to force the Area calculation.
-                 // Let's provide Total Value (Primary) + Area/Ping (Optional)? 
-                 // Actually the user APPROVED the plan which said: Area * Price.
                  container.appendChild(createInput('坪數', 'area'));
                  container.appendChild(createInput('單價/坪', 'pricePerPing'));
                 break;
@@ -320,9 +419,6 @@ import Layout from '../layouts/Layout.astro';
                  break;
             default:
                 container.appendChild(createInput('金額', 'amount', '0'));
-                // Spacer for layout balance if needed
-                const spacer = document.createElement('div');
-                container.appendChild(spacer);
                 break;
         }
     }
