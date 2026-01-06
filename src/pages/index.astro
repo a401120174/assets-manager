@@ -67,7 +67,69 @@ import Layout from '../layouts/Layout.astro';
     </div>
 
     
-    <footer class="text-center text-gray-600 text-sm py-12 border-t border-white/5 mt-12">
+    <!-- SEO Content Section -->
+    <article class="mt-24 space-y-24 max-w-4xl mx-auto border-t border-white/5 pt-16">
+        
+        <!-- Features -->
+        <section class="text-center space-y-12">
+            <h2 class="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 inline-block">
+                為什麼選擇 Asset Manager？
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                <div class="p-6 rounded-2xl bg-gray-900/50 border border-white/5 hover:border-cyan-500/30 transition-colors">
+                    <div class="text-3xl mb-4">🔒</div>
+                    <h3 class="text-xl font-semibold text-white mb-2">極致隱私安全</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">您的財務數據僅儲存在您的瀏覽器 (Local Storage)，我們不收集、不上傳任何個人資料。真正的去中心化記帳体验。</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-gray-900/50 border border-white/5 hover:border-blue-500/30 transition-colors">
+                    <div class="text-3xl mb-4">🌍</div>
+                    <h3 class="text-xl font-semibold text-white mb-2">全球匯率整合</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">即時串接國際匯率 API，支持 TWD, USD, JPY, EUR 等多國貨幣。投資美股、日幣定存，自動換算為您的本幣價值。</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-gray-900/50 border border-white/5 hover:border-purple-500/30 transition-colors">
+                    <div class="text-3xl mb-4">📊</div>
+                    <h3 class="text-xl font-semibold text-white mb-2">動態資產估值</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">針對不同資產類型提供專屬計算模型。無論是股票股數、加密貨幣數量或是房地產坪數，都能精準轉換為即時市值。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Educational Content -->
+        <section class="space-y-8">
+            <h2 class="text-3xl font-bold text-white text-center">財務自由的第一步</h2>
+            <div class="prose prose-invert max-w-none text-gray-400 leading-8">
+                <h3 class="text-xl font-semibold text-cyan-400 mb-4">什麼是淨資產 (Net Worth)？</h3>
+                <p>
+                    淨資產是衡量個人財務健康狀況最核心的指標。它的計算公式非常簡單：<strong>總資產 (Assets) - 總負債 (Liabilities) = 淨資產</strong>。
+                    許多人只關注收入，卻忽略了資產的累積與負債的控管。透過定期追蹤淨資產，您可以客觀地檢視自己的財富是否在增長，並及早發現潛在的財務漏洞。
+                </p>
+                
+                <h3 class="text-xl font-semibold text-cyan-400 mt-8 mb-4">為什麼資產配置很重要？</h3>
+                <p>
+                    「不要把所有雞蛋放在同一個籃子裡」。一個健康的財務結構應該包含不同風險屬性的資產，例如：流動性高的現金、具備成長潛力的股票、抗通膨的房地產以及高風險高報酬的加密貨幣。
+                    Asset Manager 的圖表化分析能幫助您一目了然目前的資產佔比，讓您能根據人生階段及時調整投資組合，降低風險並追求穩健的財富增長。
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="space-y-8">
+            <h2 class="text-3xl font-bold text-white text-center">常見問題</h2>
+            <div class="space-y-4">
+                <div class="p-6 rounded-2xl bg-gray-900/30 border border-white/5">
+                    <h3 class="font-semibold text-white mb-2">Q: 我的財務數據會被傳送到伺服器嗎？</h3>
+                    <p class="text-gray-400 text-sm">A: 完全不會。Asset Manager 是一個純前端運作的應用程式 (Client-side App)。所有的資料都加密儲存在您裝置的瀏覽器資料庫中，即使我們也無法看見您的資產狀況。</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-gray-900/30 border border-white/5">
+                    <h3 class="font-semibold text-white mb-2">Q: 匯率是即時的嗎？</h3>
+                    <p class="text-gray-400 text-sm">A: 是的，系統每 5 分鐘會自動從國際匯率 API 獲取最新的匯率資訊。如果您的裝置處於離線狀態，系統會自動使用上一次更新的匯率進行計算。</p>
+                </div>
+            </div>
+        </section>
+
+    </article>
+    
+    <footer class="mt-auto text-center text-gray-600 text-sm py-12 border-t border-white/5 mt-12">
         <p>© 2026 Asset Manager. Data stored locally.</p>
     </footer>
 

@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://asset-manager.vercel.app',
+  site: 'https://assets-manager-beige.vercel.app/',
   vite: {
     plugins: [tailwindcss()]
   },
