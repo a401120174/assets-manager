@@ -41,7 +41,7 @@ import Layout from '../layouts/Layout.astro';
                         <span class="w-1 h-4 bg-cyan-400 rounded-full"></span>
                         淨資產總額 (TWD)
                     </h2>
-                    <div class="text-5xl lg:text-6xl font-bold text-white tracking-tighter drop-shadow-xl tabular-nums break-all" id="total-amount">0</div>
+                    <div class="text-3xl lg:text-4xl font-bold text-white tracking-tighter drop-shadow-xl tabular-nums break-all" id="total-amount">0</div>
                 </div>
             </div>
 
@@ -360,7 +360,7 @@ import Layout from '../layouts/Layout.astro';
 
         // Update Grand Total
         if (totalAmountEl) {
-             const fmt = new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 }).format(grandTotal);
+             const fmt = new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(Math.round(grandTotal));
              totalAmountEl.textContent = fmt.replace('TWD', '$');
         }
 
