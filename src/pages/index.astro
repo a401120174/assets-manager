@@ -86,9 +86,9 @@ import Layout from "../layouts/Layout.astro";
                     </div>
                 </a>
 
-                <!-- Coast FIRE Calculator -->
+                <!-- Compound Interest Calculator -->
                 <a
-                    href="/coast-fire"
+                    href="/compound-interest"
                     class="group relative bg-slate-900 rounded-[2.5rem] p-8 hover:shadow-2xl hover:-translate-y-1 transition-all flex flex-col justify-between overflow-hidden"
                 >
                     <div
@@ -97,21 +97,21 @@ import Layout from "../layouts/Layout.astro";
                     </div>
                     <div>
                         <div
-                            class="bg-indigo-500/20 text-indigo-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6 border border-indigo-500/30"
+                            class="bg-blue-500/20 text-blue-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6 border border-blue-500/30"
                         >
-                            🔥
+                            📈
                         </div>
                         <h3 class="text-xl font-bold text-white mb-3">
-                            Coast FIRE 計算
+                            複利效應試算
                         </h3>
                         <p class="text-slate-400 text-sm leading-relaxed">
-                            計算何時能停止主動儲蓄，讓資產複利帶您抵達退休終點。
+                            見證時間的力量，計算您的長期投資收益與財富翻倍速度。
                         </p>
                     </div>
                     <span
-                        class="text-indigo-400 font-bold text-sm mt-6 flex items-center gap-2"
+                        class="text-blue-400 font-bold text-sm mt-6 flex items-center gap-2"
                     >
-                        探索未來 <svg
+                        見證複利 <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
                             height="16"
@@ -128,47 +128,94 @@ import Layout from "../layouts/Layout.astro";
                     </span>
                 </a>
 
-                <!-- Rent vs Buy -->
-                <a
-                    href="/rent-vs-buy"
-                    class="group relative bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all flex flex-col justify-between overflow-hidden"
+                <!-- Coast FIRE & Rent vs Buy in a smaller grid or row -->
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 gap-6 md:col-span-3"
                 >
-                    <div
-                        class="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 opacity-0 group-hover:opacity-100 transition-opacity"
+                    <!-- Coast FIRE Calculator -->
+                    <a
+                        href="/coast-fire"
+                        class="group relative bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all flex flex-col justify-between overflow-hidden"
                     >
-                    </div>
-                    <div>
                         <div
-                            class="bg-emerald-50 text-emerald-600 w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6"
+                            class="absolute inset-0 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity"
                         >
-                            🏠
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3">
-                            買房 vs 租房
-                        </h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">
-                            考量稅率、投報率與維護成本，幫您做出最明智的居住決策。
-                        </p>
-                    </div>
-                    <span
-                        class="text-emerald-600 font-bold text-sm mt-6 flex items-center gap-2"
-                    >
-                        開始試算 <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            ><line x1="5" y1="12" x2="19" y2="12"
-                            ></line><polyline points="12 5 19 12 12 19"
-                            ></polyline></svg
+                        <div>
+                            <div
+                                class="bg-indigo-50 text-indigo-600 w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6"
+                            >
+                                🔥
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">
+                                Coast FIRE 計算
+                            </h3>
+                            <p class="text-slate-500 text-sm leading-relaxed">
+                                計算何時能停止主動儲蓄，讓資產複利帶您抵達退休終點。
+                            </p>
+                        </div>
+                        <span
+                            class="text-indigo-600 font-bold text-sm mt-6 flex items-center gap-2"
                         >
-                    </span>
-                </a>
+                            探索未來 <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><line x1="5" y1="12" x2="19" y2="12"
+                                ></line><polyline points="12 5 19 12 12 19"
+                                ></polyline></svg
+                            >
+                        </span>
+                    </a>
+
+                    <!-- Rent vs Buy -->
+                    <a
+                        href="/rent-vs-buy"
+                        class="group relative bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all flex flex-col justify-between overflow-hidden"
+                    >
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                        </div>
+                        <div>
+                            <div
+                                class="bg-emerald-50 text-emerald-600 w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6"
+                            >
+                                🏠
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">
+                                買房 vs 租房
+                            </h3>
+                            <p class="text-slate-500 text-sm leading-relaxed">
+                                考量稅率、投報率與維護成本，幫您做出最明智的居住決策。
+                            </p>
+                        </div>
+                        <span
+                            class="text-emerald-600 font-bold text-sm mt-6 flex items-center gap-2"
+                        >
+                            開始試算 <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><line x1="5" y1="12" x2="19" y2="12"
+                                ></line><polyline points="12 5 19 12 12 19"
+                                ></polyline></svg
+                            >
+                        </span>
+                    </a>
+                </div>
             </div>
 
             <div

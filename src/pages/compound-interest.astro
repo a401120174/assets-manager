@@ -1,0 +1,857 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+    title="複利效應試算 | 下班後，讓時間幫你打工"
+    description="利用複利的力量，計算您的長期投資收益。視覺化您的財富增長，並了解通膨對購買力的影響。"
+>
+    <main
+        class="container mx-auto px-4 py-8 md:py-12 max-w-7xl min-h-screen relative z-10"
+    >
+        <!-- Header -->
+        <header class="text-center mb-12 animate-fade-in-down">
+            <h1
+                class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight"
+            >
+                下班後，讓時間幫你打工
+            </h1>
+            <p class="text-lg text-slate-500 font-medium">
+                見證「複利」如何將小雪球滾成巨大的財富。
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            <!-- Left Column: Controls -->
+            <div class="lg:col-span-4 space-y-6">
+                <div
+                    class="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm space-y-8"
+                >
+                    <h2
+                        class="text-xl font-bold text-slate-900 flex items-center gap-2"
+                    >
+                        <span class="w-1.5 h-6 bg-blue-600 rounded-full"></span>
+                        投資參數設定
+                    </h2>
+
+                    <!-- Initial Capital -->
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-end">
+                            <label class="text-sm font-bold text-slate-600"
+                                >初始本金</label
+                            >
+                            <span
+                                id="val-initial-capital"
+                                class="text-xl font-mono font-bold text-blue-600"
+                                >$0</span
+                            >
+                        </div>
+                        <input
+                            type="range"
+                            id="input-initial-capital"
+                            min="0"
+                            max="10000000"
+                            step="10000"
+                            value="100000"
+                            class="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                        />
+                        <div
+                            class="flex justify-between text-[10px] text-slate-400 font-medium px-1"
+                        >
+                            <span>$0</span>
+                            <span>$1,000萬</span>
+                        </div>
+                    </div>
+
+                    <!-- Monthly Investment -->
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-end">
+                            <label class="text-sm font-bold text-slate-600"
+                                >每月投入</label
+                            >
+                            <span
+                                id="val-monthly-investment"
+                                class="text-xl font-mono font-bold text-blue-600"
+                                >$0</span
+                            >
+                        </div>
+                        <input
+                            type="range"
+                            id="input-monthly-investment"
+                            min="0"
+                            max="200000"
+                            step="1000"
+                            value="10000"
+                            class="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                        />
+                        <div
+                            class="flex justify-between text-[10px] text-slate-400 font-medium px-1"
+                        >
+                            <span>$0</span>
+                            <span>$20萬</span>
+                        </div>
+                    </div>
+
+                    <!-- Annual Return Rate -->
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-end">
+                            <label class="text-sm font-bold text-slate-600"
+                                >預計年化報酬率</label
+                            >
+                            <span
+                                id="val-return-rate"
+                                class="text-xl font-mono font-bold text-blue-600"
+                                >7%</span
+                            >
+                        </div>
+                        <input
+                            type="range"
+                            id="input-return-rate"
+                            min="1"
+                            max="20"
+                            step="0.5"
+                            value="7"
+                            class="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                        />
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <button
+                                class="preset-rate text-[10px] px-3 py-1 rounded-full bg-slate-100 text-slate-600 hover:bg-blue-600 hover:text-white transition-all font-bold"
+                                data-rate="4">保守型 4%</button
+                            >
+                            <button
+                                class="preset-rate text-[10px] px-3 py-1 rounded-full bg-slate-100 text-slate-600 hover:bg-blue-600 hover:text-white transition-all font-bold"
+                                data-rate="7">台股大盤 7%</button
+                            >
+                            <button
+                                class="preset-rate text-[10px] px-3 py-1 rounded-full bg-slate-100 text-slate-600 hover:bg-blue-600 hover:text-white transition-all font-bold"
+                                data-rate="10">美股大盤 10%</button
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Investment Years -->
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-end">
+                            <label class="text-sm font-bold text-slate-600"
+                                >投資年限</label
+                            >
+                            <span
+                                id="val-years"
+                                class="text-xl font-mono font-bold text-blue-600"
+                                >30年</span
+                            >
+                        </div>
+                        <input
+                            type="range"
+                            id="input-years"
+                            min="1"
+                            max="50"
+                            step="1"
+                            value="30"
+                            class="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                        />
+                        <div
+                            class="flex justify-between text-[10px] text-slate-400 font-medium px-1"
+                        >
+                            <span>1年</span>
+                            <span>50年</span>
+                        </div>
+                    </div>
+
+                    <!-- Inflation Toggle -->
+                    <div
+                        class="pt-6 border-t border-slate-100 flex items-center justify-between"
+                    >
+                        <div>
+                            <label
+                                class="text-sm font-bold text-slate-900 block"
+                                >考慮通膨調節 (2%)</label
+                            >
+                            <p class="text-[10px] text-slate-500">
+                                計算「實質購買力」
+                            </p>
+                        </div>
+                        <button
+                            id="toggle-inflation"
+                            class="relative inline-flex h-6 w-11 items-center rounded-full bg-slate-200 transition-colors focus:outline-none"
+                        >
+                            <span
+                                class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-1"
+                                id="inflation-knob"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Lifestyle Presets -->
+                <div
+                    class="bg-blue-600 rounded-[2.5rem] p-8 text-white space-y-6 shadow-xl shadow-blue-200"
+                >
+                    <h3 class="text-lg font-bold flex items-center gap-2">
+                        <span>☕️</span> 拿鐵因子轉換器
+                    </h3>
+                    <div class="grid grid-cols-1 gap-3">
+                        <button
+                            class="lifestyle-btn flex items-center justify-between bg-white/10 hover:bg-white/20 p-4 rounded-2xl transition-all text-left group"
+                            data-amount="150"
+                            data-freq="daily"
+                        >
+                            <div>
+                                <div class="font-bold">每天一杯精品咖啡</div>
+                                <div class="text-[10px] opacity-70">
+                                    $150 / 天
+                                </div>
+                            </div>
+                            <span
+                                class="opacity-0 group-hover:opacity-100 transition-opacity"
+                                >→</span
+                            >
+                        </button>
+                        <button
+                            class="lifestyle-btn flex items-center justify-between bg-white/10 hover:bg-white/20 p-4 rounded-2xl transition-all text-left group"
+                            data-amount="3000"
+                            data-freq="monthly"
+                        >
+                            <div>
+                                <div class="font-bold">每月一次奢華大餐</div>
+                                <div class="text-[10px] opacity-70">
+                                    $3,000 / 月
+                                </div>
+                            </div>
+                            <span
+                                class="opacity-0 group-hover:opacity-100 transition-opacity"
+                                >→</span
+                            >
+                        </button>
+                        <button
+                            class="lifestyle-btn flex items-center justify-between bg-white/10 hover:bg-white/20 p-4 rounded-2xl transition-all text-left group"
+                            data-amount="35000"
+                            data-freq="yearly"
+                        >
+                            <div>
+                                <div class="font-bold">每年換一支新 iPhone</div>
+                                <div class="text-[10px] opacity-70">
+                                    $35,000 / 年
+                                </div>
+                            </div>
+                            <span
+                                class="opacity-0 group-hover:opacity-100 transition-opacity"
+                                >→</span
+                            >
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Visualization -->
+            <div class="lg:col-span-8 space-y-8">
+                <!-- Data Overview Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div
+                        class="bg-slate-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-2xl"
+                    >
+                        <div
+                            class="absolute -right-10 -top-10 w-40 h-40 bg-blue-500 rounded-full opacity-10 blur-3xl"
+                        >
+                        </div>
+                        <div class="relative z-10">
+                            <p
+                                class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2"
+                            >
+                                最終資產預估
+                            </p>
+                            <h3
+                                id="hero-total"
+                                class="text-4xl md:text-5xl font-mono font-bold text-blue-400"
+                            >
+                                $0
+                            </h3>
+                            <div
+                                class="mt-4 flex items-center gap-2 text-sm text-slate-300"
+                            >
+                                <span
+                                    class="px-2 py-0.5 bg-white/10 rounded-md text-[10px] font-bold"
+                                    >財富翻倍</span
+                                >
+                                <span id="hero-doubles">0</span> 次
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white rounded-[2.5rem] p-8 border border-slate-200 shadow-sm flex items-center justify-between overflow-hidden relative group"
+                    >
+                        <div class="relative z-10">
+                            <p
+                                class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-2"
+                            >
+                                雪球規模
+                            </p>
+                            <h3
+                                id="snowball-label"
+                                class="text-2xl font-bold text-slate-900"
+                            >
+                                茁壯中...
+                            </h3>
+                            <p
+                                class="text-xs text-slate-400 mt-2"
+                                id="snowball-desc"
+                            >
+                                您的財富正在加速成長
+                            </p>
+                        </div>
+                        <div
+                            class="relative w-24 h-24 flex items-center justify-center"
+                        >
+                            <div
+                                id="snowball-sphere"
+                                class="w-12 h-12 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full shadow-lg shadow-blue-200 transition-all duration-500"
+                            >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Chart -->
+                <div
+                    class="bg-white rounded-[2.5rem] p-8 border border-slate-200 shadow-sm"
+                >
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-slate-900">
+                            資產增長趨勢 (本金 vs 收益)
+                        </h3>
+                        <div class="flex gap-4 text-[10px] font-bold">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-slate-300"
+                                ></span> 累積本金
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-blue-600"
+                                ></span> 複利收益
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-[400px] w-full">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Scenarios & Comparisons -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Cost of Waiting -->
+                    <div
+                        class="bg-amber-50 rounded-[2.5rem] p-8 border border-amber-100"
+                    >
+                        <h4
+                            class="text-amber-900 font-bold mb-4 flex items-center gap-2"
+                        >
+                            ⏱️ 「晚開始」的代價
+                        </h4>
+                        <div class="space-y-3">
+                            <p class="text-sm text-amber-800 leading-relaxed">
+                                如果您晚 <span class="font-bold">5</span> 年才開始：
+                            </p>
+                            <div
+                                class="p-4 bg-white/60 rounded-2xl border border-amber-200"
+                            >
+                                <div class="text-xs text-amber-700 mb-1">
+                                    每月需多存入：
+                                </div>
+                                <div
+                                    id="cost-of-waiting"
+                                    class="text-2xl font-mono font-bold text-amber-600"
+                                >
+                                    $0
+                                </div>
+                            </div>
+                            <p class="text-[10px] text-amber-600">
+                                複利最大的對手不是虧損，而是時間。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Bill Coverage -->
+                    <div
+                        class="bg-emerald-50 rounded-[2.5rem] p-8 border border-emerald-100"
+                    >
+                        <h4
+                            class="text-emerald-900 font-bold mb-4 flex items-center gap-2"
+                        >
+                            📈 帳單覆蓋模擬
+                        </h4>
+                        <div class="space-y-4">
+                            <p class="text-sm text-emerald-800">
+                                退休後每月領回（4% 提領率）：
+                            </p>
+                            <div
+                                id="bill-coverage-amount"
+                                class="text-3xl font-mono font-bold text-emerald-600"
+                            >
+                                $0
+                            </div>
+                            <p
+                                id="bill-coverage-text"
+                                class="text-xs text-emerald-700 leading-relaxed"
+                            >
+                                --
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Section -->
+        <footer class="mt-20 max-w-4xl mx-auto space-y-12">
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center border-t border-slate-100 pt-16"
+            >
+                <div>
+                    <h5 class="font-bold text-slate-900 mb-2">什麼是複利？</h5>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        複利是將賺得的利息再滾入本金，隨時間推移，收益會像滾雪球一樣加速增長。
+                    </p>
+                </div>
+                <div>
+                    <h5 class="font-bold text-slate-900 mb-2">
+                        為什麼 7% 很重要？
+                    </h5>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        根據「72 法則」，7% 的年化報酬率約每 10
+                        年能讓您的資金翻倍一次。
+                    </p>
+                </div>
+                <div>
+                    <h5 class="font-bold text-slate-900 mb-2">通膨的影響？</h5>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        長期來看，通膨會侵蝕購買力。2% 通膨代表 35
+                        年後物價會翻倍，錢會「縮水」。
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </main>
+</Layout>
+
+<script>
+    import Chart from "chart.js/auto";
+
+    // State
+    let config = {
+        initialCapital: 100000,
+        monthlyInvestment: 10000,
+        returnRate: 7,
+        years: 30,
+        isInflationAdjusted: false,
+    };
+
+    let chart: any = null;
+
+    // Elements
+    const elements = {
+        inputs: {
+            initialCapital: document.getElementById(
+                "input-initial-capital",
+            ) as HTMLInputElement,
+            monthlyInvestment: document.getElementById(
+                "input-monthly-investment",
+            ) as HTMLInputElement,
+            returnRate: document.getElementById(
+                "input-return-rate",
+            ) as HTMLInputElement,
+            years: document.getElementById("input-years") as HTMLInputElement,
+        },
+        labels: {
+            initialCapital: document.getElementById("val-initial-capital"),
+            monthlyInvestment: document.getElementById(
+                "val-monthly-investment",
+            ),
+            returnRate: document.getElementById("val-return-rate"),
+            years: document.getElementById("val-years"),
+        },
+        heroTotal: document.getElementById("hero-total"),
+        heroDoubles: document.getElementById("hero-doubles"),
+        snowballSphere: document.getElementById("snowball-sphere"),
+        snowballLabel: document.getElementById("snowball-label"),
+        snowballDesc: document.getElementById("snowball-desc"),
+        toggleInflation: document.getElementById("toggle-inflation"),
+        inflationKnob: document.getElementById("inflation-knob"),
+        costOfWaiting: document.getElementById("cost-of-waiting"),
+        billCoverageAmount: document.getElementById("bill-coverage-amount"),
+        billCoverageText: document.getElementById("bill-coverage-text"),
+    };
+
+    const moneyFmt = new Intl.NumberFormat("zh-TW", {
+        style: "currency",
+        currency: "TWD",
+        maximumFractionDigits: 0,
+    });
+
+    function init() {
+        // Event Listeners for Sliders
+        Object.keys(elements.inputs).forEach((key) => {
+            const el = elements.inputs[key as keyof typeof elements.inputs];
+            el.addEventListener("input", (e) => {
+                const val = parseFloat((e.target as HTMLInputElement).value);
+                (config as any)[key] = val;
+                updateUI();
+            });
+        });
+
+        // Preset Rate Buttons
+        document.querySelectorAll(".preset-rate").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+                const rate = parseFloat(
+                    (e.target as HTMLElement).dataset.rate || "7",
+                );
+                config.returnRate = rate;
+                elements.inputs.returnRate.value = rate.toString();
+                updateUI();
+            });
+        });
+
+        // Lifestyle Presets
+        document.querySelectorAll(".lifestyle-btn").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+                const btnEl = e.currentTarget as HTMLElement;
+                const amount = parseFloat(btnEl.dataset.amount || "0");
+                const freq = btnEl.dataset.freq;
+
+                let monthlyAmount = amount;
+                if (freq === "daily") monthlyAmount = amount * 30;
+                if (freq === "yearly") monthlyAmount = amount / 12;
+
+                config.monthlyInvestment = monthlyAmount;
+                elements.inputs.monthlyInvestment.value =
+                    monthlyAmount.toString();
+                updateUI();
+            });
+        });
+
+        // Inflation Toggle
+        elements.toggleInflation?.addEventListener("click", () => {
+            config.isInflationAdjusted = !config.isInflationAdjusted;
+            elements.toggleInflation?.classList.toggle(
+                "bg-blue-600",
+                config.isInflationAdjusted,
+            );
+            elements.toggleInflation?.classList.toggle(
+                "bg-slate-200",
+                !config.isInflationAdjusted,
+            );
+            elements.inflationKnob?.classList.toggle(
+                "translate-x-6",
+                config.isInflationAdjusted,
+            );
+            elements.inflationKnob?.classList.toggle(
+                "translate-x-1",
+                !config.isInflationAdjusted,
+            );
+            updateUI();
+        });
+
+        initChart();
+        updateUI();
+    }
+
+    function initChart() {
+        const ctx = document.getElementById("growthChart") as HTMLCanvasElement;
+        if (!ctx) return;
+
+        chart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        label: "累積本金",
+                        data: [],
+                        borderColor: "#cbd5e1",
+                        backgroundColor: "rgba(203, 213, 225, 0.4)",
+                        fill: true,
+                        pointRadius: 0,
+                        borderWidth: 0,
+                        tension: 0.1,
+                    },
+                    {
+                        label: "複利收益",
+                        data: [],
+                        borderColor: "#2563eb",
+                        backgroundColor: "rgba(37, 99, 235, 0.7)",
+                        fill: true,
+                        pointRadius: 0,
+                        borderWidth: 0,
+                        tension: 0.1,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: "index", intersect: false },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: "rgba(255, 255, 255, 0.95)",
+                        titleColor: "#1e293b",
+                        bodyColor: "#475569",
+                        borderColor: "#e2e8f0",
+                        borderWidth: 1,
+                        padding: 12,
+                        callbacks: {
+                            label: function (context) {
+                                let label = context.dataset.label || "";
+                                if (label) label += ": ";
+                                if (context.parsed.y !== null)
+                                    label += moneyFmt.format(context.parsed.y);
+                                return label;
+                            },
+                        },
+                    },
+                },
+                scales: {
+                    x: { grid: { display: false } },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true,
+                        ticks: {
+                            callback: (val) => {
+                                if (typeof val === "number") {
+                                    if (val >= 1000000)
+                                        return (
+                                            "$" +
+                                            (val / 1000000).toFixed(1) +
+                                            "M"
+                                        );
+                                    if (val >= 10000)
+                                        return (
+                                            "$" +
+                                            (val / 10000).toFixed(0) +
+                                            "萬"
+                                        );
+                                    return "$" + val;
+                                }
+                                return val;
+                            },
+                        },
+                    },
+                },
+            },
+        });
+    }
+
+    function calculateGrowth(
+        P: number,
+        PMT: number,
+        rPct: number,
+        n: number,
+        inflationPct: number = 0,
+    ) {
+        const dataPrincipal = [];
+        const dataInterest = [];
+        const labels = [];
+
+        // Adjust rate for inflation if needed
+        // Fisher equation: (1 + nominal) = (1 + real) * (1 + inflation)
+        // real = (1 + nominal) / (1 + inflation) - 1
+        const r = rPct / 100;
+        const i = inflationPct / 100;
+        const effectiveRate = config.isInflationAdjusted
+            ? (1 + r) / (1 + i) - 1
+            : r;
+        const monthlyRate = effectiveRate / 12;
+
+        let totalPrincipal = P;
+        let totalValue = P;
+
+        for (let year = 0; year <= n; year++) {
+            labels.push(`第 ${year} 年`);
+            dataPrincipal.push(totalPrincipal);
+            dataInterest.push(Math.max(0, totalValue - totalPrincipal));
+
+            if (year < n) {
+                for (let m = 0; m < 12; m++) {
+                    totalValue = (totalValue + PMT) * (1 + monthlyRate);
+                    totalPrincipal += PMT;
+                }
+            }
+        }
+
+        return { labels, dataPrincipal, dataInterest, finalValue: totalValue };
+    }
+
+    function updateUI() {
+        // Labels
+        if (elements.labels.initialCapital)
+            elements.labels.initialCapital.textContent = moneyFmt.format(
+                config.initialCapital,
+            );
+        if (elements.labels.monthlyInvestment)
+            elements.labels.monthlyInvestment.textContent = moneyFmt.format(
+                config.monthlyInvestment,
+            );
+        if (elements.labels.returnRate)
+            elements.labels.returnRate.textContent = config.returnRate + "%";
+        if (elements.labels.years)
+            elements.labels.years.textContent = config.years + "年";
+
+        // Calculation
+        const result = calculateGrowth(
+            config.initialCapital,
+            config.monthlyInvestment,
+            config.returnRate,
+            config.years,
+            2,
+        );
+
+        // Chart Update
+        if (chart) {
+            chart.data.labels = result.labels;
+            chart.data.datasets[0].data = result.dataPrincipal;
+            chart.data.datasets[1].data = result.dataInterest;
+            chart.update("none");
+        }
+
+        // Hero Stats with Count-up (Simulation)
+        if (elements.heroTotal) {
+            animateCountUp(elements.heroTotal, result.finalValue);
+        }
+
+        // Rule of 72 Doubles
+        if (elements.heroDoubles) {
+            if (config.returnRate > 0) {
+                const totalReturnRatio =
+                    result.finalValue /
+                    (config.initialCapital +
+                        config.monthlyInvestment * config.years * 12);
+                const doubles = Math.log2(totalReturnRatio);
+                elements.heroDoubles.textContent =
+                    doubles > 0 ? doubles.toFixed(1) : "0";
+            }
+        }
+
+        // Snowball Animation
+        if (elements.snowballSphere) {
+            const scale = Math.min(2.5, 0.5 + result.finalValue / 10000000);
+            elements.snowballSphere.style.transform = `scale(${scale})`;
+            elements.snowballSphere.style.filter = `brightness(${0.8 + scale * 0.2}) blur(${Math.max(0, (scale - 1) * 2)}px)`;
+        }
+
+        // Snowball Labels
+        if (result.finalValue > 10000000) {
+            if (elements.snowballLabel)
+                elements.snowballLabel.textContent = "財富自由之巔";
+            if (elements.snowballDesc)
+                elements.snowballDesc.textContent = "您的雪球已經勢不可擋！";
+        } else if (result.finalValue > 5000000) {
+            if (elements.snowballLabel)
+                elements.snowballLabel.textContent = "資產加速狂飆";
+            if (elements.snowballDesc)
+                elements.snowballDesc.textContent = "複利效應正顯現巨大威力。";
+        } else {
+            if (elements.snowballLabel)
+                elements.snowballLabel.textContent = "穩定紮基中";
+            if (elements.snowballDesc)
+                elements.snowballDesc.textContent =
+                    "持續投入，等待時間開花結果。";
+        }
+
+        // Cost of Waiting (5 years later)
+        const waitResult = calculateGrowth(
+            config.initialCapital,
+            config.monthlyInvestment,
+            config.returnRate,
+            config.years - 5,
+        );
+        // How much more monthly PMT needed in (years-5) to reach same finalValue?
+        // PMT_needed = (FinalValue - P*(1+r)^n) / (((1+r)^n - 1) / r)
+        const target = result.finalValue;
+        const P = config.initialCapital;
+        const n = (config.years - 5) * 12;
+        const r = config.returnRate / 100 / 12;
+        const futureValueOfP = P * Math.pow(1 + r, n);
+        const pmtNeeded =
+            (target - futureValueOfP) / ((Math.pow(1 + r, n) - 1) / r);
+        const diff = pmtNeeded - config.monthlyInvestment;
+
+        if (elements.costOfWaiting) {
+            elements.costOfWaiting.textContent =
+                diff > 0 ? moneyFmt.format(diff) : "$0";
+        }
+
+        // Bill Coverage (4% Safe Withdrawal Rate per month)
+        const monthlyWithdrawal = (result.finalValue * 0.04) / 12;
+        if (elements.billCoverageAmount)
+            elements.billCoverageAmount.textContent =
+                moneyFmt.format(monthlyWithdrawal);
+
+        let coverageText = "足以應付日常基本開銷。";
+        if (monthlyWithdrawal > 100000)
+            coverageText = "相當於每月多領一份高階主管薪水。";
+        else if (monthlyWithdrawal > 50000)
+            coverageText = "足以支付台北市中心的優質房租。";
+        else if (monthlyWithdrawal > 20000)
+            coverageText = "足以覆蓋大部份的生活雜支與帳單。";
+
+        if (elements.billCoverageText)
+            elements.billCoverageText.textContent = coverageText;
+    }
+
+    function animateCountUp(el: HTMLElement, target: number) {
+        const start = 0;
+        const duration = 1000;
+        let startTime: number | null = null;
+
+        function step(timestamp: number) {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const current = Math.floor(progress * target);
+            el.textContent = moneyFmt.format(current);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            } else {
+                el.textContent = moneyFmt.format(target);
+            }
+        }
+        window.requestAnimationFrame(step);
+    }
+
+    init();
+</script>
+
+<style>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .animate-fade-in-down {
+        animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: #2563eb;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 4px solid white;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        background: #2563eb;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 4px solid white;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+</style>
