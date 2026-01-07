@@ -22,6 +22,12 @@ const currentPath = pathname.slice(1); // remove the first "/"
                 <a href="/about" class={`text-sm font-medium transition-colors duration-200 ${currentPath === "about" ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}>
                     關於我們
                 </a>
+                <a href="/coast-fire" class={`text-sm font-medium transition-colors duration-200 ${currentPath === "coast-fire" ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}>
+                    Coast FIRE
+                </a>
+                <a href="/rent-vs-buy" class={`text-sm font-medium transition-colors duration-200 ${currentPath === "rent-vs-buy" ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}>
+                    買房 vs 租房
+                </a>
                 <a href="https://github.com" target="_blank" class="px-4 py-2 text-sm font-medium text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition-all shadow-sm hover:shadow-md">
                     GitHub
                 </a>
@@ -46,6 +52,12 @@ const currentPath = pathname.slice(1); // remove the first "/"
             </a>
             <a href="/about" class={`block px-3 py-3 rounded-lg text-base font-medium ${currentPath === "about" ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}>
                 關於我們
+            </a>
+            <a href="/coast-fire" class={`block px-3 py-3 rounded-lg text-base font-medium ${currentPath === "coast-fire" ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}>
+                Coast FIRE
+            </a>
+            <a href="/rent-vs-buy" class={`block px-3 py-3 rounded-lg text-base font-medium ${currentPath === "rent-vs-buy" ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}>
+                買房 vs 租房
             </a>
             <div class="pt-4 border-t border-slate-100 mt-2">
                 <a href="https://github.com" target="_blank" class="block w-full text-center px-4 py-3 text-base font-medium text-white bg-slate-900 rounded-lg hover:bg-slate-800 shadow-sm">

@@ -63,10 +63,11 @@ function SceneContent() {
 
 export default function Background3D() {
     return (
-        <div className="fixed inset-0 -z-0 pointer-events-none opacity-60">
+        <div className="fixed inset-0 -z-20 pointer-events-none opacity-60">
             <Canvas
                 camera={{ position: [0, 0, 5], fov: 45 }}
                 gl={{ alpha: true, antialias: true }}
+                style={{ pointerEvents: 'none' }}
             >
                 <SceneContent />
             </Canvas>

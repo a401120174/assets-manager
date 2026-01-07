@@ -1,0 +1,487 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="買房 vs 租房試算 | Asset Manager" description="視覺化機會成本，找到您的買租黃金交叉點。">
+    <main class="container mx-auto px-4 py-8 md:py-12 max-w-7xl min-h-screen relative z-10">
+        
+        <!-- Header -->
+        <div class="text-center mb-12 animate-fade-in-down">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">買房 vs 租房</h1>
+            <p class="text-lg text-slate-500 font-medium">不只是房貸與租金的比較，更是「機會成本」的對決。</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Parameters Panel -->
+            <div class="lg:col-span-4 space-y-6">
+                
+                <!-- Buying Section -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                    <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <span class="w-1 h-5 bg-blue-600 rounded-full"></span>
+                        買房參數 (Buying)
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="space-y-1">
+                            <label class="flex justify-between text-sm font-semibold text-slate-600">
+                                房屋總價 <span id="val-home-price" class="text-blue-600 font-mono">$20,000,000</span>
+                            </label>
+                            <input type="range" id="home-price" min="5000000" max="100000000" step="100000" value="20000000" class="w-full accent-blue-600 cursor-pointer">
+                        </div>
+                         <div class="space-y-1">
+                            <label class="flex justify-between text-sm font-semibold text-slate-600">
+                                頭期款比例 (%) <span id="val-down-payment" class="text-blue-600">20%</span>
+                            </label>
+                            <input type="range" id="down-payment" min="10" max="100" step="5" value="20" class="w-full accent-blue-600 cursor-pointer">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                             <div class="space-y-1">
+                                <label class="flex justify-between text-xs font-semibold text-slate-500">
+                                    房貸利率 (%) <span id="val-mortgage-rate" class="text-blue-600">2.2%</span>
+                                </label>
+                                <input type="range" id="mortgage-rate" min="1" max="5" step="0.1" value="2.2" class="w-full accent-blue-600 cursor-pointer">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="flex justify-between text-xs font-semibold text-slate-500">
+                                    貸款年限 <span id="val-mortgage-years" class="text-blue-600">30年</span>
+                                </label>
+                                <input type="range" id="mortgage-years" min="10" max="40" step="5" value="30" class="w-full accent-blue-600 cursor-pointer">
+                            </div>
+                        </div>
+                         <div class="space-y-1">
+                            <label class="flex justify-between text-sm font-semibold text-slate-600">
+                                預期房價年漲幅 (%) <span id="val-appreciation" class="text-blue-600">2%</span>
+                            </label>
+                             <input type="range" id="appreciation" min="0" max="10" step="0.5" value="2" class="w-full accent-blue-600 cursor-pointer">
+                        </div>
+                         <div class="space-y-1 pt-2 border-t border-slate-100">
+                            <label class="flex justify-between text-xs font-semibold text-slate-500" title="包含稅金、維護費、保險等">
+                                持有成本 (年/總價%) <span id="val-holding-cost" class="text-slate-600">1.5%</span>
+                            </label>
+                             <input type="range" id="holding-cost" min="0.5" max="3" step="0.1" value="1.5" class="w-full accent-slate-400 cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Renting Section -->
+                 <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                    <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <span class="w-1 h-5 bg-emerald-500 rounded-full"></span>
+                        租房參數 (Renting)
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="space-y-1">
+                            <label class="flex justify-between text-sm font-semibold text-slate-600">
+                                每月租金 <span id="val-rent" class="text-emerald-600 font-mono">$35,000</span>
+                            </label>
+                            <input type="range" id="rent" min="5000" max="200000" step="1000" value="35000" class="w-full accent-emerald-500 cursor-pointer">
+                        </div>
+                         <div class="space-y-1">
+                            <label class="flex justify-between text-sm font-semibold text-slate-600">
+                                租金年漲幅 (%) <span id="val-rent-inflation" class="text-emerald-600">2%</span>
+                            </label>
+                            <input type="range" id="rent-inflation" min="0" max="8" step="0.5" value="2" class="w-full accent-emerald-500 cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Opportunity Cost Section -->
+                 <div class="bg-amber-50 p-6 rounded-3xl border border-amber-100 shadow-sm relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-amber-200 rounded-full opacity-20 blur-xl"></div>
+                    <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 relative z-10">
+                        <span class="w-1 h-5 bg-amber-500 rounded-full"></span>
+                        機會成本 (Opportunity)
+                    </h2>
+                     <div class="space-y-1 relative z-10">
+                        <label class="flex justify-between text-sm font-semibold text-slate-600">
+                            投資年化報酬率 (%) <span id="val-invest-return" class="text-amber-600">7%</span>
+                        </label>
+                        <p class="text-[10px] text-slate-500 mb-2">如果您不買房，將頭期款及每月省下的差額拿去投資...</p>
+                        <input type="range" id="invest-return" min="1" max="15" step="0.5" value="7" class="w-full accent-amber-500 cursor-pointer">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Visualization Panel -->
+            <div class="lg:col-span-8 space-y-6">
+                
+                <!-- Verdict Card -->
+                <div class="bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl">
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+                        <div>
+                             <div class="uppercase tracking-widest text-slate-400 text-xs font-bold mb-2">租買對決 (30年後淨資產)</div>
+                             <div class="flex items-end gap-2 mb-1">
+                                <span class="text-sm text-blue-400 font-bold">買房</span>
+                                <span class="text-2xl font-mono font-bold" id="res-buy-nw">$0</span>
+                             </div>
+                             <div class="flex items-end gap-2">
+                                <span class="text-sm text-emerald-400 font-bold">租房</span>
+                                <span class="text-2xl font-mono font-bold" id="res-rent-nw">$0</span>
+                             </div>
+                        </div>
+                        <div class="flex flex-col justify-center border-t md:border-t-0 md:border-l border-white/10 md:pl-8 pt-4 md:pt-0">
+                            <div class="uppercase tracking-widest text-slate-400 text-xs font-bold mb-2">黃金交叉點</div>
+                            <h3 class="text-3xl font-bold text-amber-400 mb-2" id="breakeven-text">計算中...</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed" id="verdict-desc">--</p>
+                        </div>
+                     </div>
+                </div>
+
+                <!-- Chart Card -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm h-[500px] relative">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+
+                <!-- Analysis Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                     <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="p-2 bg-blue-50 rounded-lg text-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4 8 4v14"/><path d="M9 10a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v11"/></svg>
+                            </div>
+                            <h4 class="font-bold text-slate-900">買房優勢</h4>
+                        </div>
+                        <ul class="text-sm text-slate-600 space-y-2 list-disc pl-4">
+                            <li>強迫儲蓄：房貸本金即是存錢</li>
+                            <li>槓桿效應：用少數頭期款享受全額資產增值</li>
+                            <li>居住安定感與抗通膨</li>
+                        </ul>
+                     </div>
+                      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="p-2 bg-emerald-50 rounded-lg text-emerald-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            </div>
+                            <h4 class="font-bold text-slate-900">租房優勢</h4>
+                        </div>
+                         <ul class="text-sm text-slate-600 space-y-2 list-disc pl-4">
+                            <li>現金流彈性：初期負擔通常較低</li>
+                            <li>機會成本：資金投入股市報酬率可能高於房市</li>
+                            <li>移動自由度：不受房產地點綁定</li>
+                        </ul>
+                     </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</Layout>
+
+<script>
+    import Chart from 'chart.js/auto';
+
+    // State
+    const state = {
+        homePrice: 20000000,
+        downPaymentPct: 20,
+        mortgageRate: 2.2,
+        mortgageYears: 30,
+        appreciation: 2,
+        holdingCostPct: 1.5,
+        
+        rent: 35000,
+        rentInflation: 2,
+        
+        investReturn: 7
+    };
+
+    let chart = null;
+
+    // Elements
+    const inputs = {
+        homePrice: document.getElementById('home-price'),
+        downPaymentPct: document.getElementById('down-payment'),
+        mortgageRate: document.getElementById('mortgage-rate'),
+        mortgageYears: document.getElementById('mortgage-years'),
+        appreciation: document.getElementById('appreciation'),
+        holdingCostPct: document.getElementById('holding-cost'),
+        rent: document.getElementById('rent'),
+        rentInflation: document.getElementById('rent-inflation'),
+        investReturn: document.getElementById('invest-return')
+    };
+
+    const labels = {
+        homePrice: document.getElementById('val-home-price'),
+        downPaymentPct: document.getElementById('val-down-payment'),
+        mortgageRate: document.getElementById('val-mortgage-rate'),
+        mortgageYears: document.getElementById('val-mortgage-years'),
+        appreciation: document.getElementById('val-appreciation'),
+        holdingCostPct: document.getElementById('val-holding-cost'),
+        rent: document.getElementById('val-rent'),
+        rentInflation: document.getElementById('val-rent-inflation'),
+        investReturn: document.getElementById('val-invest-return'),
+        
+        resBuyNw: document.getElementById('res-buy-nw'),
+        resRentNw: document.getElementById('res-rent-nw'),
+        breakevenText: document.getElementById('breakeven-text'),
+        verdictDesc: document.getElementById('verdict-desc')
+    };
+
+    const moneyFmt = new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', maximumFractionDigits: 0 });
+
+    function init() {
+         Object.keys(inputs).forEach(key => {
+            const el = inputs[key];
+            if(el) {
+                el.addEventListener('input', (e) => {
+                    // @ts-ignore
+                    state[key] = parseFloat(e.target.value);
+                    update();
+                });
+            }
+        });
+        update();
+    }
+
+    function calculateMortgage(principal, rate, years) {
+        const monthlyRate = rate / 100 / 12;
+        const numberOfPayments = years * 12;
+        return (principal * monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+    }
+
+    function calculate() {
+        // Initial Buy Costs
+        const downPayment = state.homePrice * (state.downPaymentPct / 100);
+        const loanAmount = state.homePrice - downPayment;
+        const monthlyMortgage = calculateMortgage(loanAmount, state.mortgageRate, state.mortgageYears);
+        
+        // Buy Scenario Initial
+        // Initial Investment = Down Payment + Buying Costs (Assume 2% for stamps/fees)
+        const buyingCosts = state.homePrice * 0.02;
+        const initialCashOutlay = downPayment + buyingCosts;
+
+        // Buying Variables
+        let houseValue = state.homePrice;
+        let loanBalance = loanAmount;
+        let buyInvestments = 0; // If rent > buy_cost, invest difference. Otherwise negative? 
+        // Logic check: Rent vs Buy is usually compared by taking the Initial Cash Outlay and investing it in Rent Scenario.
+        // And Monthly Difference is invested in whichever specific scenario is cheaper.
+
+        // Rent Scenario Initial
+        let rentInvestments = initialCashOutlay; // Opportunity Cost Principle: Renters invest the down payment!
+        let currentMonthlyRent = state.rent;
+
+        const maxYears = 30;
+        const buyData = [];
+        const rentData = [];
+        const labels = [];
+        let breakevenYear = -1;
+
+        for (let year = 0; year <= maxYears; year++) {
+            labels.push(`第 ${year} 年`);
+
+            // Snapshot at End of Year (Year 0 is start)
+            if (year === 0) {
+                buyData.push(initialCashOutlay * -1); // Just to zero set or show Equity? 
+                // Net Worth View:
+                // Buy NW = House Value - Loan Balance + BuyInvestments - SellingCost
+                // Rent NW = RentInvestments
+                // Year 0:
+                // Buy: House(P) - Loan(P-D) - Cost = D - Cost. (Actually Buying Costs are "Lost").
+                // Rent: D + Cost.
+                // So Rent starts higher by "Buying Costs".
+                
+                const startBuyNW = state.homePrice - loanAmount - (state.homePrice * 0.04); // Assume 4% selling cost friction immediately
+                buyData.push(startBuyNW);
+                rentData.push(rentInvestments);
+                continue;
+            }
+
+            // Monthly Calc Loop for the Year
+            let annualBuyCost = 0;
+            let annualRentCost = 0;
+
+            for (let m = 0; m < 12; m++) {
+                // Buy Costs: Mortgage + Holding (Tax/Maint)
+                // Holding Cost = x% of Home Price / 12
+                const monthlyHolding = (houseValue * (state.holdingCostPct / 100)) / 12;
+                const monthlyBuyOutflow = monthlyMortgage + monthlyHolding;
+                
+                // Rent Costs
+                const monthlyRentOutflow = currentMonthlyRent;
+                
+                // Invest the difference
+                const diff = monthlyRentOutflow - monthlyBuyOutflow;
+                
+                // Monthly Return Rate
+                const monthlyReturn = state.investReturn / 100 / 12;
+                
+                if (diff > 0) {
+                    // Rent is more expensive -> Buyer saves/invests
+                    buyInvestments = (buyInvestments + diff) * (1 + monthlyReturn);
+                    rentInvestments = rentInvestments * (1 + monthlyReturn);
+                } else {
+                    // Buy is more expensive -> Renter saves/invests
+                    // Diff is negative, so Renter invests -diff
+                    rentInvestments = (rentInvestments + (-diff)) * (1 + monthlyReturn);
+                    buyInvestments = buyInvestments * (1 + monthlyReturn);
+                }
+
+                // Amortization (Simplified)
+                const interestPayment = loanBalance * (state.mortgageRate / 100 / 12);
+                const principalPayment = monthlyMortgage - interestPayment;
+                if(loanBalance > 0) {
+                    loanBalance -= principalPayment;
+                    if(loanBalance < 0) loanBalance = 0;
+                }
+                
+                annualBuyCost += monthlyBuyOutflow;
+                annualRentCost += monthlyRentOutflow;
+            }
+
+            // End of Year Adjustments
+            houseValue = houseValue * (1 + state.appreciation / 100);
+            currentMonthlyRent = currentMonthlyRent * (1 + state.rentInflation / 100);
+
+            // Calculate Net Worths
+            // Buy NW: House - Loan + Investments - SellingCosts (Platform friction ~4%)
+            const sellingCost = houseValue * 0.04; 
+            const buyNW = houseValue - loanBalance + buyInvestments - sellingCost;
+            
+            // Rent NW
+            const rentNW = rentInvestments;
+
+            buyData.push(buyNW);
+            rentData.push(rentNW);
+
+            if (buyNW > rentNW && breakevenYear === -1) {
+                breakevenYear = year;
+            }
+        }
+
+        return { buyData, rentData, labels, breakevenYear };
+    }
+
+
+    function update() {
+        // UI Labels
+        labels.homePrice.textContent = '$' + (state.homePrice/10000).toFixed(0) + '萬';
+        labels.downPaymentPct.textContent = state.downPaymentPct + '%';
+        labels.mortgageRate.textContent = state.mortgageRate + '%';
+        labels.mortgageYears.textContent = state.mortgageYears + '年';
+        labels.appreciation.textContent = state.appreciation + '%';
+        labels.holdingCostPct.textContent = state.holdingCostPct + '%';
+        labels.rent.textContent = moneyFmt.format(state.rent);
+        labels.rentInflation.textContent = state.rentInflation + '%';
+        labels.investReturn.textContent = state.investReturn + '%';
+
+        // Calculation
+        const res = calculate();
+        
+        // Final Results
+        const finalBuy = res.buyData[res.buyData.length-1];
+        const finalRent = res.rentData[res.rentData.length-1];
+        
+        labels.resBuyNw.textContent = moneyFmt.format(finalBuy);
+        labels.resRentNw.textContent = moneyFmt.format(finalRent);
+
+        if (res.breakevenYear !== -1) {
+            labels.breakevenText.textContent = `第 ${res.breakevenYear} 年`;
+            labels.breakevenText.className = "text-3xl font-bold text-amber-400 mb-2";
+            labels.verdictDesc.textContent = `如果您打算持有超過 ${res.breakevenYear} 年，買房將會比租房累積更多財富 (已扣除交易成本與機會成本)。`;
+        } else {
+             if (finalRent > finalBuy) {
+                labels.breakevenText.textContent = "租房勝出";
+                labels.breakevenText.className = "text-3xl font-bold text-emerald-400 mb-2";
+                labels.verdictDesc.textContent = `在目前的參數下 (尤其是 ${state.investReturn}% 的投資回報率)，持續租房並將資金投資於市場，30年後的淨資產將高於買房。`;
+             } else {
+                labels.breakevenText.textContent = "買房勝出"; // Rare but possible if year 1
+                labels.breakevenText.className = "text-3xl font-bold text-blue-400 mb-2";
+             }
+        }
+
+        renderChart(res);
+    }
+
+    function renderChart(data) {
+        const ctx = document.getElementById('comparisonChart');
+        if (!ctx) return;
+
+        if (chart) {
+            chart.destroy();
+        }
+
+        // @ts-ignore
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.labels,
+                datasets: [
+                    {
+                        label: '買房淨資產 (Buy)',
+                        data: data.buyData,
+                        borderColor: '#2563EB', // blue-600
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                         tension: 0.4,
+                    },
+                    {
+                        label: '租房淨資產 (Rent)',
+                        data: data.rentData,
+                        borderColor: '#10B981', // emerald-500
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                         tension: 0.4,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '30年財富累積曲線 (考慮機會成本)'
+                    },
+                     tooltip: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                        titleColor: '#1e293b',
+                        bodyColor: '#475569',
+                        borderColor: '#e2e8f0',
+                        borderWidth: 1,
+                        padding: 10,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', maximumFractionDigits: 0 }).format(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
+                    },
+                },
+                 scales: {
+                    x: {
+                        grid: { display: false },
+                         ticks: { maxTicksLimit: 10 }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#f1f5f9' },
+                        ticks: {
+                            callback: function(value, index, values) {
+                                // @ts-ignore
+                                return  '$' + value / 10000 + '萬';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    init();
+</script>
