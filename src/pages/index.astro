@@ -6,6 +6,31 @@ import Layout from "../layouts/Layout.astro";
     title="下班後理財 | 白天努力生活，晚上規劃自由。"
     description="下班後理財是您最值得信賴的資產管理夥伴，提供專業、私密、直觀的資產追蹤工具。一站式管理您的全球資產。"
 >
+    <!-- SEO / GEO Structured Data -->
+    <script type="application/ld+json" is:inline>
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "我的財務數據會被傳送到伺服器嗎？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "完全不會。「下班後理財」是一個純前端運作的應用程式 (Client-side App)。所有的資料都加密儲存在您裝置的瀏覽器資料庫中，即使我們也無法看見您的資產狀況。"
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "匯率是即時的嗎？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "是的，系統每 5 分鐘會自動從國際匯率 API 獲取最新的匯率資訊。如果您的裝置處於離線狀態，系統會自動使用上一次更新的匯率進行計算。"
+                    }
+                }
+            ]
+        }
+    </script>
     <main
         class="container mx-auto px-4 py-16 md:py-24 max-w-7xl relative z-10 min-h-screen"
     >

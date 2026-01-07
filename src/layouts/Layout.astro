@@ -12,6 +12,27 @@ const {
 	title = "下班後理財 - 您的個人財富儀表板",
 	description = "全方位的個人資產管理工具。即時追蹤現金、股票、房地產與負債，自動整合實時匯率，精準掌握您的淨資產狀況。",
 } = Astro.props;
+
+const canonicalURL = new URL(
+	Astro.url.pathname,
+	"https://assets-manager-beige.vercel.app/",
+);
+
+const siteSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	name: "下班後理財",
+	url: "https://assets-manager-beige.vercel.app/",
+	description: description,
+	publisher: {
+		"@type": "Organization",
+		name: "下班後理財",
+		logo: {
+			"@type": "ImageObject",
+			url: "https://assets-manager-beige.vercel.app/favicon.svg",
+		},
+	},
+};
 ---
 
 <!doctype html>
@@ -21,6 +42,8 @@ const {
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="canonical" href={canonicalURL} />
+		<meta name="author" content="下班後理財" />
 
 		<!-- Primary Meta Tags -->
 		<title>{title}</title>
@@ -60,10 +83,16 @@ const {
 			content="https://images.unsplash.com/photo-1611974765270-ca1258547bbb?q=80&w=1200&auto=format&fit=crop"
 		/>
 
-		<!-- Fonts -->
 		<link
 			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
 			rel="stylesheet"
+		/>
+
+		<!-- Structured Data -->
+		<script
+			type="application/ld+json"
+			is:inline
+			set:html={JSON.stringify(siteSchema)}
 		/>
 	</head>
 	<body

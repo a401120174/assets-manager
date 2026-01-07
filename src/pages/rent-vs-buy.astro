@@ -6,6 +6,41 @@ import Layout from "../layouts/Layout.astro";
     title="買房 vs 租房計算器 | 下班後理財"
     description="視覺化機會成本，找到您的買租黃金交叉點。"
 >
+    <script type="application/ld+json" is:inline>
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "買房 vs 租房計算器",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Web",
+            "description": "考慮機會成本，計算買房與租房的長期淨資產差異。",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "TWD"
+            }
+        }
+    </script>
+    <script type="application/ld+json" is:inline>
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "首頁",
+                    "item": "https://assets-manager-beige.vercel.app/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "買房 vs 租房",
+                    "item": "https://assets-manager-beige.vercel.app/rent-vs-buy"
+                }
+            ]
+        }
+    </script>
     <main
         class="container mx-auto px-4 py-8 md:py-12 max-w-7xl min-h-screen relative z-10"
     >
@@ -404,19 +439,33 @@ import Layout from "../layouts/Layout.astro";
         investReturn: 7,
     };
 
-    let chart = null;
+    let chart: any = null;
 
     // Elements
     const inputs = {
-        homePrice: document.getElementById("home-price"),
-        downPaymentPct: document.getElementById("down-payment"),
-        mortgageRate: document.getElementById("mortgage-rate"),
-        mortgageYears: document.getElementById("mortgage-years"),
-        appreciation: document.getElementById("appreciation"),
-        holdingCostPct: document.getElementById("holding-cost"),
-        rent: document.getElementById("rent"),
-        rentInflation: document.getElementById("rent-inflation"),
-        investReturn: document.getElementById("invest-return"),
+        homePrice: document.getElementById("home-price") as HTMLInputElement,
+        downPaymentPct: document.getElementById(
+            "down-payment",
+        ) as HTMLInputElement,
+        mortgageRate: document.getElementById(
+            "mortgage-rate",
+        ) as HTMLInputElement,
+        mortgageYears: document.getElementById(
+            "mortgage-years",
+        ) as HTMLInputElement,
+        appreciation: document.getElementById(
+            "appreciation",
+        ) as HTMLInputElement,
+        holdingCostPct: document.getElementById(
+            "holding-cost",
+        ) as HTMLInputElement,
+        rent: document.getElementById("rent") as HTMLInputElement,
+        rentInflation: document.getElementById(
+            "rent-inflation",
+        ) as HTMLInputElement,
+        investReturn: document.getElementById(
+            "invest-return",
+        ) as HTMLInputElement,
     };
 
     const labels = {
@@ -443,11 +492,11 @@ import Layout from "../layouts/Layout.astro";
 
     function init() {
         Object.keys(inputs).forEach((key) => {
-            const el = inputs[key];
+            const el = inputs[key as keyof typeof inputs];
             if (el) {
                 el.addEventListener("input", (e) => {
-                    // @ts-ignore
-                    state[key] = parseFloat(e.target.value);
+                    const target = e.target as HTMLInputElement;
+                    (state as any)[key] = parseFloat(target.value);
                     update();
                 });
             }
@@ -455,7 +504,7 @@ import Layout from "../layouts/Layout.astro";
         update();
     }
 
-    function calculateMortgage(principal, rate, years) {
+    function calculateMortgage(principal: number, rate: number, years: number) {
         const monthlyRate = rate / 100 / 12;
         const numberOfPayments = years * 12;
         return (
@@ -557,16 +606,24 @@ import Layout from "../layouts/Layout.astro";
 
     function update() {
         // UI Labels
-        labels.homePrice.textContent =
-            "$" + (state.homePrice / 10000).toFixed(0) + "萬";
-        labels.downPaymentPct.textContent = state.downPaymentPct + "%";
-        labels.mortgageRate.textContent = state.mortgageRate + "%";
-        labels.mortgageYears.textContent = state.mortgageYears + "年";
-        labels.appreciation.textContent = state.appreciation + "%";
-        labels.holdingCostPct.textContent = state.holdingCostPct + "%";
-        labels.rent.textContent = moneyFmt.format(state.rent);
-        labels.rentInflation.textContent = state.rentInflation + "%";
-        labels.investReturn.textContent = state.investReturn + "%";
+        if (labels.homePrice)
+            labels.homePrice.textContent =
+                "$" + (state.homePrice / 10000).toFixed(0) + "萬";
+        if (labels.downPaymentPct)
+            labels.downPaymentPct.textContent = state.downPaymentPct + "%";
+        if (labels.mortgageRate)
+            labels.mortgageRate.textContent = state.mortgageRate + "%";
+        if (labels.mortgageYears)
+            labels.mortgageYears.textContent = state.mortgageYears + "年";
+        if (labels.appreciation)
+            labels.appreciation.textContent = state.appreciation + "%";
+        if (labels.holdingCostPct)
+            labels.holdingCostPct.textContent = state.holdingCostPct + "%";
+        if (labels.rent) labels.rent.textContent = moneyFmt.format(state.rent);
+        if (labels.rentInflation)
+            labels.rentInflation.textContent = state.rentInflation + "%";
+        if (labels.investReturn)
+            labels.investReturn.textContent = state.investReturn + "%";
 
         // Calculation
         const res = calculate();
@@ -575,31 +632,41 @@ import Layout from "../layouts/Layout.astro";
         const finalBuy = res.buyData[res.buyData.length - 1];
         const finalRent = res.rentData[res.rentData.length - 1];
 
-        labels.resBuyNw.textContent = moneyFmt.format(finalBuy);
-        labels.resRentNw.textContent = moneyFmt.format(finalRent);
+        if (labels.resBuyNw)
+            labels.resBuyNw.textContent = moneyFmt.format(finalBuy);
+        if (labels.resRentNw)
+            labels.resRentNw.textContent = moneyFmt.format(finalRent);
 
         if (res.breakevenYear !== -1) {
-            labels.breakevenText.textContent = `第 ${res.breakevenYear} 年`;
-            labels.breakevenText.className =
-                "text-3xl font-bold text-amber-400 mb-2";
-            labels.verdictDesc.textContent = `如果您打算持有超過 ${res.breakevenYear} 年，買房將會比租房累積更多財富 (已扣除交易成本與機會成本)。`;
+            if (labels.breakevenText) {
+                labels.breakevenText.textContent = `第 ${res.breakevenYear} 年`;
+                labels.breakevenText.className =
+                    "text-3xl font-bold text-amber-400 mb-2";
+            }
+            if (labels.verdictDesc)
+                labels.verdictDesc.textContent = `如果您打算持有超過 ${res.breakevenYear} 年，買房將會比租房累積更多財富 (已扣除交易成本與機會成本)。`;
         } else {
             if (finalRent > finalBuy) {
-                labels.breakevenText.textContent = "租房勝出的可能性高";
-                labels.breakevenText.className =
-                    "text-3xl font-bold text-emerald-400 mb-2";
-                labels.verdictDesc.textContent = `在目前的參數下 (尤其是 ${state.investReturn}% 的投資回報率)，持續租房並將資金投資於市場，30年後的淨資產可能高於買房。`;
+                if (labels.breakevenText) {
+                    labels.breakevenText.textContent = "租房勝出的可能性高";
+                    labels.breakevenText.className =
+                        "text-3xl font-bold text-emerald-400 mb-2";
+                }
+                if (labels.verdictDesc)
+                    labels.verdictDesc.textContent = `在目前的參數下 (尤其是 ${state.investReturn}% 的投資回報率)，持續租房並將資金投資於市場，30年後的淨資產可能高於買房。`;
             } else {
-                labels.breakevenText.textContent = "買房勝出";
-                labels.breakevenText.className =
-                    "text-3xl font-bold text-blue-400 mb-2";
+                if (labels.breakevenText) {
+                    labels.breakevenText.textContent = "買房勝出";
+                    labels.breakevenText.className =
+                        "text-3xl font-bold text-blue-400 mb-2";
+                }
             }
         }
 
         renderChart(res);
     }
 
-    function renderChart(data) {
+    function renderChart(data: any) {
         const ctx = document.getElementById(
             "comparisonChart",
         ) as HTMLCanvasElement;
@@ -609,7 +676,6 @@ import Layout from "../layouts/Layout.astro";
             chart.destroy();
         }
 
-        // @ts-ignore
         chart = new Chart(ctx, {
             type: "line",
             data: {
