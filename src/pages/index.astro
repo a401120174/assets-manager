@@ -1,196 +1,427 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Asset Manager | 您最值得信賴的資產管理夥伴" description="專業、私密、直觀的資產追蹤工具。一站式管理您的全球資產。">
-  <main class="container mx-auto px-4 py-16 md:py-24 max-w-7xl relative z-10 min-h-screen">
-    
-    <!-- Hero Section -->
-    <header class="text-center space-y-8 mb-32 animate-fade-in-down">
-        <div class="inline-block px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold tracking-widest uppercase mb-4">
-            專業資產追蹤工具
-        </div>
-        <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            一眼掌握您的<br/>
-            <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">全球財富淨值</span>
-        </h1>
-        <p class="text-xl text-slate-500 max-w-2xl mx-auto font-medium leading-relaxed">
-            Asset Manager 幫助您整合現金、股票、房地產與加密貨幣。
-            完全私密，數據僅存於您的裝置。
-        </p>
-        
-        <!-- Bento Grid Section -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12 max-w-6xl mx-auto w-full">
-            <!-- Assets Manager: Main Feature -->
-            <a href="/assets-manager" class="group relative md:col-span-2 md:row-span-2 bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all overflow-hidden flex flex-col justify-between min-h-[400px]">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="relative z-10">
-                    <div class="bg-blue-600 text-white w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-8 shadow-lg shadow-blue-200">💰</div>
-                    <h2 class="text-3xl font-extrabold text-slate-900 mb-4 tracking-tight">資產總覽儀表板</h2>
-                    <p class="text-slate-500 text-lg leading-relaxed max-w-md">整合您的現金、股票、房地產與加密貨幣，一眼掌握全球資產淨值與分佈。</p>
-                </div>
-                <div class="relative z-10 flex items-center gap-3 text-blue-600 font-bold">
-                    立即開始管理 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-2 transition-transform"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </div>
-            </a>
-
-            <!-- Coast FIRE Calculator -->
-            <a href="/coast-fire" class="group relative bg-slate-900 rounded-[2.5rem] p-8 hover:shadow-2xl hover:-translate-y-1 transition-all flex flex-col justify-between overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div>
-                    <div class="bg-indigo-500/20 text-indigo-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6 border border-indigo-500/30">🔥</div>
-                    <h3 class="text-xl font-bold text-white mb-3">Coast FIRE 計算</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">計算何時能停止主動儲蓄，讓資產複利帶您抵達退休終點。</p>
-                </div>
-                <span class="text-indigo-400 font-bold text-sm mt-6 flex items-center gap-2">
-                    探索未來 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </span>
-            </a>
-
-            <!-- Rent vs Buy -->
-            <a href="/rent-vs-buy" class="group relative bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all flex flex-col justify-between overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div>
-                    <div class="bg-emerald-50 text-emerald-600 w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6">🏠</div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">買房 vs 租房</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">考量稅率、投報率與維護成本，幫您做出最明智的居住決策。</p>
-                </div>
-                <span class="text-emerald-600 font-bold text-sm mt-6 flex items-center gap-2">
-                    開始試算 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </span>
-            </a>
-        </div>
-
-        <div class="pt-16 flex items-center justify-center gap-8 grayscale opacity-50">
-           <div class="text-xs font-bold tracking-tighter uppercase">Supported Assets</div>
-           <div class="flex gap-4">
-               <span class="text-2xl" title="Cash">💰</span>
-               <span class="text-2xl" title="Stock">📈</span>
-               <span class="text-2xl" title="Real Estate">🏠</span>
-               <span class="text-2xl" title="Crypto">₿</span>
-           </div>
-        </div>
-    </header>
-
-    <!-- Social Proof / Trust -->
-    <div class="py-20 border-y border-slate-100 mb-32">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-            <div>
-                <div class="text-4xl font-extrabold text-slate-900 mb-2">100%</div>
-                <div class="text-slate-500 font-medium tracking-wide text-sm">數據隱私</div>
+<Layout
+    title="下班後理財 | 白天努力生活，晚上規劃自由。"
+    description="下班後理財是您最值得信賴的資產管理夥伴，提供專業、私密、直觀的資產追蹤工具。一站式管理您的全球資產。"
+>
+    <main
+        class="container mx-auto px-4 py-16 md:py-24 max-w-7xl relative z-10 min-h-screen"
+    >
+        <!-- Hero Section -->
+        <header class="text-center space-y-8 mb-32 animate-fade-in-down">
+            <div
+                class="inline-block px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold tracking-widest uppercase mb-4"
+            >
+                專業資產追蹤工具
             </div>
-            <div>
-                <div class="text-4xl font-extrabold text-slate-900 mb-2">Real-time</div>
-                <div class="text-slate-500 font-medium tracking-wide text-sm">即時匯率更新</div>
-            </div>
-            <div>
-                <div class="text-4xl font-extrabold text-slate-900 mb-2">Free</div>
-                <div class="text-slate-500 font-medium tracking-wide text-sm">開源且永久免費</div>
-            </div>
-        </div>
-    </div>
+            <h1
+                class="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight leading-tight"
+            >
+                <span
+                    class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600"
+                    >掌握財富，開啟自由人生</span
+                >
+            </h1>
+            <p
+                class="text-2xl md:text-3xl font-bold text-slate-700 tracking-wide mt-4"
+            >
+                白天努力生活，晚上規劃自由。
+            </p>
+            <p
+                class="text-xl text-slate-500 max-w-2xl mx-auto font-medium leading-relaxed mt-6"
+            >
+                整合現金、股票與房地產，即時掌握您的資產淨值與長期成長趨勢。
+            </p>
 
-    <!-- Features Section -->
-    <article id="features" class="space-y-32 max-w-5xl mx-auto">
-        
-        <section class="text-center space-y-16">
-            <div class="space-y-4">
-                <h2 class="text-3xl md:text-5xl font-bold text-slate-900">
-                    強大功能，極簡體驗
-                </h2>
-                <p class="text-slate-500 text-lg">為您打造的現代財務儀表板</p>
-            </div>
+            <!-- Bento Grid Section -->
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12 max-w-6xl mx-auto w-full"
+            >
+                <!-- Assets Manager: Main Feature -->
+                <a
+                    href="/assets-manager"
+                    class="group relative md:col-span-2 md:row-span-2 bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all overflow-hidden flex flex-col justify-between min-h-[400px]"
+                >
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                    </div>
+                    <div class="relative z-10">
+                        <div
+                            class="bg-blue-600 text-white w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-8 shadow-lg shadow-blue-200"
+                        >
+                            💰
+                        </div>
+                        <h2
+                            class="text-3xl font-extrabold text-slate-900 mb-4 tracking-tight"
+                        >
+                            資產總覽儀表板
+                        </h2>
+                        <p
+                            class="text-slate-500 text-lg leading-relaxed max-w-md"
+                        >
+                            整合您的現金、股票與房地產，一眼掌握全球資產淨值與分佈。
+                        </p>
+                    </div>
+                    <div
+                        class="relative z-10 flex items-center gap-3 text-blue-600 font-bold"
+                    >
+                        立即開始管理 <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="group-hover:translate-x-2 transition-transform"
+                            ><line x1="5" y1="12" x2="19" y2="12"
+                            ></line><polyline points="12 5 19 12 12 19"
+                            ></polyline></svg
+                        >
+                    </div>
+                </a>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                <div class="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
-                    <div class="text-4xl mb-6 bg-blue-50 w-16 h-16 flex items-center justify-center rounded-2xl group-hover:bg-blue-600 group-hover:text-white transition-colors">🔒</div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-4">極致隱私安全</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">您的財務數據僅儲存在您的瀏覽器 (Local Storage)，我們不收集、不上傳任何個人資料。</p>
-                </div>
-                <div class="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
-                    <div class="text-4xl mb-6 bg-purple-50 w-16 h-16 flex items-center justify-center rounded-2xl group-hover:bg-purple-600 group-hover:text-white transition-colors">🌍</div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-4">全球匯率整合</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">即時串接國際匯率 API，支持多國貨幣。自動換算為您的本幣價值，掌握全球佈局。</p>
-                </div>
-                <div class="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
-                    <div class="text-4xl mb-6 bg-emerald-50 w-16 h-16 flex items-center justify-center rounded-2xl group-hover:bg-emerald-600 group-hover:text-white transition-colors">📊</div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-4">動態資產估值</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">針對不同資產類型提供專屬計算模型。股票股數、加密貨幣數量都能精準轉換為即時價值。</p>
-                </div>
-            </div>
-        </section>
+                <!-- Coast FIRE Calculator -->
+                <a
+                    href="/coast-fire"
+                    class="group relative bg-slate-900 rounded-[2.5rem] p-8 hover:shadow-2xl hover:-translate-y-1 transition-all flex flex-col justify-between overflow-hidden"
+                >
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                    </div>
+                    <div>
+                        <div
+                            class="bg-indigo-500/20 text-indigo-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6 border border-indigo-500/30"
+                        >
+                            🔥
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            Coast FIRE 計算
+                        </h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            計算何時能停止主動儲蓄，讓資產複利帶您抵達退休終點。
+                        </p>
+                    </div>
+                    <span
+                        class="text-indigo-400 font-bold text-sm mt-6 flex items-center gap-2"
+                    >
+                        探索未來 <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><line x1="5" y1="12" x2="19" y2="12"
+                            ></line><polyline points="12 5 19 12 12 19"
+                            ></polyline></svg
+                        >
+                    </span>
+                </a>
 
-        <!-- Educational Content (Shifted for marketing) -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center bg-slate-50 rounded-[3rem] p-12 md:p-20 overflow-hidden relative">
-            <div class="absolute right-0 top-0 w-96 h-96 bg-blue-200 rounded-full blur-[120px] opacity-20 -mr-20 -mt-20"></div>
-            <div class="space-y-8 relative z-10">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
-                    掌握淨資產，<br/><span class="text-blue-600">規劃財務自由的第一步</span>
-                </h2>
-                <div class="space-y-6 text-slate-600">
-                    <p class="leading-relaxed">
-                        淨資產是衡量個人財務健康狀況最核心的指標。它的計算公式非常簡單：<strong>總資產 (Assets) - 總負債 (Liabilities) = 淨資產</strong>。
-                    </p>
-                    <p class="leading-relaxed font-medium text-slate-900 border-l-4 border-blue-600 pl-6 py-2 bg-blue-50/50 rounded-r-xl">
-                        Asset Manager 協助您客觀地檢視財富增長，並及早發現潛在的財務風險。
-                    </p>
-                </div>
-                <a href="/assets-manager" class="inline-flex items-center gap-2 font-bold text-blue-600 hover:gap-4 transition-all">
-                    進入資產管理工具 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                <!-- Rent vs Buy -->
+                <a
+                    href="/rent-vs-buy"
+                    class="group relative bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all flex flex-col justify-between overflow-hidden"
+                >
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                    </div>
+                    <div>
+                        <div
+                            class="bg-emerald-50 text-emerald-600 w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6"
+                        >
+                            🏠
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">
+                            買房 vs 租房
+                        </h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            考量稅率、投報率與維護成本，幫您做出最明智的居住決策。
+                        </p>
+                    </div>
+                    <span
+                        class="text-emerald-600 font-bold text-sm mt-6 flex items-center gap-2"
+                    >
+                        開始試算 <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><line x1="5" y1="12" x2="19" y2="12"
+                            ></line><polyline points="12 5 19 12 12 19"
+                            ></polyline></svg
+                        >
+                    </span>
                 </a>
             </div>
-            <div class="relative group">
-                <div class="absolute inset-0 bg-blue-600 rounded-2xl rotate-3 opacity-10 group-hover:rotate-6 transition-transform"></div>
-                <div class="relative bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
-                    <div class="space-y-4">
-                        <div class="h-4 bg-slate-100 rounded w-3/4"></div>
-                        <div class="h-4 bg-slate-100 rounded w-1/2"></div>
-                        <div class="h-32 bg-blue-50 rounded-xl flex items-center justify-center">
-                            <span class="text-4xl font-bold text-blue-600">$ Net Worth</span>
-                        </div>
+
+            <div
+                class="pt-16 flex items-center justify-center gap-8 grayscale opacity-50"
+            >
+                <div class="text-xs font-bold tracking-tighter uppercase">
+                    Supported Assets
+                </div>
+                <div class="flex gap-4">
+                    <span class="text-2xl" title="Cash">💰</span>
+                    <span class="text-2xl" title="Stock">📈</span>
+                    <span class="text-2xl" title="Real Estate">🏠</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Social Proof / Trust -->
+        <div class="py-20 border-y border-slate-100 mb-32">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                <div>
+                    <div class="text-4xl font-extrabold text-slate-900 mb-2">
+                        100%
+                    </div>
+                    <div
+                        class="text-slate-500 font-medium tracking-wide text-sm"
+                    >
+                        數據隱私
+                    </div>
+                </div>
+                <div>
+                    <div class="text-4xl font-extrabold text-slate-900 mb-2">
+                        Real-time
+                    </div>
+                    <div
+                        class="text-slate-500 font-medium tracking-wide text-sm"
+                    >
+                        即時匯率更新
+                    </div>
+                </div>
+                <div>
+                    <div class="text-4xl font-extrabold text-slate-900 mb-2">
+                        Free
+                    </div>
+                    <div
+                        class="text-slate-500 font-medium tracking-wide text-sm"
+                    >
+                        開源且永久免費
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- FAQ -->
-        <section class="max-w-3xl mx-auto space-y-12 pb-20">
-            <h2 class="text-3xl font-bold text-slate-900 text-center">常見問題</h2>
-            <div class="space-y-4">
-                <details class="group p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 transition-colors">
-                    <summary class="list-none cursor-pointer font-bold text-slate-900 flex justify-between items-center">
-                        Q: 我的財務數據會被傳送到伺服器嗎？
-                        <span class="text-blue-600 group-open:rotate-180 transition-transform">▼</span>
-                    </summary>
-                    <p class="mt-4 text-slate-500 text-sm leading-relaxed">
-                        A: 完全不會。Asset Manager 是一個純前端運作的應用程式 (Client-side App)。所有的資料都加密儲存在您裝置的瀏覽器資料庫中，即使我們也無法看見您的資產狀況。
+        <!-- Features Section -->
+        <article id="features" class="space-y-32 max-w-5xl mx-auto">
+            <section class="text-center space-y-16">
+                <div class="space-y-4">
+                    <h2 class="text-3xl md:text-5xl font-bold text-slate-900">
+                        強大功能，極簡體驗
+                    </h2>
+                    <p class="text-slate-500 text-lg">
+                        為您打造的現代財務儀表板
                     </p>
-                </details>
-                <details class="group p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 transition-colors">
-                    <summary class="list-none cursor-pointer font-bold text-slate-900 flex justify-between items-center">
-                        Q: 匯率是即時的嗎？
-                        <span class="text-blue-600 group-open:rotate-180 transition-transform">▼</span>
-                    </summary>
-                    <p class="mt-4 text-slate-500 text-sm leading-relaxed">
-                        A: 是的，系統每 5 分鐘會自動從國際匯率 API 獲取最新的匯率資訊。如果您的裝置處於離線狀態，系統會自動使用上一次更新的匯率進行計算。
-                    </p>
-                </details>
-            </div>
-        </section>
+                </div>
 
-    </article>
-    
-    <footer class="text-center text-slate-400 text-sm py-12 border-t border-slate-100 mt-20">
-        <p>© 2026 Asset Manager. Data stored locally. Open sourced on GitHub.</p>
-    </footer>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                    <div
+                        class="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all group"
+                    >
+                        <div
+                            class="text-4xl mb-6 bg-blue-50 w-16 h-16 flex items-center justify-center rounded-2xl group-hover:bg-blue-600 group-hover:text-white transition-colors"
+                        >
+                            🔒
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-4">
+                            極致隱私安全
+                        </h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            您的財務數據僅儲存在您的瀏覽器 (Local
+                            Storage)，我們不收集、不上傳任何個人資料。
+                        </p>
+                    </div>
+                    <div
+                        class="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all group"
+                    >
+                        <div
+                            class="text-4xl mb-6 bg-purple-50 w-16 h-16 flex items-center justify-center rounded-2xl group-hover:bg-purple-600 group-hover:text-white transition-colors"
+                        >
+                            🌍
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-4">
+                            全球匯率整合
+                        </h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            即時串接國際匯率
+                            API，支持多國貨幣。自動換算為您的本幣價值，掌握全球佈局。
+                        </p>
+                    </div>
+                    <div
+                        class="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all group"
+                    >
+                        <div
+                            class="text-4xl mb-6 bg-emerald-50 w-16 h-16 flex items-center justify-center rounded-2xl group-hover:bg-emerald-600 group-hover:text-white transition-colors"
+                        >
+                            📊
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-4">
+                            動態資產估值
+                        </h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            針對不同資產類型提供專屬計算模型。股票股數、外幣存款都能精準轉換為即時價值。
+                        </p>
+                    </div>
+                </div>
+            </section>
 
-  </main>
+            <!-- Educational Content (Shifted for marketing) -->
+            <section
+                class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center bg-slate-50 rounded-[3rem] p-12 md:p-20 overflow-hidden relative"
+            >
+                <div
+                    class="absolute right-0 top-0 w-96 h-96 bg-blue-200 rounded-full blur-[120px] opacity-20 -mr-20 -mt-20"
+                >
+                </div>
+                <div class="space-y-8 relative z-10">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-slate-900 leading-tight"
+                    >
+                        掌握淨資產，<br /><span class="text-blue-600"
+                            >規劃財務自由的第一步</span
+                        >
+                    </h2>
+                    <div class="space-y-6 text-slate-600">
+                        <p class="leading-relaxed">
+                            淨資產是衡量個人財務健康狀況最核心的指標。它的計算公式非常簡單：<strong
+                                >總資產 (Assets) - 總負債 (Liabilities) = 淨資產</strong
+                            >。
+                        </p>
+                        <p
+                            class="leading-relaxed font-medium text-slate-900 border-l-4 border-blue-600 pl-6 py-2 bg-blue-50/50 rounded-r-xl"
+                        >
+                            Asset Manager
+                            協助您客觀地檢視財富增長，並及早發現潛在的財務風險。
+                        </p>
+                    </div>
+                    <a
+                        href="/assets-manager"
+                        class="inline-flex items-center gap-2 font-bold text-blue-600 hover:gap-4 transition-all"
+                    >
+                        進入資產管理工具 <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><line x1="5" y1="12" x2="19" y2="12"
+                            ></line><polyline points="12 5 19 12 12 19"
+                            ></polyline></svg
+                        >
+                    </a>
+                </div>
+                <div class="relative group">
+                    <div
+                        class="absolute inset-0 bg-blue-600 rounded-2xl rotate-3 opacity-10 group-hover:rotate-6 transition-transform"
+                    >
+                    </div>
+                    <div
+                        class="relative bg-white p-8 rounded-2xl shadow-xl border border-slate-100"
+                    >
+                        <div class="space-y-4">
+                            <div class="h-4 bg-slate-100 rounded w-3/4"></div>
+                            <div class="h-4 bg-slate-100 rounded w-1/2"></div>
+                            <div
+                                class="h-32 bg-blue-50 rounded-xl flex items-center justify-center"
+                            >
+                                <span class="text-4xl font-bold text-blue-600"
+                                    >$ Net Worth</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="max-w-3xl mx-auto space-y-12 pb-20">
+                <h2 class="text-3xl font-bold text-slate-900 text-center">
+                    常見問題
+                </h2>
+                <div class="space-y-4">
+                    <details
+                        class="group p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 transition-colors"
+                    >
+                        <summary
+                            class="list-none cursor-pointer font-bold text-slate-900 flex justify-between items-center"
+                        >
+                            Q: 我的財務數據會被傳送到伺服器嗎？
+                            <span
+                                class="text-blue-600 group-open:rotate-180 transition-transform"
+                                >▼</span
+                            >
+                        </summary>
+                        <p class="mt-4 text-slate-500 text-sm leading-relaxed">
+                            A:
+                            完全不會。「下班後理財」是一個純前端運作的應用程式
+                            (Client-side
+                            App)。所有的資料都加密儲存在您裝置的瀏覽器資料庫中，即使我們也無法看見您的資產狀況。
+                        </p>
+                    </details>
+                    <details
+                        class="group p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 transition-colors"
+                    >
+                        <summary
+                            class="list-none cursor-pointer font-bold text-slate-900 flex justify-between items-center"
+                        >
+                            Q: 匯率是即時的嗎？
+                            <span
+                                class="text-blue-600 group-open:rotate-180 transition-transform"
+                                >▼</span
+                            >
+                        </summary>
+                        <p class="mt-4 text-slate-500 text-sm leading-relaxed">
+                            A: 是的，系統每 5 分鐘會自動從國際匯率 API
+                            獲取最新的匯率資訊。如果您的裝置處於離線狀態，系統會自動使用上一次更新的匯率進行計算。
+                        </p>
+                    </details>
+                </div>
+            </section>
+        </article>
+
+        <footer
+            class="text-center text-slate-400 text-sm py-12 border-t border-slate-100 mt-20"
+        >
+            <p>
+                © 2026 下班後理財. Data stored locally. Open sourced on GitHub.
+            </p>
+        </footer>
+    </main>
 </Layout>
 
 <style>
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
     .animate-fade-in-down {
         animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;

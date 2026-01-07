@@ -1,12 +1,19 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="關於我們 | Asset Manager" description="了解 Asset Manager 的設計理念與隱私承諾。">
-    <main class="container mx-auto px-4 py-12 max-w-4xl min-h-screen">
+<Layout
+    title="關於我們 | 下班後理財"
+    description="了解下班後理財的設計理念與隱私承諾。"
+>
+    <main
+        class="container mx-auto px-4 py-12 max-w-4xl min-h-screen relative z-10"
+    >
         <!-- Hero Section -->
         <div class="text-center mb-16 space-y-4 animate-fade-in-down">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+            <h1
+                class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight"
+            >
                 關於我們
             </h1>
             <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
@@ -15,35 +22,83 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <!-- Mission Card -->
-        <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100 mb-12">
+        <div
+            class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100 mb-12"
+        >
             <div class="prose prose-lg prose-slate max-w-none text-slate-600">
-                <h3 class="text-2xl font-bold text-slate-900 mb-6">我們的使命</h3>
+                <h3 class="text-2xl font-bold text-slate-900 mb-6">
+                    我們的使命
+                </h3>
                 <p>
-                    在這個數據泛濫的時代，我們相信您的財務狀況屬於您的個人隱私。Asset Manager 的誕生源於一個簡單的想法：<strong>不需要將數據交給第三方伺服器，也能擁有強大的資產分析工具。</strong>
+                    在這個數據泛濫的時代，我們相信您的財務狀況屬於您的個人隱私。「下班後理財」的誕生源於一個簡單的想法：<strong
+                        >不需要將數據交給第三方伺服器，也能擁有強大的資產分析工具。</strong
+                    >
                 </p>
                 <p>
-                    我們採用 "Local-First" 架構，所有資產數據都加密存儲在您的裝置端。我們看不到您的存款，也無法追蹤您的投資組合。這是我們對「數位隱私」的極致承諾。
+                    我們採用 "Local-First"
+                    架構，所有資產數據都加密存儲在您的裝置端。我們看不到您的存款，也無法追蹤您的投資組合。這是我們對「數位隱私」的極致承諾。
                 </p>
             </div>
         </div>
 
-         <!-- Placeholder Content for Future -->
+        <!-- Features -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200/50">
-                <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                <div
+                    class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-4"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><circle cx="12" cy="12" r="10"></circle><line
+                            x1="12"
+                            y1="16"
+                            x2="12"
+                            y2="12"></line><line
+                            x1="12"
+                            y1="8"
+                            x2="12.01"
+                            y2="8"></line></svg
+                    >
                 </div>
                 <h4 class="text-lg font-bold text-slate-900 mb-2">開源透明</h4>
-                <p class="text-slate-500 text-sm">程式碼完全開源，任何人都可以檢視我們的安全機制。</p>
+                <p class="text-slate-500 text-sm">
+                    程式碼完全開源，任何人都可以檢視我們的安全機制。
+                </p>
             </div>
             <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200/50">
-                 <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                <div
+                    class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 mb-4"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path
+                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                        ></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"
+                        ></polyline><line x1="12" y1="22.08" x2="12" y2="12"
+                        ></line></svg
+                    >
                 </div>
                 <h4 class="text-lg font-bold text-slate-900 mb-2">持續進化</h4>
-                <p class="text-slate-500 text-sm">我們會持續整合更多元的資產類型與分析圖表。</p>
+                <p class="text-slate-500 text-sm">
+                    我們會持續整合更多元的資產類型與分析圖表。
+                </p>
             </div>
         </div>
-
     </main>
 </Layout>

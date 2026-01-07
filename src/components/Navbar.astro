@@ -3,41 +3,85 @@ const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1); // remove the first "/"
 ---
 
-<nav class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 transition-all duration-300" id="navbar">
+<nav
+    class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 transition-all duration-300"
+    id="navbar"
+>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <!-- Logo -->
-            <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.location.href='/'">
-                <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-sm">
-                    A
+            <div
+                class="flex-shrink-0 flex items-center gap-2 cursor-pointer"
+                onclick="window.location.href='/'"
+            >
+                <div
+                    class="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-sm"
+                >
+                    下
                 </div>
-                <span class="font-bold text-xl tracking-tight text-slate-900">Asset Manager</span>
+                <span class="font-bold text-xl tracking-tight text-slate-900"
+                    >下班後理財</span
+                >
             </div>
 
             <!-- Desktop Menu -->
             <div class="hidden md:flex space-x-8 items-center">
-                <a href="/" class={`text-sm font-medium transition-colors duration-200 ${currentPath === "" ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}>
+                <a
+                    href="/"
+                    class={`text-sm font-medium transition-colors duration-200 ${currentPath === "" ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}
+                >
                     首頁
                 </a>
-                <a href="/assets-manager" class={`text-sm font-medium transition-colors duration-200 ${currentPath === "assets-manager" ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}>
+                <a
+                    href="/assets-manager"
+                    class={`text-sm font-medium transition-colors duration-200 ${currentPath === "assets-manager" ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}
+                >
                     資產管理
                 </a>
-                <a href="/coast-fire" class={`text-sm font-medium transition-colors duration-200 ${currentPath === "coast-fire" ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}>
+                <a
+                    href="/coast-fire"
+                    class={`text-sm font-medium transition-colors duration-200 ${currentPath === "coast-fire" ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}
+                >
                     Coast FIRE
                 </a>
-                <a href="/rent-vs-buy" class={`text-sm font-medium transition-colors duration-200 ${currentPath === "rent-vs-buy" ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}>
+                <a
+                    href="/rent-vs-buy"
+                    class={`text-sm font-medium transition-colors duration-200 ${currentPath === "rent-vs-buy" ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}
+                >
                     買房 vs 租房
                 </a>
-                <a href="https://github.com" target="_blank" class="px-4 py-2 text-sm font-medium text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition-all shadow-sm hover:shadow-md">
+                <a
+                    href="/about"
+                    class={`text-sm font-medium transition-colors duration-200 ${currentPath === "about" ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}
+                >
+                    關於我們
+                </a>
+                <a
+                    href="https://github.com"
+                    target="_blank"
+                    class="px-4 py-2 text-sm font-medium text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition-all shadow-sm hover:shadow-md"
+                >
                     GitHub
                 </a>
             </div>
 
             <!-- Mobile Menu Button -->
             <div class="md:hidden flex items-center">
-                <button id="mobile-menu-btn" class="text-slate-500 hover:text-slate-900 focus:outline-none p-2 rounded-md hover:bg-slate-100 transition-colors">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                <button
+                    id="mobile-menu-btn"
+                    class="text-slate-500 hover:text-slate-900 focus:outline-none p-2 rounded-md hover:bg-slate-100 transition-colors"
+                >
+                    <svg
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
             </div>
@@ -45,22 +89,47 @@ const currentPath = pathname.slice(1); // remove the first "/"
     </div>
 
     <!-- Mobile Menu Panel -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg">
+    <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg"
+    >
         <div class="px-4 pt-2 pb-6 space-y-2">
-            <a href="/" class={`block px-3 py-3 rounded-lg text-base font-medium ${currentPath === "" ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}>
+            <a
+                href="/"
+                class={`block px-3 py-3 rounded-lg text-base font-medium ${currentPath === "" ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}
+            >
                 首頁
             </a>
-            <a href="/assets-manager" class={`block px-3 py-3 rounded-lg text-base font-medium ${currentPath === "assets-manager" ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}>
+            <a
+                href="/assets-manager"
+                class={`block px-3 py-3 rounded-lg text-base font-medium ${currentPath === "assets-manager" ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}
+            >
                 資產管理
             </a>
-            <a href="/coast-fire" class={`block px-3 py-3 rounded-lg text-base font-medium ${currentPath === "coast-fire" ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}>
+            <a
+                href="/coast-fire"
+                class={`block px-3 py-3 rounded-lg text-base font-medium ${currentPath === "coast-fire" ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}
+            >
                 Coast FIRE
             </a>
-            <a href="/rent-vs-buy" class={`block px-3 py-3 rounded-lg text-base font-medium ${currentPath === "rent-vs-buy" ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}>
+            <a
+                href="/rent-vs-buy"
+                class={`block px-3 py-3 rounded-lg text-base font-medium ${currentPath === "rent-vs-buy" ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}
+            >
                 買房 vs 租房
             </a>
+            <a
+                href="/about"
+                class={`block px-3 py-3 rounded-lg text-base font-medium ${currentPath === "about" ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}
+            >
+                關於我們
+            </a>
             <div class="pt-4 border-t border-slate-100 mt-2">
-                <a href="https://github.com" target="_blank" class="block w-full text-center px-4 py-3 text-base font-medium text-white bg-slate-900 rounded-lg hover:bg-slate-800 shadow-sm">
+                <a
+                    href="https://github.com"
+                    target="_blank"
+                    class="block w-full text-center px-4 py-3 text-base font-medium text-white bg-slate-900 rounded-lg hover:bg-slate-800 shadow-sm"
+                >
                     GitHub
                 </a>
             </div>
@@ -69,12 +138,12 @@ const currentPath = pathname.slice(1); // remove the first "/"
 </nav>
 
 <script>
-    const btn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('mobile-menu');
+    const btn = document.getElementById("mobile-menu-btn");
+    const menu = document.getElementById("mobile-menu");
 
     if (btn && menu) {
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
+        btn.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
         });
     }
 </script>

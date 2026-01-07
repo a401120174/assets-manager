@@ -1,29 +1,47 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Coast FIRE 計算機 | Asset Manager" description="視覺化您的財富自由之路">
-    <main class="container mx-auto px-4 py-8 md:py-12 max-w-6xl min-h-screen relative z-10">
-        
+<Layout
+    title="Coast FIRE 計算器 | 下班後理財"
+    description="視覺化您的財富自由之路"
+>
+    <main
+        class="container mx-auto px-4 py-8 md:py-12 max-w-6xl min-h-screen relative z-10"
+    >
         <!-- Header -->
         <div class="text-center mb-12 animate-fade-in-down">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">Coast FIRE 計算機</h1>
-            <p class="text-lg text-slate-500 font-medium">讓複利為您工作，預見各種財務可能。</p>
+            <h1
+                class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight"
+            >
+                Coast FIRE 計算機
+            </h1>
+            <p class="text-lg text-slate-500 font-medium">
+                讓複利為您工作，預見各種財務可能。
+            </p>
         </div>
 
         <!-- Concept Card -->
-        <div class="bg-blue-50/50 border border-blue-100 rounded-2xl p-6 mb-12 max-w-3xl mx-auto text-center">
+        <div
+            class="bg-blue-50/50 border border-blue-100 rounded-2xl p-6 mb-12 max-w-3xl mx-auto text-center"
+        >
             <h3 class="text-blue-700 font-bold mb-2">什麼是 Coast FIRE?</h3>
             <p class="text-slate-600 text-sm leading-relaxed">
-                Coast FIRE state 是指您已經存夠了退休金的本金。從現在開始，您<strong class="text-blue-600">不需要再為退休存一毛錢</strong>，只需讓資產透過複利自然增長，就能在退休時達到目標金額。這意味著您可以選擇輕鬆一點的工作 (Coast)，只需賺取足夠覆蓋當下生活費的薪水即可。
+                Coast FIRE state 是指您已經存夠了退休金的本金。從現在開始，您<strong
+                    class="text-blue-600">不需要再為退休存一毛錢</strong
+                >，只需讓資產透過複利自然增長，就能在退休時達到目標金額。這意味著您可以選擇輕鬆一點的工作
+                (Coast)，只需賺取足夠覆蓋當下生活費的薪水即可。
             </p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
             <!-- Controls Panel -->
-            <div class="lg:col-span-4 space-y-6 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm h-fit sticky top-24">
-                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <div
+                class="lg:col-span-4 space-y-6 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm h-fit sticky top-24"
+            >
+                <h2
+                    class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"
+                >
                     <span class="w-1 h-6 bg-blue-600 rounded-full"></span>
                     參數設定
                 </h2>
@@ -31,105 +49,237 @@ import Layout from '../layouts/Layout.astro';
                 <!-- Age Group -->
                 <div class="space-y-4">
                     <div class="space-y-2">
-                        <label class="flex justify-between text-sm font-semibold text-slate-600">
-                            現在年齡 <span id="val-age" class="text-blue-600">30</span>
+                        <label
+                            class="flex justify-between text-sm font-semibold text-slate-600"
+                        >
+                            現在年齡 <span id="val-age" class="text-blue-600"
+                                >30</span
+                            >
                         </label>
-                        <input type="range" id="age" min="20" max="60" value="30" class="w-full accent-blue-600 cursor-pointer">
+                        <input
+                            type="range"
+                            id="age"
+                            min="20"
+                            max="60"
+                            value="30"
+                            class="w-full accent-blue-600 cursor-pointer"
+                        />
                     </div>
                     <div class="space-y-2">
-                        <label class="flex justify-between text-sm font-semibold text-slate-600">
-                            預計退休年齡 <span id="val-retire-age" class="text-blue-600">60</span>
+                        <label
+                            class="flex justify-between text-sm font-semibold text-slate-600"
+                        >
+                            預計退休年齡 <span
+                                id="val-retire-age"
+                                class="text-blue-600">60</span
+                            >
                         </label>
-                        <input type="range" id="retire-age" min="30" max="80" value="60" class="w-full accent-blue-600 cursor-pointer">
+                        <input
+                            type="range"
+                            id="retire-age"
+                            min="30"
+                            max="80"
+                            value="60"
+                            class="w-full accent-blue-600 cursor-pointer"
+                        />
                     </div>
                 </div>
 
                 <div class="h-px bg-slate-100"></div>
 
                 <!-- Money Group -->
-                 <div class="space-y-4">
+                <div class="space-y-4">
                     <div class="space-y-2">
-                        <label class="flex justify-between text-sm font-semibold text-slate-600">
-                            目前已投資資產 (TWD) <span id="val-current-assets" class="text-blue-600 font-mono text-xs">$1,000,000</span>
+                        <label
+                            class="flex justify-between text-sm font-semibold text-slate-600"
+                        >
+                            目前已投資資產 (TWD) <span
+                                id="val-current-assets"
+                                class="text-blue-600 font-mono text-xs"
+                                >$1,000,000</span
+                            >
                         </label>
-                        <input type="range" id="current-assets" min="0" max="20000000" step="100000" value="1000000" class="w-full accent-blue-600 cursor-pointer">
+                        <input
+                            type="range"
+                            id="current-assets"
+                            min="0"
+                            max="20000000"
+                            step="100000"
+                            value="1000000"
+                            class="w-full accent-blue-600 cursor-pointer"
+                        />
                     </div>
                     <div class="space-y-2">
-                        <label class="flex justify-between text-sm font-semibold text-slate-600">
-                            年投資報酬率 (%) <span id="val-return-rate" class="text-blue-600">7%</span>
+                        <label
+                            class="flex justify-between text-sm font-semibold text-slate-600"
+                        >
+                            年投資報酬率 (%) <span
+                                id="val-return-rate"
+                                class="text-blue-600">7%</span
+                            >
                         </label>
-                        <input type="range" id="return-rate" min="1" max="15" step="0.5" value="7" class="w-full accent-blue-600 cursor-pointer">
+                        <input
+                            type="range"
+                            id="return-rate"
+                            min="1"
+                            max="15"
+                            step="0.5"
+                            value="7"
+                            class="w-full accent-blue-600 cursor-pointer"
+                        />
                     </div>
                     <div class="space-y-2">
-                        <label class="flex justify-between text-sm font-semibold text-slate-600">
-                            預估通膨率 (%) <span id="val-inflation" class="text-blue-600">2%</span>
+                        <label
+                            class="flex justify-between text-sm font-semibold text-slate-600"
+                        >
+                            預估通膨率 (%) <span
+                                id="val-inflation"
+                                class="text-blue-600">2%</span
+                            >
                         </label>
-                        <input type="range" id="inflation" min="0" max="10" step="0.5" value="2" class="w-full accent-blue-600 cursor-pointer">
+                        <input
+                            type="range"
+                            id="inflation"
+                            min="0"
+                            max="10"
+                            step="0.5"
+                            value="2"
+                            class="w-full accent-blue-600 cursor-pointer"
+                        />
                     </div>
                 </div>
 
                 <div class="h-px bg-slate-100"></div>
 
-                 <div class="space-y-4">
+                <div class="space-y-4">
                     <div class="space-y-2">
-                        <label class="flex justify-between text-sm font-semibold text-slate-600">
-                            退休後年支出 (現值) <span id="val-annual-spend" class="text-blue-600 font-mono text-xs">$600,000</span>
+                        <label
+                            class="flex justify-between text-sm font-semibold text-slate-600"
+                        >
+                            退休後年支出 (現值) <span
+                                id="val-annual-spend"
+                                class="text-blue-600 font-mono text-xs"
+                                >$600,000</span
+                            >
                         </label>
-                        <div class="text-xs text-slate-400 mb-1">依據 4% 法則計算需求</div>
-                        <input type="range" id="annual-spend" min="300000" max="3000000" step="10000" value="600000" class="w-full accent-blue-600 cursor-pointer">
+                        <div class="text-xs text-slate-400 mb-1">
+                            依據 4% 法則計算需求
+                        </div>
+                        <input
+                            type="range"
+                            id="annual-spend"
+                            min="300000"
+                            max="3000000"
+                            step="10000"
+                            value="600000"
+                            class="w-full accent-blue-600 cursor-pointer"
+                        />
                     </div>
                 </div>
-
             </div>
 
             <!-- Visualization Panel -->
             <div class="lg:col-span-8 space-y-6">
-                
                 <!-- Verdict Card -->
-                <div class="bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl" id="verdict-card">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full blur-[80px] opacity-20 -mr-16 -mt-16"></div>
+                <div
+                    class="bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl"
+                    id="verdict-card"
+                >
+                    <div
+                        class="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full blur-[80px] opacity-20 -mr-16 -mt-16"
+                    >
+                    </div>
                     <div class="relative z-10">
-                        <div class="uppercase tracking-widest text-blue-400 text-xs font-bold mb-2">Coast FIRE Status</div>
-                        <h2 class="text-3xl md:text-4xl font-bold mb-4" id="verdict-title">計算中...</h2>
-                        <p class="text-slate-300 text-lg leading-relaxed mb-6" id="verdict-desc">調整左側參數來查看您的複利成長曲線。</p>
-                        
-                        <div class="grid grid-cols-2 gap-4 mt-8 p-4 bg-white/5 rounded-2xl border border-white/10">
+                        <div
+                            class="uppercase tracking-widest text-blue-400 text-xs font-bold mb-2"
+                        >
+                            Coast FIRE Status
+                        </div>
+                        <h2
+                            class="text-3xl md:text-4xl font-bold mb-4"
+                            id="verdict-title"
+                        >
+                            計算中...
+                        </h2>
+                        <p
+                            class="text-slate-300 text-lg leading-relaxed mb-6"
+                            id="verdict-desc"
+                        >
+                            調整左側參數來查看您的複利成長曲線。
+                        </p>
+
+                        <div
+                            class="grid grid-cols-2 gap-4 mt-8 p-4 bg-white/5 rounded-2xl border border-white/10"
+                        >
                             <div>
-                                <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">退休所需金額 (通膨調整後)</div>
-                                <div class="text-2xl font-mono font-bold text-blue-400" id="target-number">$0</div>
+                                <div
+                                    class="text-slate-400 text-xs uppercase tracking-wider mb-1"
+                                >
+                                    退休所需金額 (通膨調整後)
+                                </div>
+                                <div
+                                    class="text-2xl font-mono font-bold text-blue-400"
+                                    id="target-number"
+                                >
+                                    $0
+                                </div>
                             </div>
-                             <div>
-                                <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Coast FIRE 達成年齡</div>
-                                <div class="text-2xl font-mono font-bold text-emerald-400" id="coast-age">--</div>
+                            <div>
+                                <div
+                                    class="text-slate-400 text-xs uppercase tracking-wider mb-1"
+                                >
+                                    Coast FIRE 達成年齡
+                                </div>
+                                <div
+                                    class="text-2xl font-mono font-bold text-emerald-400"
+                                    id="coast-age"
+                                >
+                                    --
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Chart Card -->
-                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm h-[400px] relative">
+                <div
+                    class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm h-[400px] relative"
+                >
                     <canvas id="fireChart"></canvas>
                 </div>
 
                 <!-- Chart Legend/Explainer -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                     <div class="p-4 rounded-xl bg-blue-50 border border-blue-100 flex gap-3 items-center">
+                    <div
+                        class="p-4 rounded-xl bg-blue-50 border border-blue-100 flex gap-3 items-center"
+                    >
                         <div class="w-3 h-3 rounded-full bg-blue-500"></div>
-                        <div class="text-sm text-slate-700"><strong>資產成長曲線</strong>：即使不再存錢，您的資產也會隨複利增長。</div>
-                     </div>
-                      <div class="p-4 rounded-xl bg-rose-50 border border-rose-100 flex gap-3 items-center">
-                        <div class="w-3 h-3 rounded-full bg-rose-500 border-2 border-dashed border-rose-300"></div>
-                        <div class="text-sm text-slate-700"><strong>退休目標</strong>：考慮通膨後，您在退休那一年需要的總資產 (25倍年支出)。</div>
-                     </div>
+                        <div class="text-sm text-slate-700">
+                            <strong>資產成長曲線</strong
+                            >：即使不再存錢，您的資產也會隨複利增長。
+                        </div>
+                    </div>
+                    <div
+                        class="p-4 rounded-xl bg-rose-50 border border-rose-100 flex gap-3 items-center"
+                    >
+                        <div
+                            class="w-3 h-3 rounded-full bg-rose-500 border-2 border-dashed border-rose-300"
+                        >
+                        </div>
+                        <div class="text-sm text-slate-700">
+                            <strong>退休目標</strong
+                            >：考慮通膨後，您在退休那一年需要的總資產
+                            (25倍年支出)。
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
     </main>
 </Layout>
 
 <script>
-    import Chart from 'chart.js/auto';
+    import Chart from "chart.js/auto";
 
     // State
     const state = {
@@ -138,43 +288,47 @@ import Layout from '../layouts/Layout.astro';
         currentAssets: 1000000,
         returnRate: 7,
         inflation: 2,
-        annualSpend: 600000
+        annualSpend: 600000,
     };
 
     let chart = null;
 
     // Elements
     const inputs = {
-        age: document.getElementById('age'),
-        retireAge: document.getElementById('retire-age'),
-        currentAssets: document.getElementById('current-assets'),
-        returnRate: document.getElementById('return-rate'),
-        inflation: document.getElementById('inflation'),
-        annualSpend: document.getElementById('annual-spend')
+        age: document.getElementById("age"),
+        retireAge: document.getElementById("retire-age"),
+        currentAssets: document.getElementById("current-assets"),
+        returnRate: document.getElementById("return-rate"),
+        inflation: document.getElementById("inflation"),
+        annualSpend: document.getElementById("annual-spend"),
     };
 
     const labels = {
-        age: document.getElementById('val-age'),
-        retireAge: document.getElementById('val-retire-age'),
-        currentAssets: document.getElementById('val-current-assets'),
-        returnRate: document.getElementById('val-return-rate'),
-        inflation: document.getElementById('val-inflation'),
-        annualSpend: document.getElementById('val-annual-spend'),
-        verdictTitle: document.getElementById('verdict-title'),
-        verdictDesc: document.getElementById('verdict-desc'),
-        targetNumber: document.getElementById('target-number'),
-        coastAge: document.getElementById('coast-age')
+        age: document.getElementById("val-age"),
+        retireAge: document.getElementById("val-retire-age"),
+        currentAssets: document.getElementById("val-current-assets"),
+        returnRate: document.getElementById("val-return-rate"),
+        inflation: document.getElementById("val-inflation"),
+        annualSpend: document.getElementById("val-annual-spend"),
+        verdictTitle: document.getElementById("verdict-title"),
+        verdictDesc: document.getElementById("verdict-desc"),
+        targetNumber: document.getElementById("target-number"),
+        coastAge: document.getElementById("coast-age"),
     };
 
     // Formatter
-    const moneyFmt = new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', maximumFractionDigits: 0 });
+    const moneyFmt = new Intl.NumberFormat("zh-TW", {
+        style: "currency",
+        currency: "TWD",
+        maximumFractionDigits: 0,
+    });
 
     function init() {
         // Bind events
-        Object.keys(inputs).forEach(key => {
+        Object.keys(inputs).forEach((key) => {
             const el = inputs[key];
-            if(el) {
-                el.addEventListener('input', (e) => {
+            if (el) {
+                el.addEventListener("input", (e) => {
                     // @ts-ignore
                     state[key] = parseFloat(e.target.value);
                     update();
@@ -187,11 +341,13 @@ import Layout from '../layouts/Layout.astro';
     function calculate() {
         const yearsToRetire = state.retireAge - state.age;
         const realRate = (state.returnRate - state.inflation) / 100; // Simplified real return
-        
+
         // 1. Calculate Target FIRE Number at Retirement Age
         // Rule of 25: Annual Spend / 0.04
         // Inflation adjust the spending needs
-        const futureAnnualSpend = state.annualSpend * Math.pow(1 + state.inflation/100, yearsToRetire);
+        const futureAnnualSpend =
+            state.annualSpend *
+            Math.pow(1 + state.inflation / 100, yearsToRetire);
         const targetFireNumber = futureAnnualSpend * 25;
 
         // 2. Generate Data Points
@@ -201,37 +357,38 @@ import Layout from '../layouts/Layout.astro';
         let coastAge = -1;
 
         // Projection from Age to 85
-        const endAge = 85; 
-        
+        const endAge = 85;
+
         for (let i = state.age; i <= endAge; i++) {
             labels.push(i);
-            
+
             // Year index
             const yearIdx = i - state.age;
-            
+
             // Asset Growth (Compound Interest)
             // FV = PV * (1 + r)^n
-            // Note: Use nominal rate for raw number growth, but target also inflates? 
+            // Note: Use nominal rate for raw number growth, but target also inflates?
             // Better to work in "Future Value" nominal terms for chart lines.
             const nominalReturn = state.returnRate / 100;
-            const currentAssetValue = state.currentAssets * Math.pow(1 + nominalReturn, yearIdx);
+            const currentAssetValue =
+                state.currentAssets * Math.pow(1 + nominalReturn, yearIdx);
             assetData.push(currentAssetValue);
 
             // Target Line
             // This is tricky. Do we show the target as a flat line in REAL terms or curved in NOMINAL terms?
             // Let's use Nominal curve for Target too.
             // Target at year X = (Base Annual Spend * (1+inflation)^yearX) * 25
-            const yearInflation = Math.pow(1 + state.inflation/100, yearIdx);
-            const nominalTarget = (state.annualSpend * yearInflation) * 25;
-            
-            // For visual simplicity, let's just show the Final Target at Retirement Age extended flat? 
-            // Or better: The amount you NEED to have at any given age to be "Coast FIREd"? 
+            const yearInflation = Math.pow(1 + state.inflation / 100, yearIdx);
+            const nominalTarget = state.annualSpend * yearInflation * 25;
+
+            // For visual simplicity, let's just show the Final Target at Retirement Age extended flat?
+            // Or better: The amount you NEED to have at any given age to be "Coast FIREd"?
             // Coast FIRE Number at Age X = Target_at_Retirement / (1 + r)^(RetireAge - Age)
-            // No, user wants to see "Growth Curve vs Target". 
+            // No, user wants to see "Growth Curve vs Target".
             // Let's stick to: Line 1 = Asset Growth. Line 2 = Nominal Target Needed.
-            // Actually simplest Coast FIRE viz is: 
+            // Actually simplest Coast FIRE viz is:
             // Do your assets grow to hit the Target Fire Number at Retire Age?
-            
+
             targetData.push(nominalTarget); // This shows the moving goalpost due to inflation
 
             // Check if crossed
@@ -248,26 +405,29 @@ import Layout from '../layouts/Layout.astro';
         labels.age.textContent = state.age.toString();
         labels.retireAge.textContent = state.retireAge.toString();
         labels.currentAssets.textContent = moneyFmt.format(state.currentAssets);
-        labels.returnRate.textContent = state.returnRate + '%';
-        labels.inflation.textContent = state.inflation + '%';
+        labels.returnRate.textContent = state.returnRate + "%";
+        labels.inflation.textContent = state.inflation + "%";
         labels.annualSpend.textContent = moneyFmt.format(state.annualSpend);
 
         const res = calculate();
 
         // Update Verdict
         labels.targetNumber.textContent = moneyFmt.format(res.targetFireNumber);
-        
+
         // Final Status Check
         const projectedAtRetire = res.assetData[state.retireAge - state.age];
-        
+
         if (projectedAtRetire >= res.targetFireNumber) {
             labels.verdictTitle.textContent = "已達成 Coast FIRE！";
-            labels.verdictTitle.className = "text-3xl md:text-4xl font-bold mb-4 text-emerald-400";
-             labels.verdictDesc.textContent = `恭喜！以目前 ${moneyFmt.format(state.currentAssets)} 的資產，即便不再投入任何新資金，靠著 ${state.returnRate}% 的複利滾動，在 ${state.retireAge} 歲退休時將成長至 ${moneyFmt.format(projectedAtRetire)}，超過您需要的 ${moneyFmt.format(res.targetFireNumber)}。`;
-            labels.coastAge.textContent = res.coastAge > state.age ? `${res.coastAge} 歲` : "現在";
+            labels.verdictTitle.className =
+                "text-3xl md:text-4xl font-bold mb-4 text-emerald-400";
+            labels.verdictDesc.textContent = `恭喜！以目前 ${moneyFmt.format(state.currentAssets)} 的資產，即便不再投入任何新資金，靠著 ${state.returnRate}% 的複利滾動，在 ${state.retireAge} 歲退休時將成長至 ${moneyFmt.format(projectedAtRetire)}，超過您需要的 ${moneyFmt.format(res.targetFireNumber)}。`;
+            labels.coastAge.textContent =
+                res.coastAge > state.age ? `${res.coastAge} 歲` : "現在";
         } else {
             labels.verdictTitle.textContent = "尚未達成";
-            labels.verdictTitle.className = "text-3xl md:text-4xl font-bold mb-4 text-rose-400";
+            labels.verdictTitle.className =
+                "text-3xl md:text-4xl font-bold mb-4 text-rose-400";
             labels.verdictDesc.textContent = `還差一點！您在 ${state.retireAge} 歲預期會擁有 ${moneyFmt.format(projectedAtRetire)}，但您的目標是 ${moneyFmt.format(res.targetFireNumber)}。建議增加本金或延後退休。`;
             labels.coastAge.textContent = "加油";
         }
@@ -276,7 +436,7 @@ import Layout from '../layouts/Layout.astro';
     }
 
     function renderChart(data) {
-        const ctx = document.getElementById('fireChart');
+        const ctx = document.getElementById("fireChart");
         if (!ctx) return;
 
         if (chart) {
@@ -285,93 +445,96 @@ import Layout from '../layouts/Layout.astro';
 
         // @ts-ignore
         chart = new Chart(ctx, {
-            type: 'line',
+            type: "line",
             data: {
                 labels: data.labels,
                 datasets: [
                     {
-                        label: '資產複利成長',
+                        label: "資產複利成長",
                         data: data.assetData,
-                        borderColor: '#3b82f6', // blue-500
-                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        borderColor: "#3b82f6", // blue-500
+                        backgroundColor: "rgba(59, 130, 246, 0.1)",
                         borderWidth: 3,
                         tension: 0.4,
                         fill: true,
                         pointRadius: 0,
-                        pointHoverRadius: 6
+                        pointHoverRadius: 6,
                     },
                     {
-                        label: 'FIRE 目標門檻 (含通膨)',
+                        label: "FIRE 目標門檻 (含通膨)",
                         data: data.targetData,
-                        borderColor: '#f43f5e', // rose-500
+                        borderColor: "#f43f5e", // rose-500
                         borderWidth: 2,
                         borderDash: [5, 5],
                         pointRadius: 0,
-                        tension: 0.4
-                    }
-                ]
+                        tension: 0.4,
+                    },
+                ],
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 animation: false,
                 interaction: {
-                    mode: 'index',
+                    mode: "index",
                     intersect: false,
                 },
                 plugins: {
                     tooltip: {
-                        backgroundColor: 'white',
-                        titleColor: '#1e293b',
-                        bodyColor: '#475569',
-                        borderColor: '#e2e8f0',
+                        backgroundColor: "white",
+                        titleColor: "#1e293b",
+                        bodyColor: "#475569",
+                        borderColor: "#e2e8f0",
                         borderWidth: 1,
                         padding: 10,
-                         callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
+                        callbacks: {
+                            label: function (context) {
+                                let label = context.dataset.label || "";
                                 if (label) {
-                                    label += ': ';
+                                    label += ": ";
                                 }
                                 if (context.parsed.y !== null) {
-                                    label += new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', maximumFractionDigits: 0 }).format(context.parsed.y);
+                                    label += new Intl.NumberFormat("zh-TW", {
+                                        style: "currency",
+                                        currency: "TWD",
+                                        maximumFractionDigits: 0,
+                                    }).format(context.parsed.y);
                                 }
                                 return label;
-                            }
-                        }
+                            },
+                        },
                     },
                     legend: {
-                        display: false
-                    }
+                        display: false,
+                    },
                 },
                 scales: {
                     x: {
                         grid: {
-                            display: false
+                            display: false,
                         },
                         title: {
                             display: true,
-                            text: '年齡'
-                        }
+                            text: "年齡",
+                        },
                     },
                     y: {
                         beginAtZero: true,
-                         ticks: {
-                            callback: function(value, index, values) {
+                        ticks: {
+                            callback: function (value, index, values) {
                                 // @ts-ignore
-                                return  '$' + value / 10000 + '萬';
-                            }
+                                return "$" + value / 10000 + "萬";
+                            },
                         },
                         border: {
-                            display: false
-                        }
-                    }
-                }
-            }
+                            display: false,
+                        },
+                    },
+                },
+            },
         });
     }
 
     // Start
     init();
-
 </script>
