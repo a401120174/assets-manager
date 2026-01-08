@@ -3,40 +3,42 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout
-    title="Coast FIRE 計算器 | 下班後理財"
-    description="視覺化您的財富自由之路"
+    title="Coast FIRE 計算機 | 提早半退休，讓複利為您工作"
+    description="計算您達成 Coast FIRE 的年齡與所需金額。視覺化您的財富自由之路，了解如何透過早期累積讓資產自然增長至退休目標。"
 >
-    <script type="application/ld+json" is:inline>
+    <!-- Structured Data for SEO / AEO -->
+    <script type="application/ld+json" is:inline slot="head">
         {
             "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "Coast FIRE 計算器",
-            "applicationCategory": "FinanceApplication",
-            "operatingSystem": "Web",
-            "description": "計算您達成 Coast FIRE 的年齡與所需金額。",
-            "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "TWD"
-            }
-        }
-    </script>
-    <script type="application/ld+json" is:inline>
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
+            "@graph": [
                 {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "首頁",
-                    "item": "https://assets-manager-beige.vercel.app/"
+                    "@type": "SoftwareApplication",
+                    "name": "Coast FIRE 計算機",
+                    "applicationCategory": "FinanceApplication",
+                    "operatingSystem": "Web",
+                    "description": "計算您達成 Coast FIRE 的年齡與所需金額，視覺化複利增長與退休目標的關係。",
+                    "offers": {
+                        "@type": "Offer",
+                        "price": "0",
+                        "priceCurrency": "TWD"
+                    }
                 },
                 {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Coast FIRE 計算",
-                    "item": "https://assets-manager-beige.vercel.app/coast-fire"
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                        {
+                            "@type": "ListItem",
+                            "position": 1,
+                            "name": "首頁",
+                            "item": "https://assets-manager-beige.vercel.app/"
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 2,
+                            "name": "Coast FIRE 計算",
+                            "item": "https://assets-manager-beige.vercel.app/coast-fire"
+                        }
+                    ]
                 }
             ]
         }
@@ -310,6 +312,84 @@ import Layout from "../layouts/Layout.astro";
                 </div>
             </div>
         </div>
+
+        <!-- Educational Content Section for AEO -->
+        <section
+            class="mt-24 max-w-4xl mx-auto space-y-16 border-t border-slate-100 pt-16 pb-24"
+        >
+            <div class="space-y-8">
+                <h2
+                    class="text-3xl font-extrabold text-slate-900 tracking-tight text-center"
+                >
+                    深入了解 Coast FIRE
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <h3
+                            class="text-xl font-bold text-slate-900 flex items-center gap-2"
+                        >
+                            <span class="w-1.5 h-6 bg-blue-600 rounded-full"
+                            ></span>
+                            Coast FIRE 與傳統 FIRE 有什麼不同？
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            傳統 FIRE (Financial Independence, Retire Early)
+                            要求積累到足以支付「餘生所有開銷」的資產後才停止工作。而
+                            Coast FIRE
+                            則是先快速積累一筆「退休種子」，之後只需靠複利自然增長至退休年齡，您可以選擇大幅減輕工作壓力，只需賺取足以「覆蓋現下生活費」的薪水。
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <h3
+                            class="text-xl font-bold text-slate-900 flex items-center gap-2"
+                        >
+                            <span class="w-1.5 h-6 bg-blue-600 rounded-full"
+                            ></span>
+                            為什麼愈早開始愈好？
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            Coast FIRE
+                            的核心動力是「複利」與「時間」。同樣的退休目標，25
+                            歲開始投入 100 萬，與 35
+                            歲才開始，在複利效應下，最終的結果會有數倍的差距。愈早達成
+                            Coast FIRE 點，您就愈早獲得對職業生涯的「選擇權」。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 rounded-[2.5rem] p-8 md:p-12">
+                <h3
+                    class="text-2xl font-extrabold text-blue-900 mb-8 text-center"
+                >
+                    常見問題 FAQ
+                </h3>
+                <div class="space-y-6">
+                    <div
+                        class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-blue-100 shadow-sm"
+                    >
+                        <h4 class="text-lg font-bold text-slate-900 mb-2">
+                            如何計算我的 Coast FIRE 數字？
+                        </h4>
+                        <p class="text-slate-600 text-sm">
+                            演算法會根據您的預計退休年齡、期望的退休支出以及預估的投資報酬率，反向推算出您「現在」必須擁有多少資產，才能在不做額外投入的情況下，靠複利在那一天準時達標。
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-blue-100 shadow-sm"
+                    >
+                        <h4 class="text-lg font-bold text-slate-900 mb-2">
+                            達成 Coast FIRE 後我該辭職嗎？
+                        </h4>
+                        <p class="text-slate-600 text-sm">
+                            這取決於您。Coast FIRE
+                            提供的是「心理安全感」。達成後，您不再需要為了存退休金而忍受高壓工作，可以切換到半職、兼職或自己感興趣但收入較低的事業，只要能支付當前的日常開銷即可。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 </Layout>
 

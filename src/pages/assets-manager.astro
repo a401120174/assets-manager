@@ -3,41 +3,42 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout
-    title="總資產計算機 | 下班後理財"
-    description="視覺化管理您的個人財富，追蹤淨資產成長。"
+    title="總資產計算機 | 全方位個人淨資產追蹤工具"
+    description="視覺化管理您的個人財富，追蹤全球資產淨值 (Net Worth)，整合即時匯率，數據僅儲存於本地端，確保絕對隱私。"
 >
-    <!-- Structured Data for SEO / GEO -->
-    <script type="application/ld+json" is:inline>
+    <!-- Structured Data for SEO / AEO -->
+    <script type="application/ld+json" is:inline slot="head">
         {
             "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "總資產計算機",
-            "applicationCategory": "FinanceApplication",
-            "operatingSystem": "Web",
-            "description": "視覺化管理您的個人財富，追蹤淨資產成長。",
-            "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "TWD"
-            }
-        }
-    </script>
-    <script type="application/ld+json" is:inline>
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
+            "@graph": [
                 {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "首頁",
-                    "item": "https://assets-manager-beige.vercel.app/"
+                    "@type": "SoftwareApplication",
+                    "name": "總資產計算機",
+                    "applicationCategory": "FinanceApplication",
+                    "operatingSystem": "Web",
+                    "description": "視覺化管理您的個人財富，追蹤全球資產淨值 (Net Worth)，整合即時匯率，數據僅儲存於本地端，確保絕對隱私。",
+                    "offers": {
+                        "@type": "Offer",
+                        "price": "0",
+                        "priceCurrency": "TWD"
+                    }
                 },
                 {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "總資產計算機",
-                    "item": "https://assets-manager-beige.vercel.app/assets-manager"
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                        {
+                            "@type": "ListItem",
+                            "position": 1,
+                            "name": "首頁",
+                            "item": "https://assets-manager-beige.vercel.app/"
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 2,
+                            "name": "總資產計算機",
+                            "item": "https://assets-manager-beige.vercel.app/assets-manager"
+                        }
+                    ]
                 }
             ]
         }
@@ -141,47 +142,208 @@ import Layout from "../layouts/Layout.astro";
             </aside>
         </div>
 
-        <!-- Template for Section -->
-        <template id="section-template">
-            <section
-                class="asset-section relative animate-fade-in bg-white rounded-2xl border border-slate-200 shadow-sm p-1"
-            >
-                <div class="flex items-center justify-between p-4 md:p-6 pb-2">
-                    <div class="flex items-center gap-3">
-                        <div
-                            class="section-icon w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-2xl border border-slate-100"
+        <!-- Educational Content Section for AEO -->
+        <section
+            class="mt-24 max-w-4xl mx-auto space-y-16 border-t border-slate-100 pt-16 pb-24"
+        >
+            <div class="space-y-8">
+                <h2
+                    class="text-3xl font-extrabold text-slate-900 tracking-tight text-center"
+                >
+                    為什麼您需要追蹤「淨資產」？
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <h3
+                            class="text-xl font-bold text-slate-900 flex items-center gap-2"
                         >
-                        </div>
-                        <div>
-                            <h3
-                                class="section-title text-lg font-bold text-slate-900 tracking-wide"
-                            >
-                            </h3>
-                            <p
-                                class="section-subtitle text-[10px] text-slate-500 uppercase tracking-widest"
-                            >
-                            </p>
-                        </div>
+                            <span class="w-1.5 h-6 bg-blue-600 rounded-full"
+                            ></span>
+                            淨資產：最真實的財務健康指標
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            淨資產（Net
+                            Worth）等於您的「總資產」減去「總負債」。相較於月收入，淨資產更能反映您積累財富的真實進度。透過定期追蹤，您可以確認自己是否正在通往財務自由的正確道路上。
+                        </p>
                     </div>
-                    <div class="text-right">
-                        <div
-                            class="section-total text-xl md:text-2xl font-bold font-mono text-blue-600 tabular-nums"
+                    <div class="space-y-4">
+                        <h3
+                            class="text-xl font-bold text-slate-900 flex items-center gap-2"
                         >
-                            $0
-                        </div>
+                            <span class="w-1.5 h-6 bg-blue-600 rounded-full"
+                            ></span>
+                            告別繁瑣記帳，專注「大帳單」
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            如果您覺得每天記錄幾十塊的消費太痛苦，資產管理是更好的替代方案。每月只需花
+                            5
+                            分鐘更新一次各帳戶與資產的大數值，就能掌握整體的財務動向，專注於長期的資產配置。
+                        </p>
                     </div>
                 </div>
+            </div>
 
-                <div class="section-list space-y-2 p-2 min-h-[50px]">
-                    <!-- Rows go here -->
-                </div>
-
-                <div class="p-2 pt-0">
-                    <button
-                        class="add-btn w-full py-3 rounded-xl border border-dashed border-slate-300 text-slate-600 hover:border-blue-400 hover:text-blue-700 hover:bg-white hover:shadow-sm transition-all duration-200 flex items-center justify-center gap-2 text-sm font-medium group bg-white/60"
+            <div class="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 text-white">
+                <h3
+                    class="text-2xl font-extrabold text-blue-400 mb-8 text-center"
+                >
+                    資產管理 FAQ
+                </h3>
+                <div class="space-y-6">
+                    <div
+                        class="bg-white/5 rounded-2xl p-6 border border-white/10"
                     >
-                        <span
-                            class="bg-slate-200 p-0.5 rounded group-hover:bg-blue-100 transition-colors text-slate-600 group-hover:text-blue-600"
+                        <h4 class="text-lg font-bold mb-2 text-white">
+                            可以使用不同幣別嗎？
+                        </h4>
+                        <p class="text-slate-400 text-sm">
+                            可以。系統支援主流外幣（如 USD, JPY, EUR
+                            等）。您只需在輸入資產時選擇幣別，計算機會自動抓取當前即時匯率，統一轉換成您的主貨幣進行統計。
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white/5 rounded-2xl p-6 border border-white/10"
+                    >
+                        <h4 class="text-lg font-bold mb-2 text-white">
+                            資料會被第三方看到嗎？
+                        </h4>
+                        <p class="text-slate-400 text-sm">
+                            絕對不會。您的所有資產分佈、金額與備註均儲存在您裝置的
+                            IndexedDB
+                            資料庫中。本站沒有中央資料庫，因此我們無法獲取、存取或轉售您的任何財務數據。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Template for Section -->
+    <template id="section-template">
+        <section
+            class="asset-section relative animate-fade-in bg-white rounded-2xl border border-slate-200 shadow-sm p-1"
+        >
+            <div class="flex items-center justify-between p-4 md:p-6 pb-2">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="section-icon w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-2xl border border-slate-100"
+                    >
+                    </div>
+                    <div>
+                        <h3
+                            class="section-title text-lg font-bold text-slate-900 tracking-wide"
+                        >
+                        </h3>
+                        <p
+                            class="section-subtitle text-[10px] text-slate-500 uppercase tracking-widest"
+                        >
+                        </p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div
+                        class="section-total text-xl md:text-2xl font-bold font-mono text-blue-600 tabular-nums"
+                    >
+                        $0
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-list space-y-2 p-2 min-h-[50px]">
+                <!-- Rows go here -->
+            </div>
+
+            <div class="p-2 pt-0">
+                <button
+                    class="add-btn w-full py-3 rounded-xl border border-dashed border-slate-300 text-slate-600 hover:border-blue-400 hover:text-blue-700 hover:bg-white hover:shadow-sm transition-all duration-200 flex items-center justify-center gap-2 text-sm font-medium group bg-white/60"
+                >
+                    <span
+                        class="bg-slate-200 p-0.5 rounded group-hover:bg-blue-100 transition-colors text-slate-600 group-hover:text-blue-600"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><line x1="12" y1="5" x2="12" y2="19"></line><line
+                                x1="5"
+                                y1="12"
+                                x2="19"
+                                y2="12"></line></svg
+                        >
+                    </span>
+                    新增項目
+                </button>
+            </div>
+        </section>
+    </template>
+
+    <!-- Template for Asset Row -->
+    <template id="asset-row-template">
+        <div
+            class="asset-row group flex flex-col md:flex-row gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all duration-200 relative shadow-sm"
+        >
+            <!-- Delete Button -->
+            <button
+                class="delete-btn absolute top-2 right-2 p-1.5 text-gray-600 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100 z-10"
+                title="刪除"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M3 6h18"></path><path
+                        d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path
+                        d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg
+                >
+            </button>
+
+            <!-- Name & Currency (Type is hidden/fixed per section) -->
+            <div
+                class="flex flex-col sm:flex-row gap-3 items-start sm:items-center flex-grow"
+            >
+                <div class="w-full sm:w-autoflex-grow min-w-[150px]">
+                    <label
+                        class="text-[10px] text-slate-600 font-bold mb-1 block uppercase tracking-wider pl-1"
+                        >項目名稱</label
+                    >
+                    <input
+                        type="text"
+                        class="asset-name w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg px-3 py-2 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all placeholder-slate-400 hover:bg-white"
+                        placeholder="輸入名稱..."
+                    />
+                </div>
+
+                <div class="w-full sm:w-28 flex-shrink-0">
+                    <label
+                        class="text-[10px] text-slate-600 font-bold mb-1 block uppercase tracking-wider pl-1"
+                        >幣別</label
+                    >
+                    <div class="relative">
+                        <select
+                            class="asset-currency w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg px-3 py-2 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer hover:bg-white font-mono"
+                        >
+                            <option value="TWD">🇹🇼 TWD</option>
+                            <option value="USD">🇺🇸 USD</option>
+                            <option value="JPY">🇯🇵 JPY</option>
+                            <option value="EUR">🇪🇺 EUR</option>
+                            <option value="CNY">🇨🇳 CNY</option>
+                            <option value="HKD">🇭🇰 HKD</option>
+                        </select>
+                        <div
+                            class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-gray-600 scale-75"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -193,120 +355,36 @@ import Layout from "../layouts/Layout.astro";
                                 stroke-width="2"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                ><line x1="12" y1="5" x2="12" y2="19"
-                                ></line><line x1="5" y1="12" x2="19" y2="12"
-                                ></line></svg
+                                ><polyline points="6 9 12 15 18 9"
+                                ></polyline></svg
                             >
-                        </span>
-                        新增項目
-                    </button>
-                </div>
-            </section>
-        </template>
-
-        <!-- Template for Asset Row -->
-        <template id="asset-row-template">
-            <div
-                class="asset-row group flex flex-col md:flex-row gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all duration-200 relative shadow-sm"
-            >
-                <!-- Delete Button -->
-                <button
-                    class="delete-btn absolute top-2 right-2 p-1.5 text-gray-600 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100 z-10"
-                    title="刪除"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M3 6h18"></path><path
-                            d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"
-                        ></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"
-                        ></path></svg
-                    >
-                </button>
-
-                <!-- Name & Currency (Type is hidden/fixed per section) -->
-                <div
-                    class="flex flex-col sm:flex-row gap-3 items-start sm:items-center flex-grow"
-                >
-                    <div class="w-full sm:w-autoflex-grow min-w-[150px]">
-                        <label
-                            class="text-[10px] text-slate-600 font-bold mb-1 block uppercase tracking-wider pl-1"
-                            >項目名稱</label
-                        >
-                        <input
-                            type="text"
-                            class="asset-name w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg px-3 py-2 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all placeholder-slate-400 hover:bg-white"
-                            placeholder="輸入名稱..."
-                        />
-                    </div>
-
-                    <div class="w-full sm:w-28 flex-shrink-0">
-                        <label
-                            class="text-[10px] text-slate-600 font-bold mb-1 block uppercase tracking-wider pl-1"
-                            >幣別</label
-                        >
-                        <div class="relative">
-                            <select
-                                class="asset-currency w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg px-3 py-2 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer hover:bg-white font-mono"
-                            >
-                                <option value="TWD">🇹🇼 TWD</option>
-                                <option value="USD">🇺🇸 USD</option>
-                                <option value="JPY">🇯🇵 JPY</option>
-                                <option value="EUR">🇪🇺 EUR</option>
-                                <option value="CNY">🇨🇳 CNY</option>
-                                <option value="HKD">🇭🇰 HKD</option>
-                            </select>
-                            <div
-                                class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-gray-600 scale-75"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    ><polyline points="6 9 12 15 18 9"
-                                    ></polyline></svg
-                                >
-                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Dynamic Inputs -->
-                <div
-                    class="dynamic-inputs grid grid-cols-2 gap-3 w-full lg:w-[45%] items-end"
-                >
-                    <!-- Inputs injected by JS -->
-                </div>
-
-                <!-- Row Total -->
-                <div
-                    class="flex-shrink-0 flex flex-col justify-end items-end min-w-[100px] border-l border-slate-100 pl-4 hidden md:flex"
-                >
-                    <span
-                        class="text-[10px] text-slate-400 uppercase tracking-wider mb-0.5"
-                        >估算 (TWD)</span
-                    >
-                    <span
-                        class="asset-row-total text-base font-bold font-mono text-slate-700"
-                        >$0</span
-                    >
-                </div>
             </div>
-        </template>
-    </main>
+
+            <!-- Dynamic Inputs -->
+            <div
+                class="dynamic-inputs grid grid-cols-2 gap-3 w-full lg:w-[45%] items-end"
+            >
+                <!-- Inputs injected by JS -->
+            </div>
+
+            <!-- Row Total -->
+            <div
+                class="flex-shrink-0 flex flex-col justify-end items-end min-w-[100px] border-l border-slate-100 pl-4 hidden md:flex"
+            >
+                <span
+                    class="text-[10px] text-slate-400 uppercase tracking-wider mb-0.5"
+                    >估算 (TWD)</span
+                >
+                <span
+                    class="asset-row-total text-base font-bold font-mono text-slate-700"
+                    >$0</span
+                >
+            </div>
+        </div>
+    </template>
 </Layout>
 
 <script>

@@ -3,40 +3,42 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout
-    title="買房 vs 租房計算器 | 下班後理財"
-    description="視覺化機會成本，找到您的買租黃金交叉點。"
+    title="買房 vs 租房計算器 | 視覺化您的居住決策與機會成本"
+    description="利用數據分析買房與租房的長期淨資產差異。考慮房價漲幅、租金通膨與投資機會成本，找到您的居住黃金交叉點。"
 >
-    <script type="application/ld+json" is:inline>
+    <!-- Structured Data for SEO / AEO -->
+    <script type="application/ld+json" is:inline slot="head">
         {
             "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "買房 vs 租房計算器",
-            "applicationCategory": "FinanceApplication",
-            "operatingSystem": "Web",
-            "description": "考慮機會成本，計算買房與租房的長期淨資產差異。",
-            "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "TWD"
-            }
-        }
-    </script>
-    <script type="application/ld+json" is:inline>
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
+            "@graph": [
                 {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "首頁",
-                    "item": "https://assets-manager-beige.vercel.app/"
+                    "@type": "SoftwareApplication",
+                    "name": "買房 vs 租房計算機",
+                    "applicationCategory": "FinanceApplication",
+                    "operatingSystem": "Web",
+                    "description": "考慮機會成本，計算買房與租房的長期淨資產差異，協助使用者做出理性的居住決策。",
+                    "offers": {
+                        "@type": "Offer",
+                        "price": "0",
+                        "priceCurrency": "TWD"
+                    }
                 },
                 {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "買房 vs 租房",
-                    "item": "https://assets-manager-beige.vercel.app/rent-vs-buy"
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                        {
+                            "@type": "ListItem",
+                            "position": 1,
+                            "name": "首頁",
+                            "item": "https://assets-manager-beige.vercel.app/"
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 2,
+                            "name": "買房 vs 租房",
+                            "item": "https://assets-manager-beige.vercel.app/rent-vs-buy"
+                        }
+                    ]
                 }
             ]
         }
@@ -420,6 +422,78 @@ import Layout from "../layouts/Layout.astro";
                 </div>
             </div>
         </div>
+
+        <!-- Educational Content Section for AEO -->
+        <section
+            class="mt-24 max-w-4xl mx-auto space-y-16 border-t border-slate-100 pt-16 pb-24"
+        >
+            <div class="space-y-8">
+                <h2
+                    class="text-3xl font-extrabold text-slate-900 tracking-tight text-center"
+                >
+                    買房還是租房？讓數據說話
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <h3
+                            class="text-xl font-bold text-slate-900 flex items-center gap-2"
+                        >
+                            <span class="w-1.5 h-6 bg-blue-600 rounded-full"
+                            ></span>
+                            什麼是「機會成本」？
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            在居住決策中，最大筆的隱生成本通常是「機會成本」。如果您選擇買房，這代表您的「頭期款」將無法投入股市或其他資產。本計算機特別納入了這項因素，幫助您評估：如果將買房的錢拿去投資大盤，30
+                            年後的資產是否會更高？
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <h3
+                            class="text-xl font-bold text-slate-900 flex items-center gap-2"
+                        >
+                            <span class="w-1.5 h-6 bg-blue-600 rounded-full"
+                            ></span>
+                            「黃金交叉點」的意義
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            買房通常伴隨著沉重的交易成本（稅金、仲介費、裝潢）。這意味著在持有的前幾年，租房通常更划算。所謂的黃金交叉點，是指「持有房屋的增值加上本金償還」開始超越「租房累積投資」的時間點。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 text-white">
+                <h3
+                    class="text-2xl font-extrabold text-amber-400 mb-8 text-center"
+                >
+                    居住決策 FAQ
+                </h3>
+                <div class="space-y-6">
+                    <div
+                        class="bg-white/5 rounded-2xl p-6 border border-white/10"
+                    >
+                        <h4 class="text-lg font-bold mb-2 text-white">
+                            為什麼計算結果建議我租房？
+                        </h4>
+                        <p class="text-slate-400 text-sm">
+                            當「預期房價漲幅」低於「投資回報率」時，租房並將差額投入市場往往能累積更多財富。此外，若租金收益比（Rent-to-Price
+                            Ratio）過低，也會讓買房顯得不具吸引力。
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white/5 rounded-2xl p-6 border border-white/10"
+                    >
+                        <h4 class="text-lg font-bold mb-2 text-white">
+                            這個工具考慮了持有費用嗎？
+                        </h4>
+                        <p class="text-slate-400 text-sm">
+                            是的。除了房貸本息，我們也讓您設定「持有成本比例」，這包含地價稅、房屋稅、社區管理費以及長期的修繕費用，確保比較結果更貼近現實。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 </Layout>
 

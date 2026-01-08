@@ -8,10 +8,14 @@ import Footer from "../components/Footer.astro";
 interface Props {
 	title?: string;
 	description?: string;
+	image?: string;
+	type?: string;
 }
 const {
 	title = "下班後理財 - 您的個人財富儀表板",
 	description = "全方位的個人資產管理工具。即時追蹤現金、股票、房地產與負債，自動整合實時匯率，精準掌握您的淨資產狀況。",
+	image = "https://images.unsplash.com/photo-1611974765270-ca1258547bbb?q=80&w=1200&auto=format&fit=crop",
+	type = "website",
 } = Astro.props;
 
 const canonicalURL = new URL(
@@ -58,43 +62,32 @@ const siteSchema = {
 		<meta name="theme-color" content="#f8fafc" />
 
 		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta
-			property="og:url"
-			content="https://assets-manager-beige.vercel.app/"
-		/>
+		<meta property="og:type" content={type} />
+		<meta property="og:url" content={Astro.url} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta
-			property="og:image"
-			content="https://images.unsplash.com/photo-1611974765270-ca1258547bbb?q=80&w=1200&auto=format&fit=crop"
-		/>
+		<meta property="og:image" content={image} />
 		<meta property="og:locale" content="zh_TW" />
 
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
-		<meta
-			property="twitter:url"
-			content="https://assets-manager-beige.vercel.app/"
-		/>
+		<meta property="twitter:url" content={Astro.url} />
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
-		<meta
-			property="twitter:image"
-			content="https://images.unsplash.com/photo-1611974765270-ca1258547bbb?q=80&w=1200&auto=format&fit=crop"
-		/>
+		<meta property="twitter:image" content={image} />
 
 		<link
 			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
 			rel="stylesheet"
 		/>
 
-		<!-- Structured Data -->
+		<!-- Global Structured Data -->
 		<script
 			type="application/ld+json"
 			is:inline
 			set:html={JSON.stringify(siteSchema)}
 		/>
+		<slot name="head" />
 	</head>
 	<body
 		class="bg-slate-50 text-slate-600 min-h-screen font-sans selection:bg-blue-100 selection:text-blue-900"

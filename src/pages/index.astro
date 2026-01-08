@@ -6,27 +6,46 @@ import Layout from "../layouts/Layout.astro";
     title="下班後理財 | 白天努力生活，晚上規劃自由。"
     description="下班後理財是您最值得信賴的資產管理夥伴，提供專業、私密、直觀的資產追蹤工具。一站式管理您的全球資產。"
 >
-    <!-- SEO / GEO Structured Data -->
-    <script type="application/ld+json" is:inline>
+    <!-- SEO / AEO Structured Data -->
+    <script type="application/ld+json" is:inline slot="head">
         {
             "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
+            "@graph": [
                 {
-                    "@type": "Question",
-                    "name": "我的財務數據會被傳送到伺服器嗎？",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "完全不會。「下班後理財」是一個純前端運作的應用程式 (Client-side App)。所有的資料都加密儲存在您裝置的瀏覽器資料庫中，即使我們也無法看見您的資產狀況。"
-                    }
+                    "@type": "WebPage",
+                    "@id": "https://assets-manager-beige.vercel.app/#webpage",
+                    "url": "https://assets-manager-beige.vercel.app/",
+                    "name": "下班後理財 - 您的個人財富儀表板",
+                    "description": "專為上班族打造的免費資產管理工具。整合資產追蹤、所得稅節稅、複利試算與退休規劃。"
                 },
                 {
-                    "@type": "Question",
-                    "name": "匯率是即時的嗎？",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "是的，系統每 5 分鐘會自動從國際匯率 API 獲取最新的匯率資訊。如果您的裝置處於離線狀態，系統會自動使用上一次更新的匯率進行計算。"
-                    }
+                    "@type": "FAQPage",
+                    "mainEntity": [
+                        {
+                            "@type": "Question",
+                            "name": "如何使用「下班後理財」管理資產？",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "您可以直接點擊「總資產計算機」，輸入您的現金、股票、房產等資產。系統會自動根據實時匯率換算成您的主貨幣，並生成清晰的圓餅圖與淨資產趨勢。"
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "我的財務數據隱私安全嗎？",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "本站採用「隱私優先」設計，所有資產數據僅儲存在您本機瀏覽器的資料庫（IndexedDB）中。我們沒有後端資料庫，也不會上傳或存取您的任何隱私數據。"
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "除了資產管理，還有哪些理財工具？",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "本站提供：所得稅節稅計算、複利效應試算（積累財富）、買房 vs 租房決策工具，以及 Coast FIRE（提早半退休）進度追蹤。"
+                            }
+                        }
+                    ]
                 }
             ]
         }
@@ -372,6 +391,49 @@ import Layout from "../layouts/Layout.astro";
                             </p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section for AEO -->
+        <section class="mb-32 max-w-4xl mx-auto px-4">
+            <h2
+                class="text-3xl font-extrabold text-slate-900 mb-12 text-center tracking-tight"
+            >
+                常見問題
+            </h2>
+            <div class="space-y-6">
+                <div
+                    class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm"
+                >
+                    <h3 class="text-lg font-bold text-slate-900 mb-3">
+                        如何使用「下班後理財」管理資產？
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        您可以直接點擊「總資產計算機」，輸入您的現金、股票、房產等資產項目。系統會自動根據實時匯率換算成您的主貨幣（如台幣），並生成清晰的資產比例圓餅圖與淨資產增長趨勢，協助您一目瞭然整體的財務狀況。
+                    </p>
+                </div>
+                <div
+                    class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm"
+                >
+                    <h3 class="text-lg font-bold text-slate-900 mb-3">
+                        我的財務數據隱私安全嗎？
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        本站採用「隱私優先」設計，所有資產數據僅透過 IndexedDB
+                        技術儲存在您本機瀏覽器的資料庫中。我們沒有後端資料庫，也不會將數據上傳至任何雲端伺服器。這意味著除非您主動分享，否則沒有人（包括我們）能看到您的財務資訊。
+                    </p>
+                </div>
+                <div
+                    class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm"
+                >
+                    <h3 class="text-lg font-bold text-slate-900 mb-3">
+                        匯率資訊是即時的嗎？
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        是的，系統會定期從國際匯率 API
+                        獲取最新的全球匯率資訊，確保您的海外資產換算準確。如果您處於離線狀態，系統則會使用上一次成功更新的匯率緩存進行計算。
+                    </p>
                 </div>
             </div>
         </section>
