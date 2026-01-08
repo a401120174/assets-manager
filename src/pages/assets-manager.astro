@@ -116,6 +116,43 @@ import Layout from "../layouts/Layout.astro";
                     </div>
                 </div>
 
+                <!-- Advice Card -->
+                <div
+                    id="advice-card"
+                    class="p-6 rounded-2xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 shadow-md relative overflow-hidden hidden"
+                >
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><circle cx="12" cy="12" r="10"></circle><line
+                                    x1="12"
+                                    y1="16"
+                                    x2="12"
+                                    y2="12"></line><line
+                                    x1="12"
+                                    y1="8"
+                                    x2="12.01"
+                                    y2="8"></line></svg
+                            >
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">
+                            資產建議
+                        </h3>
+                    </div>
+                    <div id="advice-content" class="space-y-3">
+                        <!-- Advice items injected by JS -->
+                    </div>
+                </div>
+
                 <!-- Chart Card -->
                 <div
                     class="p-6 rounded-2xl bg-white border border-slate-100 shadow-md relative overflow-hidden"
@@ -659,6 +696,121 @@ import Layout from "../layouts/Layout.astro";
         }
 
         updateChart(typeTotals);
+        generateAdvice(typeTotals, grandTotal);
+    }
+
+    function generateAdvice(
+        typeTotals: Record<string, number>,
+        grandTotal: number,
+    ) {
+        const adviceCard = document.getElementById("advice-card");
+        const adviceContent = document.getElementById("advice-content");
+        if (!adviceCard || !adviceContent) return;
+
+        const tips: {
+            text: string;
+            type: "info" | "warning" | "success";
+            icon: string;
+        }[] = [];
+
+        // Calculate key metrics
+        const totalAssets = Object.entries(typeTotals).reduce(
+            (acc, [type, val]) => (type !== "liability" ? acc + val : acc),
+            0,
+        );
+        const liabilities = Math.abs(typeTotals["liability"] || 0);
+        const netWorth = grandTotal;
+        const cash = typeTotals["cash"] || 0;
+        const stocks = typeTotals["stock"] || 0;
+
+        // If no assets at all
+        if (totalAssets === 0 && liabilities === 0) {
+            adviceCard.classList.add("hidden");
+            return;
+        }
+
+        adviceCard.classList.remove("hidden");
+
+        // 1. High Cash Level (> 60% of total assets)
+        if (totalAssets > 0 && cash / totalAssets > 0.6) {
+            tips.push({
+                text: "現金水位較高 (超過 60%)，在通膨環境下購買力可能受損。建議可適度配置低風險投資工具（如長天期美債 ETF 或高利定存）。",
+                type: "info",
+                icon: "💰",
+            });
+        }
+
+        // 2. Low Liquidity (< 10% of total assets)
+        if (totalAssets > 0 && cash / totalAssets < 0.1) {
+            tips.push({
+                text: "流動性資產佔比偏低（低於 10%）。建議預留 3-6 個月的緊急預備金，以應對突發狀況。",
+                type: "warning",
+                icon: "🚨",
+            });
+        }
+
+        // 3. High Debt Ratio (Liabilities / Total Assets > 40%)
+        if (totalAssets > 0 && liabilities / totalAssets > 0.4) {
+            tips.push({
+                text: "負債比率較高 (超過 40%)。建議優先償還高利率債務（如信用卡循環利息），以減輕財務負擔。",
+                type: "warning",
+                icon: "💳",
+            });
+        }
+
+        // 4. Investment Gaps
+        if (netWorth > 500000 && stocks === 0) {
+            tips.push({
+                text: "淨資產已達一定規模但尚未配置股權類資產。建議可從追蹤大盤的指數型 ETF (如 0050 或 VTI) 開始，參與長期經濟增長。",
+                type: "info",
+                icon: "📈",
+            });
+        }
+
+        // 5. Heavy Concentration (Any category > 80% except real estate)
+        for (const [type, val] of Object.entries(typeTotals)) {
+            if (
+                type !== "real_estate" &&
+                type !== "liability" &&
+                totalAssets > 0 &&
+                val / totalAssets > 0.8
+            ) {
+                const typeName =
+                    ASSET_TYPES.find((t) => t.id === type)?.title || type;
+                tips.push({
+                    text: `資產過度集中於「${typeName}」。建議適度分散投資組合，降低單一市場或資產類別帶來的波動風險。`,
+                    type: "info",
+                    icon: "⚖️",
+                });
+            }
+        }
+
+        // 6. Good Status / Encouragement
+        if (tips.length === 0) {
+            tips.push({
+                text: "資產配置目前看起來相當穩健！繼續保持定期盤點與紀錄的習慣。",
+                type: "success",
+                icon: "✨",
+            });
+        }
+
+        // Render Tips
+        adviceContent.innerHTML = tips
+            .map((tip) => {
+                const colors = {
+                    info: "bg-blue-50 text-blue-700 border-blue-100",
+                    warning: "bg-amber-50 text-amber-700 border-amber-100",
+                    success:
+                        "bg-emerald-50 text-emerald-700 border-emerald-100",
+                };
+                return `
+                <div class="flex gap-3 p-3 rounded-xl border ${colors[tip.type]} animate-fade-in">
+                    <span class="text-lg flex-shrink-0">${tip.icon}</span>
+                    <p class="text-xs leading-relaxed font-medium">${tip.text}</p>
+                </div>
+            `;
+            })
+            .join("");
     }
 
     function renderDynamicInputs(asset: Asset, container: HTMLElement) {
