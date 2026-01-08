@@ -9,7 +9,7 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://assets-manager-beige.vercel.app/',
+  site: 'https://workfree.vercel.app/',
   vite: {
     plugins: [tailwindcss()]
   },

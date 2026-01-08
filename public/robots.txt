@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://assets-manager-beige.vercel.app/sitemap-index.xml
+Sitemap: https://workfree.vercel.app/sitemap-index.xml
