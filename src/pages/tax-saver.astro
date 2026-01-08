@@ -1,0 +1,976 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+    title="薪資節稅計算機 | 下班後理財"
+    description="智慧試算您的綜合所得稅，探索勞退自提、捐贈等節稅策略，讓您在報稅季輕鬆省錢。"
+>
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json" is:inline>
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "薪資節稅計算機",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Web",
+            "description": "智慧試算您的綜合所得稅，探索勞退自提、捐贈等節稅策略。"
+        }
+    </script>
+
+    <main
+        class="container mx-auto px-4 py-8 max-w-7xl relative z-10 min-h-screen"
+    >
+        <!-- Header -->
+        <header class="mb-8 md:mb-12 text-center animate-fade-in-down">
+            <div
+                class="inline-block px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-600 text-xs font-bold tracking-widest uppercase mb-4"
+            >
+                💰 Tax Saver
+            </div>
+            <h1
+                class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-2 tracking-tight"
+            >
+                薪資節稅計算機
+            </h1>
+            <p class="text-slate-500 text-sm font-medium tracking-wide">
+                智慧試算綜合所得稅，探索最佳節稅策略
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left Column: Inputs -->
+            <div class="lg:col-span-7 space-y-6">
+                <!-- Income Input Card -->
+                <div
+                    class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8"
+                >
+                    <h2
+                        class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2"
+                    >
+                        <span
+                            class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600"
+                            >💵</span
+                        >
+                        收入資訊
+                    </h2>
+
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label
+                                    class="text-xs text-slate-600 font-bold mb-2 block uppercase tracking-wider"
+                                    >月薪 (TWD)</label
+                                >
+                                <input
+                                    type="number"
+                                    id="monthly-salary"
+                                    class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all font-mono"
+                                    placeholder="50,000"
+                                    value="50000"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    class="text-xs text-slate-600 font-bold mb-2 block uppercase tracking-wider"
+                                    >年終獎金 (月數)</label
+                                >
+                                <input
+                                    type="number"
+                                    id="bonus-months"
+                                    class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all font-mono"
+                                    placeholder="1.5"
+                                    value="1.5"
+                                    step="0.1"
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label
+                                class="text-xs text-slate-600 font-bold mb-2 block uppercase tracking-wider"
+                                >其他所得 (TWD/年)</label
+                            >
+                            <input
+                                type="number"
+                                id="other-income"
+                                class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all font-mono"
+                                placeholder="0"
+                                value="0"
+                            />
+                        </div>
+
+                        <div
+                            class="bg-blue-50 rounded-xl p-4 border border-blue-100"
+                        >
+                            <div
+                                class="flex justify-between items-center text-sm"
+                            >
+                                <span class="text-slate-600 font-medium"
+                                    >年收入總額</span
+                                >
+                                <span
+                                    id="annual-income"
+                                    class="text-2xl font-bold text-blue-600 font-mono"
+                                    >$0</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Status Card -->
+                <div
+                    class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8"
+                >
+                    <h2
+                        class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2"
+                    >
+                        <span
+                            class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600"
+                            >👤</span
+                        >
+                        個人狀況
+                    </h2>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label
+                                class="text-xs text-slate-600 font-bold mb-2 block uppercase tracking-wider"
+                                >婚姻狀況</label
+                            >
+                            <div class="flex gap-3">
+                                <button
+                                    id="status-single"
+                                    class="marital-status-btn flex-1 px-4 py-3 rounded-lg border-2 border-slate-200 text-slate-700 font-medium hover:border-blue-400 transition-all active"
+                                    data-status="single"
+                                >
+                                    單身
+                                </button>
+                                <button
+                                    id="status-married"
+                                    class="marital-status-btn flex-1 px-4 py-3 rounded-lg border-2 border-slate-200 text-slate-700 font-medium hover:border-blue-400 transition-all"
+                                    data-status="married"
+                                >
+                                    已婚
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label
+                                    class="text-xs text-slate-600 font-bold mb-2 block uppercase tracking-wider"
+                                    >扶養子女人數</label
+                                >
+                                <input
+                                    type="number"
+                                    id="dependents-children"
+                                    class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all font-mono"
+                                    value="0"
+                                    min="0"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    class="text-xs text-slate-600 font-bold mb-2 block uppercase tracking-wider"
+                                    >扶養長輩人數 (70+)</label
+                                >
+                                <input
+                                    type="number"
+                                    id="dependents-elderly"
+                                    class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all font-mono"
+                                    value="0"
+                                    min="0"
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label
+                                class="text-xs text-slate-600 font-bold mb-2 block uppercase tracking-wider"
+                                >扣除額類型</label
+                            >
+                            <div class="flex gap-3">
+                                <button
+                                    id="deduction-standard"
+                                    class="deduction-type-btn flex-1 px-4 py-3 rounded-lg border-2 border-slate-200 text-slate-700 font-medium hover:border-blue-400 transition-all active"
+                                    data-type="standard"
+                                >
+                                    標準扣除額
+                                </button>
+                                <button
+                                    id="deduction-itemized"
+                                    class="deduction-type-btn flex-1 px-4 py-3 rounded-lg border-2 border-slate-200 text-slate-700 font-medium hover:border-blue-400 transition-all"
+                                    data-type="itemized"
+                                >
+                                    列舉扣除額
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="itemized-inputs" class="hidden space-y-3">
+                            <div>
+                                <label
+                                    class="text-xs text-slate-600 font-bold mb-2 block uppercase tracking-wider"
+                                    >保險費 (TWD/年)</label
+                                >
+                                <input
+                                    type="number"
+                                    id="insurance-premium"
+                                    class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all font-mono"
+                                    value="0"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    class="text-xs text-slate-600 font-bold mb-2 block uppercase tracking-wider"
+                                    >醫藥費 (TWD/年)</label
+                                >
+                                <input
+                                    type="number"
+                                    id="medical-expense"
+                                    class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all font-mono"
+                                    value="0"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    class="text-xs text-slate-600 font-bold mb-2 block uppercase tracking-wider"
+                                    >捐贈 (TWD/年)</label
+                                >
+                                <input
+                                    type="number"
+                                    id="donation"
+                                    class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all font-mono"
+                                    value="0"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tax-Saving Scenarios -->
+                <div
+                    class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8"
+                >
+                    <h2
+                        class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2"
+                    >
+                        <span
+                            class="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-600"
+                            >🎯</span
+                        >
+                        節稅策略模擬
+                    </h2>
+
+                    <div class="space-y-4">
+                        <!-- Labor Pension Self-Contribution -->
+                        <div
+                            class="border border-slate-200 rounded-xl p-4 hover:border-emerald-300 transition-colors"
+                        >
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex-1">
+                                    <h3
+                                        class="font-bold text-slate-900 mb-1 flex items-center gap-2"
+                                    >
+                                        勞退自提 6%
+                                        <span
+                                            class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full"
+                                            >推薦</span
+                                        >
+                                    </h3>
+                                    <p class="text-xs text-slate-500">
+                                        自提金額可全額抵稅，退休時領回
+                                    </p>
+                                </div>
+                                <label
+                                    class="relative inline-flex items-center cursor-pointer"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        id="labor-pension-toggle"
+                                        class="sr-only peer"
+                                    />
+                                    <div
+                                        class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"
+                                    >
+                                    </div>
+                                </label>
+                            </div>
+                            <div
+                                id="labor-pension-result"
+                                class="hidden bg-emerald-50 rounded-lg p-3 text-sm"
+                            >
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-slate-600"
+                                        >年自提金額</span
+                                    >
+                                    <span
+                                        id="labor-pension-amount"
+                                        class="font-bold text-slate-900 font-mono"
+                                        >$0</span
+                                    >
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-600">節稅金額</span>
+                                    <span
+                                        id="labor-pension-savings"
+                                        class="font-bold text-emerald-600 font-mono"
+                                        >$0</span
+                                    >
+                                </div>
+                                <p class="text-xs text-slate-500 mt-2">
+                                    💡 實質成本：<span
+                                        id="labor-pension-net-cost"
+                                        class="font-bold">$0</span
+                                    >（扣除節稅後）
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Donation Simulation -->
+                        <div
+                            class="border border-slate-200 rounded-xl p-4 hover:border-blue-300 transition-colors"
+                        >
+                            <h3 class="font-bold text-slate-900 mb-3">
+                                捐贈節稅試算
+                            </h3>
+                            <div class="flex gap-3 items-end">
+                                <div class="flex-1">
+                                    <label
+                                        class="text-xs text-slate-600 font-bold mb-2 block"
+                                        >捐贈金額 (TWD)</label
+                                    >
+                                    <input
+                                        type="number"
+                                        id="donation-simulation"
+                                        class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-lg px-4 py-2 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all font-mono"
+                                        placeholder="10000"
+                                        value="0"
+                                    />
+                                </div>
+                            </div>
+                            <div
+                                id="donation-result"
+                                class="hidden bg-blue-50 rounded-lg p-3 text-sm mt-3"
+                            >
+                                <p class="text-slate-600">
+                                    實質花費：<span
+                                        id="donation-net-cost"
+                                        class="font-bold text-blue-600 font-mono"
+                                        >$0</span
+                                    >
+                                </p>
+                                <p class="text-xs text-slate-500 mt-1">
+                                    💡 政府幫你出了 <span
+                                        id="donation-tax-benefit"
+                                        class="font-bold">$0</span
+                                    >
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Results -->
+            <div class="lg:col-span-5 space-y-6 lg:sticky lg:top-8">
+                <!-- Tax Pressure Gauge -->
+                <div
+                    class="bg-white rounded-2xl border border-slate-200 shadow-lg p-6 md:p-8"
+                >
+                    <h2
+                        class="text-sm text-slate-500 uppercase tracking-wider font-bold mb-6 flex items-center gap-2"
+                    >
+                        <span class="w-1 h-4 bg-red-500 rounded-full"></span>
+                        稅務壓力計
+                    </h2>
+
+                    <div class="relative h-48 mb-6">
+                        <svg
+                            id="gauge-svg"
+                            viewBox="0 0 200 120"
+                            class="w-full h-full"
+                        >
+                            <!-- Gauge Background Arc -->
+                            <path
+                                d="M 20 100 A 80 80 0 0 1 180 100"
+                                fill="none"
+                                stroke="#e2e8f0"
+                                stroke-width="20"
+                                stroke-linecap="round"></path>
+
+                            <!-- Colored Segments -->
+                            <path
+                                d="M 20 100 A 80 80 0 0 1 68 36"
+                                fill="none"
+                                stroke="#10b981"
+                                stroke-width="20"
+                                stroke-linecap="round"></path>
+                            <path
+                                d="M 68 36 A 80 80 0 0 1 132 36"
+                                fill="none"
+                                stroke="#fbbf24"
+                                stroke-width="20"
+                                stroke-linecap="round"></path>
+                            <path
+                                d="M 132 36 A 80 80 0 0 1 180 100"
+                                fill="none"
+                                stroke="#ef4444"
+                                stroke-width="20"
+                                stroke-linecap="round"></path>
+
+                            <!-- Needle -->
+                            <g id="gauge-needle" transform="rotate(0 100 100)">
+                                <line
+                                    x1="100"
+                                    y1="100"
+                                    x2="100"
+                                    y2="30"
+                                    stroke="#1e293b"
+                                    stroke-width="3"
+                                    stroke-linecap="round"></line>
+                                <circle cx="100" cy="100" r="6" fill="#1e293b"
+                                ></circle>
+                            </g>
+
+                            <!-- Labels -->
+                            <text
+                                x="20"
+                                y="115"
+                                font-size="10"
+                                fill="#64748b"
+                                text-anchor="start">0%</text
+                            >
+                            <text
+                                x="100"
+                                y="25"
+                                font-size="10"
+                                fill="#64748b"
+                                text-anchor="middle">20%</text
+                            >
+                            <text
+                                x="180"
+                                y="115"
+                                font-size="10"
+                                fill="#64748b"
+                                text-anchor="end">40%</text
+                            >
+                        </svg>
+                    </div>
+
+                    <div
+                        id="current-bracket"
+                        class="text-center mb-4 p-4 rounded-xl bg-slate-50"
+                    >
+                        <div class="text-xs text-slate-500 mb-1">
+                            目前稅率級距
+                        </div>
+                        <div
+                            id="bracket-rate"
+                            class="text-3xl font-bold text-slate-900"
+                        >
+                            5%
+                        </div>
+                    </div>
+
+                    <div
+                        id="next-bracket-warning"
+                        class="hidden bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm"
+                    >
+                        <p class="text-amber-800 font-medium">
+                            ⚠️ 距離下一級距還差 <span
+                                id="bracket-distance"
+                                class="font-bold">$0</span
+                            >
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tax Summary -->
+                <div
+                    class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl shadow-lg p-6 md:p-8 text-white"
+                >
+                    <h2
+                        class="text-sm text-slate-300 uppercase tracking-wider font-bold mb-6"
+                    >
+                        稅額試算
+                    </h2>
+
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-300">應稅所得</span>
+                            <span
+                                id="taxable-income"
+                                class="text-lg font-bold font-mono">$0</span
+                            >
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-300">應納稅額</span>
+                            <span
+                                id="tax-payable"
+                                class="text-2xl font-bold font-mono text-red-400"
+                                >$0</span
+                            >
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-300">有效稅率</span>
+                            <span
+                                id="effective-rate"
+                                class="text-lg font-bold font-mono">0%</span
+                            >
+                        </div>
+                        <div
+                            class="pt-4 border-t border-slate-700 flex justify-between items-center"
+                        >
+                            <span class="text-slate-300">稅後年收入</span>
+                            <span
+                                id="after-tax-income"
+                                class="text-xl font-bold font-mono text-emerald-400"
+                                >$0</span
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Savings Summary -->
+                <div
+                    id="savings-summary"
+                    class="hidden bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl shadow-lg p-6 md:p-8 text-white"
+                >
+                    <h2
+                        class="text-sm text-emerald-100 uppercase tracking-wider font-bold mb-4"
+                    >
+                        🎉 節稅成果
+                    </h2>
+
+                    <div class="text-center mb-4">
+                        <div class="text-sm text-emerald-100 mb-1">
+                            總共節省
+                        </div>
+                        <div
+                            id="total-savings"
+                            class="text-4xl font-bold font-mono"
+                        >
+                            $0
+                        </div>
+                    </div>
+
+                    <div
+                        id="savings-comparison"
+                        class="bg-white/20 rounded-lg p-4 text-sm text-center"
+                    >
+                        <p id="comparison-text" class="font-medium">
+                            等於送你 X 張沖繩來回機票 ✈️
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>
+
+<script>
+    // Taiwan Tax Constants (2025)
+    const TAX_BRACKETS = [
+        { min: 0, max: 560000, rate: 0.05, deduction: 0 },
+        { min: 560001, max: 1260000, rate: 0.12, deduction: 39200 },
+        { min: 1260001, max: 2520000, rate: 0.2, deduction: 140000 },
+        { min: 2520001, max: 4720000, rate: 0.3, deduction: 392000 },
+        { min: 4720001, max: Infinity, rate: 0.4, deduction: 864000 },
+    ];
+
+    const STANDARD_DEDUCTION = { single: 124000, married: 248000 };
+    const PERSONAL_EXEMPTION = 92000;
+    const ELDERLY_EXEMPTION = 138000;
+    const LABOR_PENSION_MAX_RATE = 0.06;
+
+    // State
+    let state = {
+        monthlySalary: 50000,
+        bonusMonths: 1.5,
+        otherIncome: 0,
+        maritalStatus: "single",
+        dependentsChildren: 0,
+        dependentsElderly: 0,
+        deductionType: "standard",
+        insurancePremium: 0,
+        medicalExpense: 0,
+        donation: 0,
+        laborPensionEnabled: false,
+        donationSimulation: 0,
+    };
+
+    // Initialize
+    document.addEventListener("DOMContentLoaded", () => {
+        setupEventListeners();
+        calculate();
+    });
+
+    function setupEventListeners() {
+        // Income inputs
+        document
+            .getElementById("monthly-salary")
+            ?.addEventListener("input", (e) => {
+                state.monthlySalary =
+                    parseFloat((e.target as HTMLInputElement).value) || 0;
+                calculate();
+            });
+
+        document
+            .getElementById("bonus-months")
+            ?.addEventListener("input", (e) => {
+                state.bonusMonths =
+                    parseFloat((e.target as HTMLInputElement).value) || 0;
+                calculate();
+            });
+
+        document
+            .getElementById("other-income")
+            ?.addEventListener("input", (e) => {
+                state.otherIncome =
+                    parseFloat((e.target as HTMLInputElement).value) || 0;
+                calculate();
+            });
+
+        // Marital status
+        document.querySelectorAll(".marital-status-btn").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+                const target = e.target as HTMLButtonElement;
+                document
+                    .querySelectorAll(".marital-status-btn")
+                    .forEach((b) => b.classList.remove("active"));
+                target.classList.add("active");
+                state.maritalStatus = target.dataset.status as
+                    | "single"
+                    | "married";
+                calculate();
+            });
+        });
+
+        // Dependents
+        document
+            .getElementById("dependents-children")
+            ?.addEventListener("input", (e) => {
+                state.dependentsChildren =
+                    parseInt((e.target as HTMLInputElement).value) || 0;
+                calculate();
+            });
+
+        document
+            .getElementById("dependents-elderly")
+            ?.addEventListener("input", (e) => {
+                state.dependentsElderly =
+                    parseInt((e.target as HTMLInputElement).value) || 0;
+                calculate();
+            });
+
+        // Deduction type
+        document.querySelectorAll(".deduction-type-btn").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+                const target = e.target as HTMLButtonElement;
+                document
+                    .querySelectorAll(".deduction-type-btn")
+                    .forEach((b) => b.classList.remove("active"));
+                target.classList.add("active");
+                state.deductionType = target.dataset.type as
+                    | "standard"
+                    | "itemized";
+
+                const itemizedInputs =
+                    document.getElementById("itemized-inputs");
+                if (state.deductionType === "itemized") {
+                    itemizedInputs?.classList.remove("hidden");
+                } else {
+                    itemizedInputs?.classList.add("hidden");
+                }
+                calculate();
+            });
+        });
+
+        // Itemized deductions
+        document
+            .getElementById("insurance-premium")
+            ?.addEventListener("input", (e) => {
+                state.insurancePremium =
+                    parseFloat((e.target as HTMLInputElement).value) || 0;
+                calculate();
+            });
+
+        document
+            .getElementById("medical-expense")
+            ?.addEventListener("input", (e) => {
+                state.medicalExpense =
+                    parseFloat((e.target as HTMLInputElement).value) || 0;
+                calculate();
+            });
+
+        document.getElementById("donation")?.addEventListener("input", (e) => {
+            state.donation =
+                parseFloat((e.target as HTMLInputElement).value) || 0;
+            calculate();
+        });
+
+        // Labor pension toggle
+        document
+            .getElementById("labor-pension-toggle")
+            ?.addEventListener("change", (e) => {
+                state.laborPensionEnabled = (
+                    e.target as HTMLInputElement
+                ).checked;
+                const result = document.getElementById("labor-pension-result");
+                if (state.laborPensionEnabled) {
+                    result?.classList.remove("hidden");
+                } else {
+                    result?.classList.add("hidden");
+                }
+                calculate();
+            });
+
+        // Donation simulation
+        document
+            .getElementById("donation-simulation")
+            ?.addEventListener("input", (e) => {
+                state.donationSimulation =
+                    parseFloat((e.target as HTMLInputElement).value) || 0;
+                calculate();
+            });
+    }
+
+    function calculate() {
+        // Calculate annual income
+        const annualIncome =
+            state.monthlySalary * 12 +
+            state.monthlySalary * state.bonusMonths +
+            state.otherIncome;
+
+        // Calculate deductions
+        let totalDeduction = 0;
+
+        // Standard or itemized deduction
+        if (state.deductionType === "standard") {
+            totalDeduction =
+                state.maritalStatus === "single"
+                    ? STANDARD_DEDUCTION.single
+                    : STANDARD_DEDUCTION.married;
+        } else {
+            totalDeduction =
+                state.insurancePremium + state.medicalExpense + state.donation;
+        }
+
+        // Personal exemptions
+        const totalPeople =
+            (state.maritalStatus === "married" ? 2 : 1) +
+            state.dependentsChildren +
+            state.dependentsElderly;
+        const personalExemption =
+            (totalPeople - state.dependentsElderly) * PERSONAL_EXEMPTION +
+            state.dependentsElderly * ELDERLY_EXEMPTION;
+
+        totalDeduction += personalExemption;
+
+        // Labor pension self-contribution
+        let laborPensionAmount = 0;
+        if (state.laborPensionEnabled) {
+            laborPensionAmount =
+                state.monthlySalary * 12 * LABOR_PENSION_MAX_RATE;
+            totalDeduction += laborPensionAmount;
+        }
+
+        // Taxable income
+        const taxableIncome = Math.max(0, annualIncome - totalDeduction);
+
+        // Find tax bracket
+        const bracket = TAX_BRACKETS.find(
+            (b) => taxableIncome >= b.min && taxableIncome <= b.max,
+        )!;
+        const taxPayable = Math.max(
+            0,
+            taxableIncome * bracket.rate - bracket.deduction,
+        );
+
+        // Calculate without tax-saving strategies for comparison
+        const baseDeduction =
+            (state.maritalStatus === "single"
+                ? STANDARD_DEDUCTION.single
+                : STANDARD_DEDUCTION.married) + personalExemption;
+        const baseTaxableIncome = Math.max(0, annualIncome - baseDeduction);
+        const baseBracket = TAX_BRACKETS.find(
+            (b) => baseTaxableIncome >= b.min && baseTaxableIncome <= b.max,
+        )!;
+        const baseTaxPayable = Math.max(
+            0,
+            baseTaxableIncome * baseBracket.rate - baseBracket.deduction,
+        );
+
+        const totalSavings = baseTaxPayable - taxPayable;
+
+        // Update UI
+        updateUI({
+            annualIncome,
+            taxableIncome,
+            taxPayable,
+            bracket,
+            laborPensionAmount,
+            totalSavings,
+        });
+    }
+
+    function updateUI(data: {
+        annualIncome: number;
+        taxableIncome: number;
+        taxPayable: number;
+        bracket: { min: number; max: number; rate: number; deduction: number };
+        laborPensionAmount: number;
+        totalSavings: number;
+    }) {
+        // Annual income
+        document.getElementById("annual-income")!.textContent = formatCurrency(
+            data.annualIncome,
+        );
+
+        // Tax summary
+        document.getElementById("taxable-income")!.textContent = formatCurrency(
+            data.taxableIncome,
+        );
+        document.getElementById("tax-payable")!.textContent = formatCurrency(
+            data.taxPayable,
+        );
+
+        const effectiveRate =
+            data.annualIncome > 0
+                ? ((data.taxPayable / data.annualIncome) * 100).toFixed(2)
+                : 0;
+        document.getElementById("effective-rate")!.textContent =
+            effectiveRate + "%";
+
+        document.getElementById("after-tax-income")!.textContent =
+            formatCurrency(data.annualIncome - data.taxPayable);
+
+        // Tax bracket
+        document.getElementById("bracket-rate")!.textContent =
+            (data.bracket.rate * 100).toFixed(0) + "%";
+
+        // Update gauge
+        updateGauge(data.bracket.rate);
+
+        // Next bracket warning
+        const nextBracket = TAX_BRACKETS.find(
+            (b) => b.min > data.taxableIncome,
+        );
+        if (nextBracket) {
+            const distance = nextBracket.min - data.taxableIncome;
+            document.getElementById("bracket-distance")!.textContent =
+                formatCurrency(distance);
+            document
+                .getElementById("next-bracket-warning")
+                ?.classList.remove("hidden");
+        } else {
+            document
+                .getElementById("next-bracket-warning")
+                ?.classList.add("hidden");
+        }
+
+        // Labor pension results
+        if (state.laborPensionEnabled && data.laborPensionAmount > 0) {
+            const savings = data.laborPensionAmount * data.bracket.rate;
+            const netCost = data.laborPensionAmount - savings;
+
+            document.getElementById("labor-pension-amount")!.textContent =
+                formatCurrency(data.laborPensionAmount);
+            document.getElementById("labor-pension-savings")!.textContent =
+                formatCurrency(savings);
+            document.getElementById("labor-pension-net-cost")!.textContent =
+                formatCurrency(netCost);
+        }
+
+        // Donation simulation
+        if (state.donationSimulation > 0) {
+            const taxBenefit = state.donationSimulation * data.bracket.rate;
+            const netCost = state.donationSimulation - taxBenefit;
+
+            document.getElementById("donation-net-cost")!.textContent =
+                formatCurrency(netCost);
+            document.getElementById("donation-tax-benefit")!.textContent =
+                formatCurrency(taxBenefit);
+            document
+                .getElementById("donation-result")
+                ?.classList.remove("hidden");
+        } else {
+            document.getElementById("donation-result")?.classList.add("hidden");
+        }
+
+        // Savings summary
+        if (data.totalSavings > 0) {
+            document.getElementById("total-savings")!.textContent =
+                formatCurrency(data.totalSavings);
+
+            // Fun comparison
+            const okinawaTickets = Math.floor(data.totalSavings / 5000);
+            const ramenBowls = Math.floor(data.totalSavings / 300);
+
+            let comparisonText = "";
+            if (okinawaTickets >= 1) {
+                comparisonText = `等於送你 ${okinawaTickets} 張沖繩來回機票 ✈️`;
+            } else if (ramenBowls >= 1) {
+                comparisonText = `等於送你 ${ramenBowls} 碗一蘭拉麵 🍜`;
+            } else {
+                comparisonText = `等於送你 ${Math.floor(data.totalSavings / 50)} 杯星巴克 ☕`;
+            }
+
+            document.getElementById("comparison-text")!.textContent =
+                comparisonText;
+            document
+                .getElementById("savings-summary")
+                ?.classList.remove("hidden");
+        } else {
+            document.getElementById("savings-summary")?.classList.add("hidden");
+        }
+    }
+
+    function updateGauge(rate: number) {
+        const angle = -90 + rate * 100 * 1.8; // Map 0-40% to -90 to +90 degrees
+        const needle = document.getElementById("gauge-needle");
+        if (needle) {
+            needle.setAttribute("transform", `rotate(${angle} 100 100)`);
+        }
+    }
+
+    function formatCurrency(amount: number) {
+        return new Intl.NumberFormat("zh-TW", {
+            style: "currency",
+            currency: "TWD",
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        }).format(amount);
+    }
+</script>
+
+<style>
+    .marital-status-btn.active,
+    .deduction-type-btn.active {
+        border-color: #3b82f6;
+        background-color: #eff6ff;
+        color: #1e40af;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in-down {
+        animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    #gauge-needle {
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+</style>

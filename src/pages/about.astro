@@ -3,102 +3,231 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout
-    title="關於我們 | 下班後理財"
-    description="了解下班後理財的設計理念與隱私承諾。"
+    title="關於作者 | 下班後理財"
+    description="了解「下班後理財」的開發初衷與獨立開發者的理財哲學。"
 >
-    <main
-        class="container mx-auto px-4 py-12 max-w-4xl min-h-screen relative z-10"
-    >
-        <!-- Hero Section -->
-        <div class="text-center mb-16 space-y-4 animate-fade-in-down">
-            <h1
-                class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight"
-            >
-                關於我們
-            </h1>
-            <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-                致力於打造最安全、純粹的個人資產管理體驗。
-            </p>
-        </div>
-
-        <!-- Mission Card -->
+    <main class="relative min-h-screen overflow-hidden pb-24">
+        <!-- Background Decorations -->
         <div
-            class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100 mb-12"
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] -z-10 pointer-events-none"
         >
-            <div class="prose prose-lg prose-slate max-w-none text-slate-600">
-                <h3 class="text-2xl font-bold text-slate-900 mb-6">
-                    我們的使命
-                </h3>
-                <p>
-                    在這個數據泛濫的時代，我們相信您的財務狀況屬於您的個人隱私。「下班後理財」的誕生源於一個簡單的想法：<strong
-                        >不需要將數據交給第三方伺服器，也能擁有強大的資產分析工具。</strong
-                    >
-                </p>
-                <p>
-                    我們採用 "Local-First"
-                    架構，所有資產數據都加密存儲在您的裝置端。我們看不到您的存款，也無法追蹤您的投資組合。這是我們對「數位隱私」的極致承諾。
-                </p>
+            <div
+                class="absolute top-20 left-10 w-72 h-72 bg-blue-100 rounded-full blur-[100px] opacity-40 animate-pulse"
+            >
+            </div>
+            <div
+                class="absolute top-40 right-10 w-96 h-96 bg-emerald-100 rounded-full blur-[120px] opacity-40 animate-pulse"
+            >
             </div>
         </div>
 
-        <!-- Features -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200/50">
+        <div
+            class="container mx-auto px-4 pt-16 md:pt-24 max-w-5xl relative z-10"
+        >
+            <!-- Hero Section -->
+            <div class="text-center mb-20 space-y-6 animate-fade-in-down">
                 <div
-                    class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-4"
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-4 border border-blue-100"
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><circle cx="12" cy="12" r="10"></circle><line
-                            x1="12"
-                            y1="16"
-                            x2="12"
-                            y2="12"></line><line
-                            x1="12"
-                            y1="8"
-                            x2="12.01"
-                            y2="8"></line></svg
-                    >
+                    Independent Developer Project
                 </div>
-                <h4 class="text-lg font-bold text-slate-900 mb-2">開源透明</h4>
-                <p class="text-slate-500 text-sm">
-                    程式碼完全開源，任何人都可以檢視我們的安全機制。
+                <h1
+                    class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight"
+                >
+                    這裡沒有公司，<br /><span class="text-blue-600"
+                        >只有追求極致的開發者</span
+                    >
+                </h1>
+                <p
+                    class="text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed"
+                >
+                    我是一位獨立工程師。為了做出自己心中理想的理財工具，我決定動手實現它，並將它分享給與我有一樣需求的你。
                 </p>
             </div>
-            <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200/50">
-                <div
-                    class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 mb-4"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path
-                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
-                        ></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"
-                        ></polyline><line x1="12" y1="22.08" x2="12" y2="12"
-                        ></line></svg
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+                <!-- Left: Story -->
+                <div class="lg:col-span-2 space-y-12">
+                    <section
+                        class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-sm border border-slate-100 relative group overflow-hidden"
                     >
+                        <div
+                            class="absolute top-0 right-0 p-8 text-slate-100 text-8xl font-serif select-none pointer-events-none group-hover:text-blue-50 transition-colors"
+                        >
+                            “
+                        </div>
+                        <h2
+                            class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3"
+                        >
+                            <span
+                                class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-sm"
+                                >01</span
+                            >
+                            為什麼要做這件事？
+                        </h2>
+                        <div
+                            class="prose prose-lg prose-slate text-slate-600 space-y-6 leading-relaxed"
+                        >
+                            <p>
+                                身為一名工程師，我對「效率」與「數位隱私」有著近乎偏執的追求。長期以來，我一直在尋找一個能夠一眼看清資產現況，同時又不需要把家產帳目上傳到雲端的工具。
+                            </p>
+                            <p>
+                                我發現許多理財 App
+                                不是充滿了推銷廣告，就是介面過於繁瑣。於是，我利用下班時間，從第一行程式碼開始，打造了「下班後理財」。
+                            </p>
+                            <p>
+                                這不是一個大型公司的產品。這是一個工程師為了優化生活、解決問題所交出的答卷。
+                            </p>
+                        </div>
+                    </section>
+
+                    <section
+                        class="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 shadow-2xl text-white relative overflow-hidden"
+                    >
+                        <div
+                            class="absolute bottom-0 right-0 w-64 h-64 bg-blue-500 rounded-full blur-[100px] opacity-20"
+                        >
+                        </div>
+                        <h2
+                            class="text-2xl font-bold mb-8 flex items-center gap-3 text-white"
+                        >
+                            <span
+                                class="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-slate-900 text-sm"
+                                >02</span
+                            >
+                            我的開發哲學
+                        </h2>
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10 font-sans"
+                        >
+                            <div
+                                class="space-y-3 p-4 rounded-2xl bg-white/5 border border-white/10"
+                            >
+                                <span class="text-blue-400 text-2xl">🔒</span>
+                                <h4 class="font-bold text-lg">隱私即服務</h4>
+                                <p
+                                    class="text-slate-400 text-sm leading-relaxed"
+                                >
+                                    工具不應該以數據換取免費。本站所有資料皆儲存在您的本地瀏覽器，這是最安全的防線。
+                                </p>
+                            </div>
+                            <div
+                                class="space-y-3 p-4 rounded-2xl bg-white/5 border border-white/10"
+                            >
+                                <span class="text-purple-400 text-2xl">⚡</span>
+                                <h4 class="font-bold text-lg">直覺大於繁瑣</h4>
+                                <p
+                                    class="text-slate-400 text-sm leading-relaxed"
+                                >
+                                    捨棄細碎的記帳流程。我更在乎資產大方向的成長與分散風險，讓工具服務人，而非人服務工具。
+                                </p>
+                            </div>
+                            <div
+                                class="space-y-3 p-4 rounded-2xl bg-white/5 border border-white/10"
+                            >
+                                <span class="text-emerald-400 text-2xl">📈</span
+                                >
+                                <h4 class="font-bold text-lg">數據驅動決策</h4>
+                                <p
+                                    class="text-slate-400 text-sm leading-relaxed"
+                                >
+                                    將冰冷的數字視覺化。無論是稅務壓力還是 Coast
+                                    FIRE
+                                    進度，視覺化的資料能幫助您做出更理性的選擇。
+                                </p>
+                            </div>
+                            <div
+                                class="space-y-3 p-4 rounded-2xl bg-white/5 border border-white/10"
+                            >
+                                <span class="text-amber-400 text-2xl">☕</span>
+                                <h4 class="font-bold text-lg">純粹的體驗</h4>
+                                <p
+                                    class="text-slate-400 text-sm leading-relaxed"
+                                >
+                                    沒有註冊、沒有通知、沒有廣告。這裡只有最單純、功能完整的理財計算機。
+                                </p>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-                <h4 class="text-lg font-bold text-slate-900 mb-2">持續進化</h4>
-                <p class="text-slate-500 text-sm">
-                    我們會持續整合更多元的資產類型與分析圖表。
-                </p>
+
+                <!-- Right: Side Card -->
+                <div class="space-y-8 lg:sticky lg:top-8">
+                    <!-- Creator Card -->
+                    <div
+                        class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm text-center"
+                    >
+                        <div
+                            class="w-20 h-20 bg-blue-100 rounded-full mx-auto mb-6 flex items-center justify-center text-3xl shadow-inner border border-blue-50"
+                        >
+                            👨‍💻
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-2">
+                            關於作者：路易斯
+                        </h4>
+                        <p class="text-sm text-slate-500 leading-relaxed mb-6">
+                            一位熱愛技術與投資的獨立開發者。我致力於透過技術解決生活中的痛點，並相信工具的本質應該是簡單且充滿力量。
+                        </p>
+                        <div class="pt-6 border-t border-slate-50 space-y-3">
+                            <p
+                                class="text-xs text-slate-400 uppercase tracking-widest font-bold"
+                            >
+                                目前進度
+                            </p>
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-slate-600 font-medium"
+                                        >功能開發 (V1.2)</span
+                                    >
+                                    <span class="text-blue-600 font-bold"
+                                        >進行中</span
+                                    >
+                                </div>
+                                <div
+                                    class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden"
+                                >
+                                    <div
+                                        class="bg-blue-600 h-full w-[85%] rounded-full"
+                                    >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA / Spread the word -->
+                    <div
+                        class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl p-8 text-white shadow-xl shadow-blue-200"
+                    >
+                        <h4 class="text-lg font-bold mb-4">覺得有幫助嗎？</h4>
+                        <p class="text-blue-100 text-sm leading-relaxed mb-6">
+                            這是一個完全免費的專案。如果您覺得這個工具縮短了您理財的時間，歡迎將它分享給身邊的朋友。您的支持是我持續更新最大的動力！
+                        </p>
+                        <a
+                            href="mailto:a401120174@gmail.com"
+                            class="block w-full text-center bg-white text-blue-600 font-bold py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-sm"
+                        >
+                            聯絡作者
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 </Layout>
+
+<style>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .animate-fade-in-down {
+        animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+</style>

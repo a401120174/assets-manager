@@ -39,6 +39,12 @@ const currentPath = pathname.slice(1); // remove the first "/"
                     總資產計算機
                 </a>
                 <a
+                    href="/tax-saver"
+                    class={`text-sm font-medium transition-colors duration-200 ${currentPath === "tax-saver" ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}
+                >
+                    薪資節稅
+                </a>
+                <a
                     href="/coast-fire"
                     class={`text-sm font-medium transition-colors duration-200 ${currentPath === "coast-fire" ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}
                 >
@@ -104,6 +110,12 @@ const currentPath = pathname.slice(1); // remove the first "/"
                 class={`block px-3 py-3 rounded-lg text-base font-medium ${currentPath === "assets-manager" ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}
             >
                 總資產計算機
+            </a>
+            <a
+                href="/tax-saver"
+                class={`block px-3 py-3 rounded-lg text-base font-medium ${currentPath === "tax-saver" ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}
+            >
+                薪資節稅
             </a>
             <a
                 href="/coast-fire"

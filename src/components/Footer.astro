@@ -1,0 +1,121 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer
+    class="bg-white border-t border-slate-200 pt-16 pb-8 mt-20 relative z-10"
+>
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <!-- Brand Section -->
+            <div class="md:col-span-2">
+                <a href="/" class="flex items-center gap-2 mb-6 group">
+                    <div
+                        class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-blue-200 group-hover:scale-110 transition-transform"
+                    >
+                        下
+                    </div>
+                    <span
+                        class="text-xl font-bold text-slate-900 tracking-tight"
+                        >下班後理財</span
+                    >
+                </a>
+                <p class="text-slate-500 max-w-sm leading-relaxed">
+                    提供專業、直觀且完全免費的理財計算工具。我們相信，明智的財務決策應該是每個人都能觸手可及的。
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="text-slate-900 font-bold mb-6">工具清單</h4>
+                <ul class="space-y-4">
+                    <li>
+                        <a
+                            href="/assets-manager"
+                            class="text-slate-500 hover:text-blue-600 transition-colors"
+                            >總資產計算機</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/tax-saver"
+                            class="text-slate-500 hover:text-blue-600 transition-colors"
+                            >薪資節稅計算</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/coast-fire"
+                            class="text-slate-500 hover:text-blue-600 transition-colors"
+                            >Coast FIRE 計算</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/compound-interest"
+                            class="text-slate-500 hover:text-blue-600 transition-colors"
+                            >複利試算工具</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/rent-vs-buy"
+                            class="text-slate-500 hover:text-blue-600 transition-colors"
+                            >買房 vs 租房</a
+                        >
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Policy & Support -->
+            <div>
+                <h4 class="text-slate-900 font-bold mb-6">關於與支援</h4>
+                <ul class="space-y-4">
+                    <li>
+                        <a
+                            href="/about"
+                            class="text-slate-500 hover:text-blue-600 transition-colors"
+                            >關於我們</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/terms"
+                            class="text-slate-500 hover:text-blue-600 transition-colors"
+                            >服務條款</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/privacy"
+                            class="text-slate-500 hover:text-blue-600 transition-colors"
+                            >隱私權政策</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="mailto:a401120174@gmail.com"
+                            class="text-slate-500 hover:text-blue-600 transition-colors"
+                            >聯繫支援</a
+                        >
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div
+            class="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400"
+        >
+            <p>© {currentYear} 下班後理財. 保留所有權利。</p>
+            <div class="flex gap-6">
+                <span class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"
+                    ></span>
+                    系統運作正常
+                </span>
+                <span class="text-slate-300">|</span>
+                <span>Made with ❤️ in Taiwan</span>
+            </div>
+        </div>
+    </div>
+</footer>
