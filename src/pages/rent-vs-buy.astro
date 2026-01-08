@@ -190,6 +190,25 @@ import Layout from "../layouts/Layout.astro";
                                 class="w-full accent-slate-400 cursor-pointer"
                             />
                         </div>
+                        <div class="space-y-1">
+                            <label
+                                class="flex justify-between text-xs font-semibold text-slate-500"
+                            >
+                                每月管理費 <span
+                                    id="val-mgmt-fee"
+                                    class="text-slate-600">$3,000</span
+                                >
+                            </label>
+                            <input
+                                type="range"
+                                id="mgmt-fee"
+                                min="0"
+                                max="15000"
+                                step="100"
+                                value="3000"
+                                class="w-full accent-slate-400 cursor-pointer"
+                            />
+                        </div>
                     </div>
                 </div>
 
@@ -508,6 +527,7 @@ import Layout from "../layouts/Layout.astro";
         mortgageYears: 30,
         appreciation: 2,
         holdingCostPct: 1.5,
+        managementFee: 3000,
         rent: 35000,
         rentInflation: 2,
         investReturn: 7,
@@ -533,6 +553,7 @@ import Layout from "../layouts/Layout.astro";
         holdingCostPct: document.getElementById(
             "holding-cost",
         ) as HTMLInputElement,
+        managementFee: document.getElementById("mgmt-fee") as HTMLInputElement,
         rent: document.getElementById("rent") as HTMLInputElement,
         rentInflation: document.getElementById(
             "rent-inflation",
@@ -549,6 +570,7 @@ import Layout from "../layouts/Layout.astro";
         mortgageYears: document.getElementById("val-mortgage-years"),
         appreciation: document.getElementById("val-appreciation"),
         holdingCostPct: document.getElementById("val-holding-cost"),
+        managementFee: document.getElementById("val-mgmt-fee"),
         rent: document.getElementById("val-rent"),
         rentInflation: document.getElementById("val-rent-inflation"),
         investReturn: document.getElementById("val-invest-return"),
@@ -632,7 +654,8 @@ import Layout from "../layouts/Layout.astro";
             // Monthly Calc Loop for the Year
             for (let m = 0; m < 12; m++) {
                 const monthlyHolding =
-                    (houseValue * (state.holdingCostPct / 100)) / 12;
+                    (houseValue * (state.holdingCostPct / 100)) / 12 +
+                    state.managementFee;
                 const monthlyBuyOutflow = monthlyMortgage + monthlyHolding;
                 const monthlyRentOutflow = currentMonthlyRent;
 
@@ -693,6 +716,10 @@ import Layout from "../layouts/Layout.astro";
             labels.appreciation.textContent = state.appreciation + "%";
         if (labels.holdingCostPct)
             labels.holdingCostPct.textContent = state.holdingCostPct + "%";
+        if (labels.managementFee)
+            labels.managementFee.textContent = moneyFmt.format(
+                state.managementFee,
+            );
         if (labels.rent) labels.rent.textContent = moneyFmt.format(state.rent);
         if (labels.rentInflation)
             labels.rentInflation.textContent = state.rentInflation + "%";

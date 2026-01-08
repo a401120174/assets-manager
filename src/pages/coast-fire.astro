@@ -83,6 +83,34 @@ import Layout from "../layouts/Layout.astro";
                     參數設定
                 </h2>
 
+                <!-- Mainstream Toggle -->
+                <div
+                    class="p-4 rounded-2xl bg-blue-50 border border-blue-100 mb-6 group cursor-pointer hover:bg-blue-100 transition-all duration-300"
+                    id="mainstream-toggle-container"
+                >
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <div class="relative inline-flex items-center">
+                            <input
+                                type="checkbox"
+                                id="mainstream-toggle"
+                                class="sr-only peer"
+                            />
+                            <div
+                                class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                            >
+                            </div>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-sm font-bold text-blue-900"
+                                >載入台灣上班族主流試算</span
+                            >
+                            <span class="text-[10px] text-blue-700/70"
+                                >30歲、100萬本金、5萬月支出</span
+                            >
+                        </div>
+                    </label>
+                </div>
+
                 <!-- Age Group -->
                 <div class="space-y-4">
                     <div class="space-y-2">
@@ -391,285 +419,336 @@ import Layout from "../layouts/Layout.astro";
             </div>
         </section>
     </main>
-</Layout>
 
-<script>
-    import Chart from "chart.js/auto";
+    <script>
+        import Chart from "chart.js/auto";
 
-    // State
-    const state = {
-        age: 30,
-        retireAge: 60,
-        currentAssets: 1000000,
-        returnRate: 7,
-        inflation: 2,
-        annualSpend: 600000,
-    };
+        // State
+        const state = {
+            age: 30,
+            retireAge: 60,
+            currentAssets: 1000000,
+            returnRate: 7,
+            inflation: 2,
+            annualSpend: 600000,
+        };
 
-    let chart: any = null;
+        let chart: any = null;
 
-    // Elements
-    const inputs = {
-        age: document.getElementById("age") as HTMLInputElement,
-        retireAge: document.getElementById("retire-age") as HTMLInputElement,
-        currentAssets: document.getElementById(
-            "current-assets",
-        ) as HTMLInputElement,
-        returnRate: document.getElementById("return-rate") as HTMLInputElement,
-        inflation: document.getElementById("inflation") as HTMLInputElement,
-        annualSpend: document.getElementById(
-            "annual-spend",
-        ) as HTMLInputElement,
-    };
+        // Elements
+        const inputs = {
+            age: document.getElementById("age") as HTMLInputElement,
+            retireAge: document.getElementById(
+                "retire-age",
+            ) as HTMLInputElement,
+            currentAssets: document.getElementById(
+                "current-assets",
+            ) as HTMLInputElement,
+            returnRate: document.getElementById(
+                "return-rate",
+            ) as HTMLInputElement,
+            inflation: document.getElementById("inflation") as HTMLInputElement,
+            annualSpend: document.getElementById(
+                "annual-spend",
+            ) as HTMLInputElement,
+        };
 
-    const labels = {
-        age: document.getElementById("val-age"),
-        retireAge: document.getElementById("val-retire-age"),
-        currentAssets: document.getElementById("val-current-assets"),
-        returnRate: document.getElementById("val-return-rate"),
-        inflation: document.getElementById("val-inflation"),
-        annualSpend: document.getElementById("val-annual-spend"),
-        verdictTitle: document.getElementById("verdict-title"),
-        verdictDesc: document.getElementById("verdict-desc"),
-        targetNumber: document.getElementById("target-number"),
-        coastAge: document.getElementById("coast-age"),
-    };
+        const labels = {
+            age: document.getElementById("val-age"),
+            retireAge: document.getElementById("val-retire-age"),
+            currentAssets: document.getElementById("val-current-assets"),
+            returnRate: document.getElementById("val-return-rate"),
+            inflation: document.getElementById("val-inflation"),
+            annualSpend: document.getElementById("val-annual-spend"),
+            verdictTitle: document.getElementById("verdict-title"),
+            verdictDesc: document.getElementById("verdict-desc"),
+            targetNumber: document.getElementById("target-number"),
+            coastAge: document.getElementById("coast-age"),
+            mainstreamToggle: document.getElementById(
+                "mainstream-toggle",
+            ) as HTMLInputElement,
+        };
 
-    // Formatter
-    const moneyFmt = new Intl.NumberFormat("zh-TW", {
-        style: "currency",
-        currency: "TWD",
-        maximumFractionDigits: 0,
-    });
+        // Formatter
+        const moneyFmt = new Intl.NumberFormat("zh-TW", {
+            style: "currency",
+            currency: "TWD",
+            maximumFractionDigits: 0,
+        });
 
-    function init() {
-        // Bind events
-        Object.keys(inputs).forEach((key) => {
-            const el = inputs[key as keyof typeof inputs];
-            if (el) {
-                el.addEventListener("input", (e) => {
-                    const target = e.target as HTMLInputElement;
-                    (state as any)[key] = parseFloat(target.value);
+        function init() {
+            // Bind events
+            Object.keys(inputs).forEach((key) => {
+                const el = inputs[key as keyof typeof inputs];
+                if (el) {
+                    el.addEventListener("input", (e) => {
+                        const target = e.target as HTMLInputElement;
+                        (state as any)[key] = parseFloat(target.value);
+                        update();
+                    });
+                }
+            });
+
+            // Mainstream Toggle Logic
+            if (labels.mainstreamToggle) {
+                labels.mainstreamToggle.addEventListener("change", (e) => {
+                    const checked = (e.target as HTMLInputElement).checked;
+                    if (checked) {
+                        state.age = 30;
+                        state.retireAge = 60;
+                        state.currentAssets = 1000000;
+                        state.returnRate = 7;
+                        state.inflation = 2;
+                        state.annualSpend = 600000;
+
+                        // Sync UI
+                        inputs.age.value = "30";
+                        inputs.retireAge.value = "60";
+                        inputs.currentAssets.value = "1000000";
+                        inputs.returnRate.value = "7";
+                        inputs.inflation.value = "2";
+                        inputs.annualSpend.value = "600000";
+                    }
                     update();
                 });
             }
-        });
-        update();
-    }
 
-    function calculate() {
-        const yearsToRetire = state.retireAge - state.age;
-        const realRate = (state.returnRate - state.inflation) / 100; // Simplified real return
-
-        // 1. Calculate Target FIRE Number at Retirement Age
-        // Rule of 25: Annual Spend / 0.04
-        // Inflation adjust the spending needs
-        const futureAnnualSpend =
-            state.annualSpend *
-            Math.pow(1 + state.inflation / 100, yearsToRetire);
-        const targetFireNumber = futureAnnualSpend * 25;
-
-        // 2. Generate Data Points
-        const labels = [];
-        const assetData = [];
-        const targetData = [];
-        let coastAge = -1;
-
-        // Projection from Age to 85
-        const endAge = 85;
-
-        for (let i = state.age; i <= endAge; i++) {
-            labels.push(i);
-
-            // Year index
-            const yearIdx = i - state.age;
-
-            // Asset Growth (Compound Interest)
-            // FV = PV * (1 + r)^n
-            // Note: Use nominal rate for raw number growth, but target also inflates?
-            // Better to work in "Future Value" nominal terms for chart lines.
-            const nominalReturn = state.returnRate / 100;
-            const currentAssetValue =
-                state.currentAssets * Math.pow(1 + nominalReturn, yearIdx);
-            assetData.push(currentAssetValue);
-
-            // Target Line
-            // This is tricky. Do we show the target as a flat line in REAL terms or curved in NOMINAL terms?
-            // Let's use Nominal curve for Target too.
-            // Target at year X = (Base Annual Spend * (1+inflation)^yearX) * 25
-            const yearInflation = Math.pow(1 + state.inflation / 100, yearIdx);
-            const nominalTarget = state.annualSpend * yearInflation * 25;
-
-            // For visual simplicity, let's just show the Final Target at Retirement Age extended flat?
-            // Or better: The amount you NEED to have at any given age to be "Coast FIREd"?
-            // Coast FIRE Number at Age X = Target_at_Retirement / (1 + r)^(RetireAge - Age)
-            // No, user wants to see "Growth Curve vs Target".
-            // Let's stick to: Line 1 = Asset Growth. Line 2 = Nominal Target Needed.
-            // Actually simplest Coast FIRE viz is:
-            // Do your assets grow to hit the Target Fire Number at Retire Age?
-
-            targetData.push(nominalTarget); // This shows the moving goalpost due to inflation
-
-            // Check if crossed
-            if (currentAssetValue >= nominalTarget && coastAge === -1) {
-                coastAge = i;
-            }
+            update();
         }
 
-        return { assetData, targetData, labels, targetFireNumber, coastAge };
-    }
+        function calculate() {
+            const yearsToRetire = state.retireAge - state.age;
+            const realRate = (state.returnRate - state.inflation) / 100; // Simplified real return
 
-    function update() {
-        // Update labels
-        if (labels.age) labels.age.textContent = state.age.toString();
-        if (labels.retireAge)
-            labels.retireAge.textContent = state.retireAge.toString();
-        if (labels.currentAssets)
-            labels.currentAssets.textContent = moneyFmt.format(
-                state.currentAssets,
-            );
-        if (labels.returnRate)
-            labels.returnRate.textContent = state.returnRate + "%";
-        if (labels.inflation)
-            labels.inflation.textContent = state.inflation + "%";
-        if (labels.annualSpend)
-            labels.annualSpend.textContent = moneyFmt.format(state.annualSpend);
+            // 1. Calculate Target FIRE Number at Retirement Age
+            // Rule of 25: Annual Spend / 0.04
+            // Inflation adjust the spending needs
+            const futureAnnualSpend =
+                state.annualSpend *
+                Math.pow(1 + state.inflation / 100, yearsToRetire);
+            const targetFireNumber = futureAnnualSpend * 25;
 
-        const res = calculate();
+            // 2. Generate Data Points
+            const labels = [];
+            const assetData = [];
+            const targetData = [];
+            let coastAge = -1;
 
-        // Update Verdict
-        if (labels.targetNumber)
-            labels.targetNumber.textContent = moneyFmt.format(
-                res.targetFireNumber,
-            );
+            // Projection from Age to 85
+            const endAge = 85;
 
-        // Final Status Check
-        const projectedAtRetire = res.assetData[state.retireAge - state.age];
+            for (let i = state.age; i <= endAge; i++) {
+                labels.push(i);
 
-        if (projectedAtRetire >= res.targetFireNumber) {
-            if (labels.verdictTitle) {
-                labels.verdictTitle.textContent = "已達成 Coast FIRE！";
-                labels.verdictTitle.className =
-                    "text-3xl md:text-4xl font-bold mb-4 text-emerald-400";
+                // Year index
+                const yearIdx = i - state.age;
+
+                // Asset Growth (Compound Interest)
+                // FV = PV * (1 + r)^n
+                // Note: Use nominal rate for raw number growth, but target also inflates?
+                // Better to work in "Future Value" nominal terms for chart lines.
+                const nominalReturn = state.returnRate / 100;
+                const currentAssetValue =
+                    state.currentAssets * Math.pow(1 + nominalReturn, yearIdx);
+                assetData.push(currentAssetValue);
+
+                // Target Line
+                // This is tricky. Do we show the target as a flat line in REAL terms or curved in NOMINAL terms?
+                // Let's use Nominal curve for Target too.
+                // Target at year X = (Base Annual Spend * (1+inflation)^yearX) * 25
+                const yearInflation = Math.pow(
+                    1 + state.inflation / 100,
+                    yearIdx,
+                );
+                const nominalTarget = state.annualSpend * yearInflation * 25;
+
+                // For visual simplicity, let's just show the Final Target at Retirement Age extended flat?
+                // Or better: The amount you NEED to have at any given age to be "Coast FIREd"?
+                // Coast FIRE Number at Age X = Target_at_Retirement / (1 + r)^(RetireAge - Age)
+                // No, user wants to see "Growth Curve vs Target".
+                // Let's stick to: Line 1 = Asset Growth. Line 2 = Nominal Target Needed.
+                // Actually simplest Coast FIRE viz is:
+                // Do your assets grow to hit the Target Fire Number at Retire Age?
+
+                targetData.push(nominalTarget); // This shows the moving goalpost due to inflation
+
+                // Check if crossed
+                if (currentAssetValue >= nominalTarget && coastAge === -1) {
+                    coastAge = i;
+                }
             }
-            if (labels.verdictDesc)
-                labels.verdictDesc.textContent = `恭喜！以目前 ${moneyFmt.format(state.currentAssets)} 的資產，即便不再投入任何新資金，靠著 ${state.returnRate}% 的複利滾動，在 ${state.retireAge} 歲退休時將成長至 ${moneyFmt.format(projectedAtRetire)}，超過您需要的 ${moneyFmt.format(res.targetFireNumber)}。`;
-            if (labels.coastAge)
-                labels.coastAge.textContent =
-                    res.coastAge > state.age ? `${res.coastAge} 歲` : "現在";
-        } else {
-            if (labels.verdictTitle) {
-                labels.verdictTitle.textContent = "尚未達成";
-                labels.verdictTitle.className =
-                    "text-3xl md:text-4xl font-bold mb-4 text-rose-400";
-            }
-            if (labels.verdictDesc)
-                labels.verdictDesc.textContent = `還差一點！您在 ${state.retireAge} 歲預期會擁有 ${moneyFmt.format(projectedAtRetire)}，但您的目標是 ${moneyFmt.format(res.targetFireNumber)}。建議增加本金或延後退休。`;
-            if (labels.coastAge) labels.coastAge.textContent = "加油";
+
+            return {
+                assetData,
+                targetData,
+                labels,
+                targetFireNumber,
+                coastAge,
+            };
         }
 
-        renderChart(res);
-    }
+        function update() {
+            // Update labels
+            if (labels.age) labels.age.textContent = state.age.toString();
+            if (labels.retireAge)
+                labels.retireAge.textContent = state.retireAge.toString();
+            if (labels.currentAssets)
+                labels.currentAssets.textContent = moneyFmt.format(
+                    state.currentAssets,
+                );
+            if (labels.returnRate)
+                labels.returnRate.textContent = state.returnRate + "%";
+            if (labels.inflation)
+                labels.inflation.textContent = state.inflation + "%";
+            if (labels.annualSpend)
+                labels.annualSpend.textContent = moneyFmt.format(
+                    state.annualSpend,
+                );
 
-    function renderChart(data: any) {
-        const ctx = document.getElementById("fireChart") as HTMLCanvasElement;
-        if (!ctx) return;
+            const res = calculate();
 
-        if (chart) {
-            chart.destroy();
+            // Update Verdict
+            if (labels.targetNumber)
+                labels.targetNumber.textContent = moneyFmt.format(
+                    res.targetFireNumber,
+                );
+
+            // Final Status Check
+            const projectedAtRetire =
+                res.assetData[state.retireAge - state.age];
+
+            if (projectedAtRetire >= res.targetFireNumber) {
+                if (labels.verdictTitle) {
+                    labels.verdictTitle.textContent = "已達成 Coast FIRE！";
+                    labels.verdictTitle.className =
+                        "text-3xl md:text-4xl font-bold mb-4 text-emerald-400";
+                }
+                if (labels.verdictDesc)
+                    labels.verdictDesc.textContent = `恭喜！以目前 ${moneyFmt.format(state.currentAssets)} 的資產，即便不再投入任何新資金，靠著 ${state.returnRate}% 的複利滾動，在 ${state.retireAge} 歲退休時將成長至 ${moneyFmt.format(projectedAtRetire)}，超過您需要的 ${moneyFmt.format(res.targetFireNumber)}。`;
+                if (labels.coastAge)
+                    labels.coastAge.textContent =
+                        res.coastAge > state.age
+                            ? `${res.coastAge} 歲`
+                            : "現在";
+            } else {
+                if (labels.verdictTitle) {
+                    labels.verdictTitle.textContent = "尚未達成";
+                    labels.verdictTitle.className =
+                        "text-3xl md:text-4xl font-bold mb-4 text-rose-400";
+                }
+                if (labels.verdictDesc)
+                    labels.verdictDesc.textContent = `還差一點！您在 ${state.retireAge} 歲預期會擁有 ${moneyFmt.format(projectedAtRetire)}，但您的目標是 ${moneyFmt.format(res.targetFireNumber)}。建議增加本金或延後退休。`;
+                if (labels.coastAge) labels.coastAge.textContent = "加油";
+            }
+
+            renderChart(res);
         }
 
-        chart = new Chart(ctx, {
-            type: "line",
-            data: {
-                labels: data.labels,
-                datasets: [
-                    {
-                        label: "資產複利成長",
-                        data: data.assetData,
-                        borderColor: "#3b82f6", // blue-500
-                        backgroundColor: "rgba(59, 130, 246, 0.1)",
-                        borderWidth: 3,
-                        tension: 0.4,
-                        fill: true,
-                        pointRadius: 0,
-                        pointHoverRadius: 6,
-                    },
-                    {
-                        label: "FIRE 目標門檻 (含通膨)",
-                        data: data.targetData,
-                        borderColor: "#f43f5e", // rose-500
-                        borderWidth: 2,
-                        borderDash: [5, 5],
-                        pointRadius: 0,
-                        tension: 0.4,
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: false,
-                interaction: {
-                    mode: "index",
-                    intersect: false,
+        function renderChart(data: any) {
+            const ctx = document.getElementById(
+                "fireChart",
+            ) as HTMLCanvasElement;
+            if (!ctx) return;
+
+            if (chart) {
+                chart.destroy();
+            }
+
+            chart = new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: data.labels,
+                    datasets: [
+                        {
+                            label: "資產複利成長",
+                            data: data.assetData,
+                            borderColor: "#3b82f6", // blue-500
+                            backgroundColor: "rgba(59, 130, 246, 0.1)",
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 0,
+                            pointHoverRadius: 6,
+                        },
+                        {
+                            label: "FIRE 目標門檻 (含通膨)",
+                            data: data.targetData,
+                            borderColor: "#f43f5e", // rose-500
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            pointRadius: 0,
+                            tension: 0.4,
+                        },
+                    ],
                 },
-                plugins: {
-                    tooltip: {
-                        backgroundColor: "white",
-                        titleColor: "#1e293b",
-                        bodyColor: "#475569",
-                        borderColor: "#e2e8f0",
-                        borderWidth: 1,
-                        padding: 10,
-                        callbacks: {
-                            label: function (context) {
-                                let label = context.dataset.label || "";
-                                if (label) {
-                                    label += ": ";
-                                }
-                                if (context.parsed.y !== null) {
-                                    label += new Intl.NumberFormat("zh-TW", {
-                                        style: "currency",
-                                        currency: "TWD",
-                                        maximumFractionDigits: 0,
-                                    }).format(context.parsed.y);
-                                }
-                                return label;
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: false,
+                    interaction: {
+                        mode: "index",
+                        intersect: false,
+                    },
+                    plugins: {
+                        tooltip: {
+                            backgroundColor: "white",
+                            titleColor: "#1e293b",
+                            bodyColor: "#475569",
+                            borderColor: "#e2e8f0",
+                            borderWidth: 1,
+                            padding: 10,
+                            callbacks: {
+                                label: function (context) {
+                                    let label = context.dataset.label || "";
+                                    if (label) {
+                                        label += ": ";
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat(
+                                            "zh-TW",
+                                            {
+                                                style: "currency",
+                                                currency: "TWD",
+                                                maximumFractionDigits: 0,
+                                            },
+                                        ).format(context.parsed.y);
+                                    }
+                                    return label;
+                                },
                             },
                         },
-                    },
-                    legend: {
-                        display: false,
-                    },
-                },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false,
-                        },
-                        title: {
-                            display: true,
-                            text: "年齡",
-                        },
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function (value, index, values) {
-                                // @ts-ignore
-                                return "$" + value / 10000 + "萬";
-                            },
-                        },
-                        border: {
+                        legend: {
                             display: false,
                         },
                     },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false,
+                            },
+                            title: {
+                                display: true,
+                                text: "年齡",
+                            },
+                        },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function (value, index, values) {
+                                    // @ts-ignore
+                                    return "$" + value / 10000 + "萬";
+                                },
+                            },
+                            border: {
+                                display: false,
+                            },
+                        },
+                    },
                 },
-            },
-        });
-    }
+            });
+        }
 
-    // Start
-    init();
-</script>
+        // Start
+        init();
+    </script>
+</Layout>
